@@ -2,14 +2,14 @@
   "name": "parcel-project-template",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://iura-radulov.io/Teamproject-Filmoteka/",
+  "homepage": "https://iura-radulov.io/teamproject-filmoteka/",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /Teamproject-Filmoteka/"
+    "build": "parcel build src/*.html --public-url /teamproject-filmoteka/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://Iura-Radulov/Teamproject-Filmoteka.git"
+    "url": "git+https://Iura-Radulov/teamproject-filmoteka.git"
   },
   "keywords": [],
   "author": "Alexander Repeta <alexander.repeta@gmail.com>",
