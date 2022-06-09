@@ -1,1 +1,50 @@
 @import '~node_modules/modern-normalize/modern-normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+$colors: (
+  'white-color': #ffffff,
+  'black-color': #000000,
+  'red-color': #ff001b,
+  'pin-color': #ff6b08,
+  'another-text-color': #545454,
+  'grey-color': #818181,
+);
+
+@function getColor($key) {
+  @return map-get($colors, $key);
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  line-height: 1.52;
+  letter-spacing: 0.04em;
+
+  background: getColor('white-color');
+  color: getColor('black-color');
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 0 32px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+    padding: 0 32px;
+  }
+}
