@@ -1,7 +1,13 @@
-const URL = "https://filmoteka-goit-6e05f-default-rtdb.firebaseio.com/";
 
-export class Firebase {
-    static create(data) {
+const URL = "https://filmoteka-goit-6e05f-default-rtdb.firebaseio.com/users.json";
+
+const data = {
+    name: 'George',
+    email: 'some@mail.ru',
+    password: 12345,
+}
+ class Firebase {
+     create(data) {
        return fetch(URL, {
             method: 'POST',
             body: JSON.stringify(data),
@@ -9,20 +15,26 @@ export class Firebase {
                 'Content-Type': 'aplicatiom/json'
             }
         })
-            .then(response => response.json())
-            .then(response => console.log(response))
+           .then(response => response.json())
+           .then(response => {
+               data.id = response.name;
+               return data;
+         })
+           
     }
+      getUser() {
+          return fetch(URL).then(response => response.json())
+          .then(response => console.log(response))
+        
+     }
+}
+function sentData(data) {
+    const user1 = new Firebase();
+    const sentDat = user1.create(data);
+console.log(sentDat);
 }
 
-const URL_API = "https://api.themoviedb.org/3/"
+// sentData(data)
 
-// /trending/{media_type}/{time_window}
-const api_key="8c768371227c12dea02a7fda24385a83"
-
-function fetchApi() {
-    return fetch(`${URL_API}trending/all/week?api_key=${api_key}`)
-    .then(response => response.json())
-    
-}
-
-fetchApi().then(response => console.log(response))
+const gettingDate = new Firebase();
+// gettingDate.getUser()
