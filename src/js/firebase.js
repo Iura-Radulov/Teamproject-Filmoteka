@@ -59,4 +59,4 @@ const gettingDate = new Firebase();
 // gettingDate.getUser()
 const email = 'some@mail.ru';
 const password = 123456;
-authWithEmailPassword(email, password).then(console.log(data))
+// authWithEmailPassword(email, password).then(console.log(data))
