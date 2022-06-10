@@ -15,6 +15,7 @@ export default function authWithEmailPassword(email, password) {
     })
         .then(response => response.json())
         .then(data => data.idToken)
+        .catch(error => console.log(error))
 }
 
 

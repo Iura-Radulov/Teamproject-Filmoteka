@@ -1,4 +1,4 @@
-import { authWithEmailPassword } from './authWithEmailPassword'
+import  authWithEmailPassword  from './authWithEmailPassword'
 
 
 const URL = "https://filmoteka-goit-6e05f-default-rtdb.firebaseio.com/users.json";
@@ -58,5 +58,6 @@ console.log(sentDat);
 const gettingDate = new Firebase();
 // gettingDate.getUser()
 const email = 'some@mail.ru';
-const password = 123456;
+const password = "123456";
 // authWithEmailPassword(email, password).then(console.log(data))
+authWithEmailPassword(email, password).then(Firebase.fetch)
