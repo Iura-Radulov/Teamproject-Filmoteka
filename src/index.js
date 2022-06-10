@@ -1,1 +1,5 @@
-import "./sass/index.scss"
+
+
+
+
+import './js/firebase'
