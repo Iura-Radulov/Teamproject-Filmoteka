@@ -20,6 +20,7 @@ class LibraryApi {
     this.showQueueBtn.addEventListener('click', this.showQueue.bind(this));
   }
 
+  // awaits an object describing current movie
   addToWatched = movie => {
     const myMovie = {
       genres: movie.genres,
@@ -29,9 +30,8 @@ class LibraryApi {
       first_air_date: movie.first_air_date,
       id: movie.id,
     };
-    this.watched.push(movie);
+    this.watched.push(myMovie);
   };
-
   addToQueue = movie => {
     const myMovie = {
       genres: movie.genres,
@@ -41,10 +41,13 @@ class LibraryApi {
       first_air_date: movie.first_air_date,
       id: movie.id,
     };
-    this.queue.push(movie);
+    this.queue.push(myMovie);
   };
 
-  showWatched = () => {
+  // awaits reference to element in which it will render
+  showWatched = container => {
+    container.innerHTML = '';
+
     const markup = this.watched.map(
       () => `<div class="film-card">
         <img src="https://image.tmdb.org/t/p/w500${poster_path}"  alt="" loading="lazy" data-id=${id} />
@@ -69,10 +72,13 @@ class LibraryApi {
         </div>
       </div>`
     );
-  };
 
-  showQueue = () => {
-    return this.queue.map(
+    container.insertAdjacentHtml('beforeend', markup);
+  };
+  showQueue = container => {
+    container.innerHTML = '';
+
+    const markup = this.queue.map(
       () => `<div class="film-card">
         <img src="https://image.tmdb.org/t/p/w500${poster_path}"  alt="" loading="lazy" data-id=${id} />
         <div class="info">
@@ -96,6 +102,8 @@ class LibraryApi {
         </div>
       </div>`
     );
+
+    container.insertAdjacentHtml('beforeend', markup);
   };
 }
 
