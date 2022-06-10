@@ -11,10 +11,12 @@ const filmsContainer = document.querySelector('.films__container');
 const backdropEl = document.querySelector('.backdrop');
 const modalFilmInfoEl = document.querySelector('.modal_film-info');
 const btnModal = document.querySelector('.modal_film__button--close');
+const formEl = document.querySelector('.search-form');
 
 document.addEventListener('DOMContentLoaded', startPopularFilms);
 filmsContainer.addEventListener('click', onFilmClick);
 btnModal.addEventListener('click', onBtnModalClick);
+formEl.addEventListener('submit', onSearchFilm);
 
 async function startPopularFilms() {
   clearFilmsContainer();
@@ -60,4 +62,38 @@ function onFilmClick(event) {
 function onBtnModalClick() {
   backdropEl.classList.add('is-hidden');
   document.body.classList.toggle('modal-open');
+}
+
+function onSearchFilm(event) {
+  event.preventDefault();
+  clearFilmsContainer();
+  console.log(event.currentTarget);
+
+  newApiSearchFilm.query =
+    event.currentTarget.elements.searchQuery.value.trim();
+  console.log(newApiSearchFilm.searchQuery);
+  if (newApiSearchFilm.query === '') {
+    return alert('Please enter search data.');
+  }
+  newApiSearchFilm.resetPage();
+
+  newApiSearchFilm
+    .searchFilm()
+    .then(dates => {
+      console.log(dates);
+      const filmArray = dates[0].results;
+      const genreArray = dates[1].genres;
+      console.log(filmArray);
+      console.log(genreArray);
+
+      if (filmArray.length === 0) {
+        return alert(
+          'Sorry, there are no images matching your search query. Please try again.'
+        );
+      } else {
+        const markup = createFilmsList(dates);
+        filmsContainer.insertAdjacentHTML('afterbegin', markup);
+      }
+    })
+    .catch(error => console.log(error));
 }
