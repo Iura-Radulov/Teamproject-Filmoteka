@@ -60,14 +60,3 @@ const gettingDate = new Firebase();
 const email = 'some@mail.ru';
 const password = 123456;
 authWithEmailPassword(email, password).then(console.log(data))
-
-
-
-
-
-
-
-
-
-
-
