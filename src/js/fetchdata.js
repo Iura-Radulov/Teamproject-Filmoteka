@@ -52,6 +52,8 @@ function onFilmClick(event) {
           const markup = createFilmCard(movie);
           backdropEl.classList.remove('is-hidden');
           document.body.classList.toggle('modal-open');
+          backdropEl.addEventListener('click', onBackdropClick);
+          document.addEventListener('keydown', onEscKeyPress);
           modalFilmInfoEl.insertAdjacentHTML('beforeend', markup);
         }
       })
@@ -96,4 +98,18 @@ function onSearchFilm(event) {
       }
     })
     .catch(error => console.log(error));
+}
+
+function onBackdropClick() {
+  backdropEl.classList.add('is-hidden');
+  document.body.classList.toggle('modal-open');
+  backdropEl.removeEventListener('click', onBackdropClick);
+}
+
+function onEscKeyPress(event) {
+  if (event.code === 'Escape') {
+    backdropEl.classList.add('is-hidden');
+    document.body.classList.toggle('modal-open');
+    document.removeEventListener('keydown', onEscKeyPress);
+  }
 }
