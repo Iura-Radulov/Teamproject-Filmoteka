@@ -53,6 +53,8 @@ function onFilmClick(event) {
           const markup = createFilmCard(movie);
           backdropEl.classList.remove('is-hidden');
           document.body.classList.toggle('modal-open');
+          backdropEl.addEventListener('click', onBackdropClick);
+          document.addEventListener('keydown', onEscKeyPress);
           modalFilmInfoEl.insertAdjacentHTML('beforeend', markup);
         }
       })
@@ -74,7 +76,9 @@ function onSearchFilm(event) {
     event.currentTarget.elements.searchQuery.value.trim();
   console.log(newApiSearchFilm.searchQuery);
   if (newApiSearchFilm.query === '') {
+
     return Notiflix.Notify.info('Please enter search data.');
+
   }
   newApiSearchFilm.resetPage();
 
@@ -88,8 +92,10 @@ function onSearchFilm(event) {
       console.log(genreArray);
 
       if (filmArray.length === 0) {
+
         return Notiflix.Notify.info(
           'Sorry, there are no movies matching your search query. Please try again.'
+
         );
       } else {
         const markup = createFilmsList(dates);
@@ -98,3 +104,18 @@ function onSearchFilm(event) {
     })
     .catch(error => console.log(error));
 }
+
+function onBackdropClick() {
+  backdropEl.classList.add('is-hidden');
+  document.body.classList.toggle('modal-open');
+  backdropEl.removeEventListener('click', onBackdropClick);
+}
+
+function onEscKeyPress(event) {
+  if (event.code === 'Escape') {
+    backdropEl.classList.add('is-hidden');
+    document.body.classList.toggle('modal-open');
+    document.removeEventListener('keydown', onEscKeyPress);
+  }
+}
+

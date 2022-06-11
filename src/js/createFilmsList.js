@@ -10,6 +10,7 @@ export default function createFilmsList(dates) {
         genre_ids,
         release_date,
         id,
+        vote_average,
       }) => {
         return `<div class="film-card">
         <img src="https://image.tmdb.org/t/p/w500${poster_path}"  alt="" loading="lazy" data-id=${id} />
@@ -30,6 +31,7 @@ export default function createFilmsList(dates) {
               .concat([' Other'])} </b >
             <b>|</b>
             <b>${release_date ? release_date.slice(0, 4) : '-'}</b>
+            <b>${vote_average}</b>
           </p>
         </div>
       </div>`;
