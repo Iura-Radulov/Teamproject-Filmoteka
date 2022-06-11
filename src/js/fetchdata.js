@@ -3,6 +3,7 @@ import NewApiPopularFilms from './NewApiPopularFilms';
 import createFilmsList from './createFilmsList';
 import createFilmCard from './createFilmCard';
 import fetchFilmModal from './fetchFilmModal';
+import Notiflix from 'notiflix';
 
 const newApiSearchFilm = new NewApiSearchFilms();
 const newApiPopularFilms = new NewApiPopularFilms();
@@ -75,7 +76,9 @@ function onSearchFilm(event) {
     event.currentTarget.elements.searchQuery.value.trim();
   console.log(newApiSearchFilm.searchQuery);
   if (newApiSearchFilm.query === '') {
-    return alert('Please enter search data.');
+
+    return Notiflix.Notify.info('Please enter search data.');
+
   }
   newApiSearchFilm.resetPage();
 
@@ -89,8 +92,10 @@ function onSearchFilm(event) {
       console.log(genreArray);
 
       if (filmArray.length === 0) {
-        return alert(
-          'Sorry, there are no images matching your search query. Please try again.'
+
+        return Notiflix.Notify.info(
+          'Sorry, there are no movies matching your search query. Please try again.'
+
         );
       } else {
         const markup = createFilmsList(dates);
@@ -113,3 +118,4 @@ function onEscKeyPress(event) {
     document.removeEventListener('keydown', onEscKeyPress);
   }
 }
+
