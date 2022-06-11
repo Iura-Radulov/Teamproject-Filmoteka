@@ -1,4 +1,6 @@
-import { initializeApp } from "firebase/app";
+
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 const API_KEY = "AIzaSyDcQX36y9qDVvGT9ex-Dyg3NuMiItVzDWw"
 
 export default function authWithEmailPassword(email, password) {
@@ -20,25 +22,21 @@ export default function authWithEmailPassword(email, password) {
 
 
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyDcQX36y9qDVvGT9ex-Dyg3NuMiItVzDWw",
-  authDomain: "filmoteka-goit-6e05f.firebaseapp.com",
-  databaseURL: "https://filmoteka-goit-6e05f-default-rtdb.firebaseio.com",
-  projectId: "filmoteka-goit-6e05f",
-  storageBucket: "filmoteka-goit-6e05f.appspot.com",
-  messagingSenderId: "281727023613",
-  appId: "1:281727023613:web:ae072f932b4bc661d88194"
-};
+const email = 'some@mail.ru';
+const password = '123456';
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
-
-
+// console.log(app);
+// console.log(getFirestore);
+// getAuth()
+//   .getUserByEmail(email)
+//   .then((userRecord) => {
+//     // See the UserRecord reference doc for the contents of userRecord.
+//     console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
+//   })
+//   .catch((error) => {
+//     console.log('Error fetching user data:', error);
+//   });
 
 
 
