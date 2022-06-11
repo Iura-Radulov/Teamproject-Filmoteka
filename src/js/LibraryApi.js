@@ -11,37 +11,50 @@ class LibraryApi {
     this.queue = [];
 
     // button event listeners
-    this.addToWatchedBtn.addEventListener(
-      'click',
-      this.addToWatched.bind(this)
-    );
-    this.addToQueueBtn.addEventListener('click', this.addToQueue.bind(this));
-    this.showWatchedBtn.addEventListener('click', this.showWatched.bind(this));
-    this.showQueueBtn.addEventListener('click', this.showQueue.bind(this));
+    // this.showWatchedBtn.addEventListener('click', this.showWatched.bind(this));
+    // this.showQueueBtn.addEventListener('click', this.showQueue.bind(this));
   }
 
   // awaits an object describing current movie
   addToWatched = movie => {
-    const myMovie = {
+    const watchedMovie = {
       genres: movie.genres,
       original_title: movie.original_title,
       poster_path: movie.poster_path,
       original_name: movie.original_name,
-      first_air_date: movie.first_air_date,
+      release_date: movie.release_date,
       id: movie.id,
+      vote_average: movie.vote_average,
     };
-    this.watched.push(myMovie);
+
+    this.watched.push(watchedMovie);
+    console.log(this.watched);
   };
   addToQueue = movie => {
-    const myMovie = {
+    const queueMovie = {
       genres: movie.genres,
       original_title: movie.original_title,
       poster_path: movie.poster_path,
       original_name: movie.original_name,
-      first_air_date: movie.first_air_date,
+      release_date: movie.release_date,
       id: movie.id,
+      vote_average: movie.vote_average,
     };
-    this.queue.push(myMovie);
+
+    this.queue.push(queueMovie);
+    console.log(this.queue);
+  };
+
+  // is called from open modal window
+  onAddToWatchedBtnClick = movie => {
+    this.addToWatchedBtn.addEventListener('click', () => {
+      this.addToWatched(movie);
+    });
+  };
+  onAddToQueueBtnClick = movie => {
+    this.addToQueueBtn.addEventListener('click', () => {
+      this.addToQueue(movie);
+    });
   };
 
   // awaits reference to element in which it will render
@@ -49,7 +62,13 @@ class LibraryApi {
     container.innerHTML = '';
 
     const markup = this.watched.map(
-      () => `<div class="film-card">
+      ({
+        poster_path,
+        original_title,
+        original_name,
+        genres,
+        release_date,
+      }) => `<div class="film-card">
         <img src="https://image.tmdb.org/t/p/w500${poster_path}"  alt="" loading="lazy" data-id=${id} />
         <div class="info">
           <p class="film-name">${
@@ -57,17 +76,9 @@ class LibraryApi {
           }
           </p>
           <p class="info-item">
-            <b>${genreArray
-              .reduce((listGenre, genre) => {
-                if (genre_ids.includes(genre.id)) {
-                  listGenre.push(` ${genre.name}`);
-                }
-                return listGenre;
-              }, [])
-              .slice(0, 2)
-              .concat([' Other'])} </b >
+            <b>${genres.map(genre => genre.name)}</b >
             <b>|</b>
-            <b>${first_air_date ? first_air_date.slice(0, 4) : '-'}</b>
+            <b>${release_date ? release_date.slice(0, 4) : '-'}</b>
           </p>
         </div>
       </div>`
@@ -79,7 +90,13 @@ class LibraryApi {
     container.innerHTML = '';
 
     const markup = this.queue.map(
-      () => `<div class="film-card">
+      ({
+        poster_path,
+        original_title,
+        original_name,
+        genres,
+        release_date,
+      }) => `<div class="film-card">
         <img src="https://image.tmdb.org/t/p/w500${poster_path}"  alt="" loading="lazy" data-id=${id} />
         <div class="info">
           <p class="film-name">${
@@ -87,17 +104,9 @@ class LibraryApi {
           }
           </p>
           <p class="info-item">
-            <b>${genreArray
-              .reduce((listGenre, genre) => {
-                if (genre_ids.includes(genre.id)) {
-                  listGenre.push(` ${genre.name}`);
-                }
-                return listGenre;
-              }, [])
-              .slice(0, 2)
-              .concat([' Other'])} </b >
+            <b>${genres.map(genre => genre.name)}</b >
             <b>|</b>
-            <b>${first_air_date ? first_air_date.slice(0, 4) : '-'}</b>
+            <b>${release_date ? release_date.slice(0, 4) : '-'}</b>
           </p>
         </div>
       </div>`
