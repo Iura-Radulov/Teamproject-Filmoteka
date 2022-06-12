@@ -5,70 +5,65 @@ class LibraryApi {
     this.addToQueueBtn = document.getElementById('add-to-queue');
     this.showWatchedBtn = document.getElementById('show-watched');
     this.showQueueBtn = document.getElementById('show-queue');
+    this.container = document.querySelector('.films__container');
 
     // arrays of data (to be replaced by firebase database)
     this.watched = [];
     this.queue = [];
 
     // button event listeners
-    // this.showWatchedBtn.addEventListener('click', this.showWatched.bind(this));
-    // this.showQueueBtn.addEventListener('click', this.showQueue.bind(this));
+    this.addToWatchedBtn.addEventListener(
+      'click',
+      this.onAddButtonClick.bind(this)
+    );
+    this.addToQueueBtn.addEventListener(
+      'click',
+      this.onAddButtonClick.bind(this)
+    );
+    this.showWatchedBtn.addEventListener('click', this.showWatched.bind(this));
+    this.showQueueBtn.addEventListener('click', this.showQueue.bind(this));
   }
 
-  // awaits an object describing current movie
-  addToWatched = movie => {
-    const watchedMovie = {
-      genres: movie.genres,
-      original_title: movie.original_title,
-      poster_path: movie.poster_path,
-      original_name: movie.original_name,
-      release_date: movie.release_date,
-      id: movie.id,
-      vote_average: movie.vote_average,
-    };
-
-    this.watched.push(watchedMovie);
-    console.log(this.watched);
-  };
-  addToQueue = movie => {
-    const queueMovie = {
-      genres: movie.genres,
-      original_title: movie.original_title,
-      poster_path: movie.poster_path,
-      original_name: movie.original_name,
-      release_date: movie.release_date,
-      id: movie.id,
-      vote_average: movie.vote_average,
-    };
-
-    this.queue.push(queueMovie);
-    console.log(this.queue);
-  };
-
   // is called from open modal window
-  onAddToWatchedBtnClick = movie => {
-    this.addToWatchedBtn.addEventListener('click', () => {
-      this.addToWatched(movie);
-    });
-  };
-  onAddToQueueBtnClick = movie => {
-    this.addToQueueBtn.addEventListener('click', () => {
-      this.addToQueue(movie);
-    });
+  onAddButtonClick = event => {
+    const movieJson = event.target.dataset.movie;
+    switch (event.target.id) {
+      case 'add-to-watched':
+        this.watched.push(JSON.parse(movieJson));
+        this.removeBtnAttribute(event.target);
+        break;
+
+      case 'add-to-queue':
+        this.queue.push(JSON.parse(movieJson));
+        this.removeBtnAttribute(event.target);
+        break;
+      default:
+        break;
+    }
+    // const watched = this.watched.map(item => JSON.parse(item));
+    // const queue = this.queue.map(item => JSON.parse(item));
+    console.log('watched:', this.watched);
+    console.log('queue:', this.queue);
   };
 
-  // awaits reference to element in which it will render
-  showWatched = container => {
-    container.innerHTML = '';
+  removeBtnAttribute = button => {
+    button.removeAttribute('data-movie');
+  };
 
-    const markup = this.watched.map(
-      ({
-        poster_path,
-        original_title,
-        original_name,
-        genres,
-        release_date,
-      }) => `<div class="film-card">
+  // renders to DOM
+  showWatched = () => {
+    this.container.innerHTML = '';
+
+    const markup = this.watched
+      .map(
+        ({
+          poster_path,
+          original_title,
+          original_name,
+          genres,
+          release_date,
+          id,
+        }) => `<div class="film-card">
         <img src="https://image.tmdb.org/t/p/w500${poster_path}"  alt="" loading="lazy" data-id=${id} />
         <div class="info">
           <p class="film-name">${
@@ -82,12 +77,13 @@ class LibraryApi {
           </p>
         </div>
       </div>`
-    );
+      )
+      .join('');
 
-    container.insertAdjacentHtml('beforeend', markup);
+    this.container.insertAdjacentHTML('beforeend', markup);
   };
-  showQueue = container => {
-    container.innerHTML = '';
+  showQueue = () => {
+    this.container.innerHTML = '';
 
     const markup = this.queue.map(
       ({
@@ -96,6 +92,7 @@ class LibraryApi {
         original_name,
         genres,
         release_date,
+        id,
       }) => `<div class="film-card">
         <img src="https://image.tmdb.org/t/p/w500${poster_path}"  alt="" loading="lazy" data-id=${id} />
         <div class="info">
@@ -112,7 +109,7 @@ class LibraryApi {
       </div>`
     );
 
-    container.insertAdjacentHtml('beforeend', markup);
+    this.container.insertAdjacentHtml('beforeend', markup);
   };
 }
 
