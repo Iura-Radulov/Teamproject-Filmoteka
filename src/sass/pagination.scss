@@ -1,0 +1,51 @@
+.pagination {
+  padding: 30 0 30 0;
+}
+
+.pagination_list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 40px;
+}
+
+.arrow{
+    font-weight: bolder;
+    width: 40px;
+    height: 40px;
+    background: #F7F7F7;
+    border-radius: 5px;
+  
+}
+
+.points {
+  
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 1.33;
+      padding-bottom: 5px;
+  
+}
+
+
+
+.numbers{
+    height: 40px;
+    width: 40px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    background: none;
+  }
+
+
+
+
+.active{
+    background: #FF6B08;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    
+}

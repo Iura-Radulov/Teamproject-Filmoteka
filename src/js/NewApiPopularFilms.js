@@ -21,6 +21,9 @@ export default class NewApiPopularFilms {
   resetPage() {
     this.page = 1;
   }
+ setPage(page) {
+    this.page = page;
+  }
 
   incrementPage() {
     this.page += 1;
