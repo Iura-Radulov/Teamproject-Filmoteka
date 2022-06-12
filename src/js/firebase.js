@@ -40,7 +40,7 @@ class Firebase {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
-                'Content-Type': 'aplicatiom/json'
+                'Content-Type': 'applicatiom/json'
             }
         })
            .then(response => response.json())
@@ -85,6 +85,7 @@ const gettingDate = new Firebase();
 const email = 'some1@mail.ru';
 const password = '123467';
 
+// handleLogin(email, password)
 
 // authWithEmailPassword(email, password).then(token => gettingDate.fetch(token)).then(console.log)
 

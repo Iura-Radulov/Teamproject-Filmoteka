@@ -9,7 +9,7 @@ export default function authWithEmailPassword(email, password) {
             returnSecureToken: true,
         }),
         headers: {
-                'Content-Type': 'aplicatiom/json'
+                'Content-Type': 'applicatiom/json'
             }
         
     })

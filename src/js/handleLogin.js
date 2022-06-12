@@ -8,5 +8,5 @@ export default function handleLogin (email, password) {
                 id: user.uid;
                 token: user.accessToken;              
             })
-            .catch(() => alert('Invalid user!'))
+           .catch(() => alert('Invalid user!'))    
     }
