@@ -1,21 +1,46 @@
-import { authWithEmailPassword } from './authWithEmailPassword'
+import { initializeApp } from "firebase/app";
+import authWithEmailPassword from './authWithEmailPassword'
+import handleLogin from "./handleLogin";
+import handleRegister from "./handleRegister";
 
 
 const URL = "https://filmoteka-goit-6e05f-default-rtdb.firebaseio.com/users.json";
 
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDcQX36y9qDVvGT9ex-Dyg3NuMiItVzDWw",
+  authDomain: "filmoteka-goit-6e05f.firebaseapp.com",
+  databaseURL: "https://filmoteka-goit-6e05f-default-rtdb.firebaseio.com",
+  projectId: "filmoteka-goit-6e05f",
+  storageBucket: "filmoteka-goit-6e05f.appspot.com",
+  messagingSenderId: "281727023613",
+  appId: "1:281727023613:web:ae072f932b4bc661d88194"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+
 
 const data = {
-    name: 'George',
+    name: 'Mike',
     email: 'some@mail.ru',
     password: 12345,
 }
- class Firebase {
-     create(data) {
-       return fetch(URL, {
+class Firebase {
+    constructor() {
+        this.URL = "https://filmoteka-goit-6e05f-default-rtdb.firebaseio.com/users.json"; 
+     }
+    create(data) {
+         
+       return fetch(this.URL, {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
-                'Content-Type': 'aplicatiom/json'
+                'Content-Type': 'applicatiom/json'
             }
         })
            .then(response => response.json())
@@ -26,7 +51,7 @@ const data = {
            
     }
       getUser() {
-          return fetch(URL).then(response => response.json())
+          return fetch(this.URL).then(response => response.json())
           .then(response => console.log(response))
         
       }
@@ -57,6 +82,11 @@ console.log(sentDat);
 
 const gettingDate = new Firebase();
 // gettingDate.getUser()
-const email = 'some@mail.ru';
-const password = 123456;
-// authWithEmailPassword(email, password).then(console.log(data))
+const email = 'some1@mail.ru';
+const password = '123467';
+
+// handleLogin(email, password)
+
+// authWithEmailPassword(email, password).then(token => gettingDate.fetch(token)).then(console.log)
+
+
