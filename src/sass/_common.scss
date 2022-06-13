@@ -29,6 +29,7 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
+  border-radius: 5px
 }
 
 a {
@@ -39,6 +40,8 @@ a {
   margin: 0 auto;
   padding: 0 20px;
 }
+
+
 @media screen and (min-width: 768px) {
   .container {
     max-width: 768px;
@@ -50,5 +53,6 @@ a {
   .container {
     max-width: 1024px;
     padding: 0 32px;
+    
   }
 }
