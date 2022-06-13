@@ -52,4 +52,22 @@
     background-image: url(../images/svg/heart.svg);
     margin-left: 10px;
     margin-right: 10px;
+
+        animation: heartbeat .60s infinite;
+        }
+        
+        ;
+        
+        @keyframes heartbeat {
+            0% {
+                transform: scale(0.5);
+            }
+        
+            40% {
+                transform: scale(2);
+            }
+                         40% {
+                             transform: scale(2);
+                         }
+                    
 }
