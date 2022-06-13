@@ -1,8 +1,9 @@
 import { initializeApp } from "firebase/app";
 import authWithEmailPassword from './authWithEmailPassword'
-import NewApiPopularFilms from './NewApiPopularFilms'
-const newApiPopularFilms = new NewApiPopularFilms()
-newApiPopularFilms.fetchFilmsCards()
+import handleLogin from "./handleLogin";
+import handleRegister from "./handleRegister";
+
+
 const URL = "https://filmoteka-goit-6e05f-default-rtdb.firebaseio.com/users.json";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -39,7 +40,7 @@ class Firebase {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
-                'Content-Type': 'aplicatiom/json'
+                'Content-Type': 'applicatiom/json'
             }
         })
            .then(response => response.json())
@@ -81,5 +82,11 @@ console.log(sentDat);
 
 const gettingDate = new Firebase();
 // gettingDate.getUser()
-const email = 'some@mail.ru';
-const password = '123456';
+const email = 'some1@mail.ru';
+const password = '123467';
+
+// handleLogin(email, password)
+
+// authWithEmailPassword(email, password).then(token => gettingDate.fetch(token)).then(console.log)
+
+

@@ -1,6 +1,4 @@
 
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 const API_KEY = "AIzaSyDcQX36y9qDVvGT9ex-Dyg3NuMiItVzDWw"
 
 export default function authWithEmailPassword(email, password) {
@@ -11,7 +9,7 @@ export default function authWithEmailPassword(email, password) {
             returnSecureToken: true,
         }),
         headers: {
-                'Content-Type': 'aplicatiom/json'
+                'Content-Type': 'applicatiom/json'
             }
         
     })
@@ -23,8 +21,7 @@ export default function authWithEmailPassword(email, password) {
 
 
 
-const email = 'some@mail.ru';
-const password = '123456';
+
 
 // console.log(app);
 // console.log(getFirestore);
