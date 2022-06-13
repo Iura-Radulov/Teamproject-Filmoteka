@@ -13,7 +13,11 @@ export default function createFilmCard(movie) {
   console.log(genres);
 
   return `<div class="about_film-card">
-         <img src="https://image.tmdb.org/t/p/w500${poster_path}" class="about_film-img" alt="" loading="lazy" data-id=${id} />
+         <img src=${
+           poster_path !== null
+             ? `https://image.tmdb.org/t/p/w500${poster_path}`
+             : `https://www.online-tech-tips.com/wp-content/uploads/2022/03/image-41.jpeg`
+         } class="about_film-img" alt="" loading="lazy" data-id=${id} />
         <div class="about_film-info">
           <h1 class="about_film-name">${
             original_title ? original_title : original_name
