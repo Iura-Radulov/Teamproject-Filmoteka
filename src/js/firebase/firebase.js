@@ -1,5 +1,16 @@
 import { initializeApp } from "firebase/app";
-import authWithEmailPassword from './authWithEmailPassword'
+import {
+   getAuth,
+   onAuthStateChanged,
+   createUserWithEmailAndPassword,
+   signInWithEmailAndPassword,
+   GoogleAuthProvider,
+   connectAuthEmulator,
+   AuthErrorCodes,
+   signOut,
+} from 'firebase/auth';
+import refs from "./refs";
+import authWithEmailPassword from "./authWithEmailPassword";
 import handleLogin from "./handleLogin";
 import handleRegister from "./handleRegister";
 
@@ -22,18 +33,74 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+
+// Create new account using email/password
+
+export async function createAccount() {  
+   const email = refs.txtEmailRegister.value;
+   const password = refs.txtPasswordRegister.value;
+
+   try {
+       await createUserWithEmailAndPassword(auth, email, password);
+       ({user}) => {
+                console.log(user);              
+                email: user.email;
+                id: user.uid;
+                token: user.accessToken;               
+            }
+  
+   } catch (error) {
+      console.log(`There was an error: ${error}`);
+    //   showLoginError(error);
+   }
+};
+
+// Login using email/password
+
+export async function loginEmailPassword () {
+   const email = refs.txtEmailLogin.value;
+   const password = refs.txtPasswordLogin.value;
+   try {
+       await signInWithEmailAndPassword(auth, email, password);
+      ({user}) => {                
+                email: user.email;
+                id: user.uid;
+                token: user.accessToken;              
+            }
+      
+   } catch (error) {
+      console.log(error);
+      
+   }
+};
 
 
 
-const data = {
-    name: 'Mike',
-    email: 'some@mail.ru',
-    password: 12345,
-}
+
+
+
+
+
+
+
+
+
+
+
+// const data = {
+//     name: 'Mike',
+//     email: 'some@mail.ru',
+//     password: 12345,
+// }
 class Firebase {
     constructor() {
         this.URL = "https://filmoteka-goit-6e05f-default-rtdb.firebaseio.com/users.json"; 
-     }
+    }
+    
+
+
     create(data) {
          
        return fetch(this.URL, {
