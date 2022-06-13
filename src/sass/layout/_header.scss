@@ -197,3 +197,30 @@
 .display-none {
     display: none;
 }
+
+// ========================
+//  кнопка регистрації
+.sign-up-btn {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.14;
+    color: #fff;
+    background-color: transparent;
+    text-transform: uppercase;
+    border: 2px solid #FFF;
+    width: 140px;
+    height: 30px;
+    position: absolute;
+    right: 32px;
+    top: 50px;
+    &:focus,
+    &:hover {
+        border: 3px solid #FF6B08;
+        color: #FF6B08;
+    }
+    @media screen and (max-width: 768px) {
+        right: 20px;
+        top: 35px;
+    }
+}
+   
