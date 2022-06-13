@@ -1,4 +1,6 @@
 .filmoteka_footer {
+    display: flex;
+    justify-content: center;
     text-align: center;
     font-family: 'Roboto';
     font-style: normal;
@@ -17,22 +19,37 @@
     // padding-right: 36px;
     padding-top: 28.71px;
     padding-bottom: 29.7px;
+
+    @media screen and (max-width: 768px) {
+            flex-direction: column;
+        }
     
 }
 
-.footer_text{
-margin-top: 9.9px;
+.footer_left{
+    position: relative;
+    display: flex;
+    text-align: center;
 }
 
-// .text_before_svg::after{
-//     background-image: url(/src/images/svg/heart.svg);
-// }
+.footer_right{
+    position: relative;
+    display: flex;
+    text-align: center;
+}
+
+.footer_text{
+    @media screen and (max-width: 768px) {
+            margin-top: 9.9px;
+        }
+}
 
 .footer_link{
     text-decoration: underline;
 }
 
 .svg{
+    background-image: url(../images/svg/heart.svg);
     margin-left: 10px;
     margin-right: 10px;
 }
