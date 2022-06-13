@@ -10,9 +10,14 @@ export default function createFilmsList(dates) {
         genre_ids,
         release_date,
         id,
+        vote_average,
       }) => {
         return `<div class="film-card">
-        <img src="https://image.tmdb.org/t/p/w500${poster_path}"  alt="" loading="lazy" data-id=${id} />
+        <img src=${
+          poster_path !== null
+            ? `https://image.tmdb.org/t/p/w500${poster_path}`
+            : `https://www.online-tech-tips.com/wp-content/uploads/2022/03/image-41.jpeg`
+        } alt="" loading="lazy" data-id=${id} />
         <div class="info">
           <p class="film-name">${
             original_title ? original_title : original_name
@@ -30,6 +35,7 @@ export default function createFilmsList(dates) {
               .concat([' Other'])} </b >
             <b>|</b>
             <b>${release_date ? release_date.slice(0, 4) : '-'}</b>
+            <b>${vote_average}</b>
           </p>
         </div>
       </div>`;
