@@ -45,7 +45,8 @@
 
 .active{
   
-    background:#FF6B08 ;
+ 
+    background: getColor('pin-color');
     border-radius: 5px;
     width: 40px;
     height: 40px;
