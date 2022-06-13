@@ -3,7 +3,9 @@ const refs = {
    signInButton: document.getElementById('signInBtn'),
     container: document.getElementById('container'),
     registerFormSignUp: document.querySelector('.register-form__sign-up'),
-   registerFormSignIn: document.querySelector('.register-form__sign-in'),
+    registerFormSignIn: document.querySelector('.register-form__sign-in'),
+    signInContainer: document.querySelector('.sign-in-container'),
+   signUpContainer: document.querySelector('.sign-up-container'),
 
    btnLogin: document.getElementById('btnLoginBtn'),
    btnSignup: document.getElementById('btnSignUpBtn'),
@@ -23,5 +25,6 @@ const refs = {
    divLoginError: document.getElementById('divLoginError'),
    lblLoginErrorMessage: document.getElementById('lblLoginErrorMessage'),
 }
+//        footer
 
 export default refs;

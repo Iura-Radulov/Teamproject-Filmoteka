@@ -33,5 +33,22 @@ export function hideFormLoginRegister() {
    refs.formLogin.style.display = 'none';
 };
 
+
+function hideFormLogin() {
+    refs.signInContainer.syyle.display = 'none';
+}
+
+
+function showFormRegister() {
+    refs.signUpContainer.syyle.display = 'flex';
+}
+
 // showFormLoginRegister()
 hideFormLoginRegister()
+
+function onBtnSignUp() {
+    showFormLoginRegister();
+    hideFormLogin();
+    showFormRegister();
+}
+

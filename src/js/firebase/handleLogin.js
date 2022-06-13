@@ -1,7 +1,7 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import refs from "./refs";
 import { loginEmailPassword } from './firebase';
-import {resetForm, hideFormLoginRegister} from './handleRegister';
+import {resetForm, hideFormLoginRegister, showFormLoginRegister} from './handleRegister';
 refs.registerFormSignIn.addEventListener('submit', handleLogin);
 
 
@@ -29,3 +29,19 @@ function showLoginError (error) {
    }
 };
 
+function showFormLogin() {
+    refs.signInContainer.style.display = 'flex';
+}
+
+
+function hideFormRegister() {
+    refs.signUpContainer.style.display = 'none';
+}
+
+function onBtnSignIn() {
+    showFormLoginRegister();
+    hideFormRegister();
+    showFormLogin();
+}
+
+// onBtnSignIn()
