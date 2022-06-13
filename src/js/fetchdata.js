@@ -16,7 +16,6 @@ const formEl = document.querySelector('.search-form');
 
 document.addEventListener('DOMContentLoaded', startPopularFilms);
 filmsContainer.addEventListener('click', onFilmClick);
-
 formEl.addEventListener('submit', onSearchFilm);
 
 async function startPopularFilms() {
@@ -30,10 +29,6 @@ async function startPopularFilms() {
   } catch (error) {
     console.log(error.message);
   }
-}
-
-function clearFilmsContainer() {
-  filmsContainer.innerHTML = '';
 }
 
 function onFilmClick(event) {
@@ -61,12 +56,6 @@ function onFilmClick(event) {
       })
       .catch(error => console.log(error));
   }
-}
-
-function onBtnModalClick() {
-  backdropEl.classList.add('is-hidden');
-  document.body.classList.toggle('modal-open');
-  backdropEl.removeEventListener('click', onBackdropClick);
 }
 
 function onSearchFilm(event) {
@@ -115,4 +104,14 @@ function onEscKeyPress(event) {
     document.body.classList.toggle('modal-open');
     document.removeEventListener('keydown', onEscKeyPress);
   }
+}
+
+function onBtnModalClick() {
+  backdropEl.classList.add('is-hidden');
+  document.body.classList.toggle('modal-open');
+  backdropEl.removeEventListener('click', onBackdropClick);
+}
+
+function clearFilmsContainer() {
+  filmsContainer.innerHTML = '';
 }
