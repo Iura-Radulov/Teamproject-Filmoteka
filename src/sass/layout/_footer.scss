@@ -23,6 +23,30 @@
     
 }
 
+.svg {
+    background-image: url(../images/svg/heart.svg);
+    margin-left: 10px;
+    margin-right: 10px;
+
+    animation: heartbeat 1s infinite;
+}
+
+;
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(0.5);
+    }
+
+    40% {
+        transform: scale(2);
+    }
+
+    40% {
+        transform: scale(2);
+    }
+}
+
 .footer_left{
     position: relative;
     display: flex;
@@ -45,26 +69,3 @@
     text-decoration: underline;
 }
 
-.svg{
-    background-image: url(../images/svg/heart.svg);
-    margin-left: 10px;
-    margin-right: 10px;
-
-    animation: heartbeat 1s infinite;
-    }
-    
-    ;
-    
-    @keyframes heartbeat {
-        0% {
-            transform: scale(0.5);
-        }
-    
-        40% {
-            transform: scale(2);
-        }
-    
-        40% {
-            transform: scale(2);
-        }
-}
