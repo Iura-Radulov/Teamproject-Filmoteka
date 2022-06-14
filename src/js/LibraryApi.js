@@ -90,9 +90,9 @@ function renderWatched(arrayOfJsons) {
         id,
         vote_average,
       }) => `<div class="film-card">
-        <img src="https://image.tmdb.org/t/p/w500${poster_path}"  alt="" loading="lazy" data-id=${id} />
+        <img src="https://image.tmdb.org/t/p/w500${poster_path}"  alt="" width="310" loading="lazy" data-id=${id} />
         <div class="info">
-          <p class="film-name">${
+          <p class="film__info-name">${
             original_title ? original_title : original_name
           }
           </p>
@@ -132,9 +132,9 @@ function renderQueue(arrayOfJsons) {
         id,
         vote_average,
       }) => `<div class="film-card">
-        <img src="https://image.tmdb.org/t/p/w500${poster_path}"  alt="" loading="lazy" data-id=${id} />
+        <img src="https://image.tmdb.org/t/p/w500${poster_path}"  alt="" width="310" loading="lazy" data-id=${id} />
         <div class="info">
-          <p class="film-name">${
+          <p class="film__info-name">${
             original_title ? original_title : original_name
           }
           </p>
