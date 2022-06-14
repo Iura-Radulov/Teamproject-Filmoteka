@@ -108,6 +108,7 @@
     }
 }
 .search-wrapper{
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -197,3 +198,58 @@
 .display-none {
     display: none;
 }
+
+// ========================
+//  кнопка регистрації
+.sign-up-btn {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.14;
+    color:  getColor('white-color');
+    background-color: transparent;
+    text-transform: uppercase;
+    border: 2px solid getColor('white-color');
+    border-radius: 2px;
+    width: 140px;
+    height: 30px;
+    position: absolute;
+    right: 0;
+    top: -10px;
+    &:focus,
+    &:hover {
+        border: 3px solid getColor('btn-color');
+        color: getColor('btn-color');
+    }
+    @media screen and (max-width: 768px) {
+        width: 65px;
+        right: 75;
+        top: -40px;
+    }
+}
+
+.sign-in-btn {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.14;
+    color: getColor('white-color');
+    background-color: transparent;
+    text-transform: uppercase;
+    border: 2px solid  getColor('white-color');;
+    border-radius: 2px;
+    width: 140px;
+    height: 30px;
+    position: absolute;
+    right: 0;
+    top: 27px;
+    &:focus,
+    &:hover {
+        border: 3px solid getColor('btn-color');
+        color: getColor('btn-color');
+    }
+    @media screen and (max-width: 768px) {
+        width: 65px;
+        right: 0;
+        top: -40px;
+    }
+}
+   
