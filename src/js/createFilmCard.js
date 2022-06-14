@@ -25,7 +25,7 @@ export default function createFilmCard(movie) {
           </h1>
           <div class="about_film-item">
           <p class="about_film-text">Vote / Votes</p>
-          <b class="about_film-date">${vote_average} / ${vote_count}</b>
+          <b class="about_film-date"><span class = about_film_vote>${vote_average}</span> / ${vote_count}</b>
           </div>
           <div class="about_film-item">
           <p class="about_film-text">Popularity</p>
