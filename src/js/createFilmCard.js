@@ -45,6 +45,12 @@ export default function createFilmCard(movie) {
           </div>
           <h2 class="about_film-pretitle">ABOUT</h2>
           <p class="about_film-overview">${overview}</p>
+          
+      <button type="button" class="btn" id="add-to-watched">
+        Add to Watched
+      </button>
+      <button type="button" class="btn" id="add-to-queue">Add to Queue</button>
+    
         </div>
-      </div>`;
+        </div>`;
 }
