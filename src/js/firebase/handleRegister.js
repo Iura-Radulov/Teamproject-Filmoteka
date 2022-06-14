@@ -1,6 +1,6 @@
 import refs from "./refs";
 // import Firebase from './firebase'
-
+import {hideFormRegister} from './handleLogin'
 refs.registerFormSignUp.addEventListener('submit', handleRegister);
 
 
@@ -26,6 +26,8 @@ export function showFormLoginRegister() {
 export function hideFormLoginRegisterByKey(e) {
    if (e.key === 'Escape') {
       hideFormLoginRegister();
+      hideFormLogin();
+      hideFormRegister();
       window.removeEventListener('keydown', hideFormLoginRegisterByKey);
    }
 };
@@ -35,12 +37,14 @@ export function hideFormLoginRegister() {
 
 
 function hideFormLogin() {
-    refs.signInContainer.syyle.display = 'none';
+    refs.signInContainer.style.display = 'none';
+   // refs.signInContainer.classList.add('is-hidden');
 }
 
 
 function showFormRegister() {
-    refs.signUpContainer.syyle.display = 'flex';
+   refs.signUpContainer.style.display = 'flex';
+   // refs.signUpContainer.classList.remove('is-hidden');
 }
 
 // showFormLoginRegister()
@@ -52,3 +56,4 @@ function onBtnSignUp() {
     showFormRegister();
 }
 
+refs.signUpBtn.addEventListener('click', onBtnSignUp);

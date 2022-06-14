@@ -1,0 +1,45 @@
+.films__container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px 16px;
+  padding: 60px 0;
+  justify-content: center;
+}
+.film__info {
+  &-name {
+    margin-top: 8px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 12px;
+    line-height: 16px;
+    color: #000000;
+    text-transform: uppercase;
+    max-width: 309px;
+  }
+
+  &-desc {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #ff6b08;
+  }
+}
+
+.rating {
+  color: white;
+  background: #ff6b08;
+  border-radius: 5px;
+  padding: 1px 10px;
+  margin-left: 5px;
+}
+
+.votes {
+  width: 36px;
+  height: 16px;
+  background: #f7f7f7;
+  border-radius: 5px;
+  padding: 1px 4px;
+}
