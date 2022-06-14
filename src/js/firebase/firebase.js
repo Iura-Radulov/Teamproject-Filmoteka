@@ -10,6 +10,8 @@ import {
    signOut,
 } from 'firebase/auth';
 import refs from "./refs";
+import { showLoginError } from "./handleLogin";
+import { hideFormLoginRegister, resetForm } from "./handleRegister";
 import authWithEmailPassword from "./authWithEmailPassword";
 import handleLogin from "./handleLogin";
 import handleRegister from "./handleRegister";
@@ -32,7 +34,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 
@@ -53,7 +55,7 @@ export async function createAccount() {
   
    } catch (error) {
       console.log(`There was an error: ${error}`);
-    //   showLoginError(error);
+     
    }
 };
 
@@ -64,15 +66,17 @@ export async function loginEmailPassword () {
    const password = refs.txtPasswordLogin.value;
    try {
        await signInWithEmailAndPassword(auth, email, password);
-      ({user}) => {                
-                email: user.email;
-                id: user.uid;
-                token: user.accessToken;              
-            }
+       ({ user }) => {
+           email: user.email;
+           id: user.uid;
+           token: user.accessToken;
+       };
+    //    resetForm();
+    //   hideFormLoginRegister();
       
    } catch (error) {
       console.log(error);
-      
+       showLoginError(error);
    }
 };
 
