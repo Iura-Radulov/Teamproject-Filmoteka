@@ -24,15 +24,24 @@ export default function createFilmsList(dates) {
           }
           </p>
           <p class="info-item">
-            <b>${genreArray
-              .reduce((listGenre, genre) => {
-                if (genre_ids.includes(genre.id)) {
-                  listGenre.push(` ${genre.name}`);
-                }
-                return listGenre;
-              }, [])
-              .slice(0, 2)
-              .concat([' Other'])} </b >
+            <b>${
+              genre_ids.length > 2
+                ? genreArray
+                    .reduce((listGenre, genre) => {
+                      if (genre_ids.includes(genre.id)) {
+                        listGenre.push(` ${genre.name}`);
+                      }
+                      return listGenre;
+                    }, [])
+                    .slice(0, 2)
+                    .concat([' Other'])
+                : genreArray.reduce((listGenre, genre) => {
+                    if (genre_ids.includes(genre.id)) {
+                      listGenre.push(` ${genre.name}`);
+                    }
+                    return listGenre;
+                  }, [])
+            } </b >
             <b>|</b>
             <b>${release_date ? release_date.slice(0, 4) : '-'}</b>
             <b>${vote_average}</b>
