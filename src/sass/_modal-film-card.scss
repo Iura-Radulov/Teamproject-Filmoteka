@@ -62,10 +62,10 @@ body.modal-open {
     height: 552px;
   }
 
-      @media screen and (min-width: 1024px) {
-          width: 814px;
-          height:558px;
-      }
+  @media screen and (min-width: 1024px) {
+    width: 814px;
+    height: 558px;
+  }
 }
 
 .modal_film-info {
@@ -89,10 +89,10 @@ body.modal-open {
     // padding: 40px 16px;
     margin: 0, auto;
   }
-        @media screen and (min-width: 1024px) {
-         width: 320px;
-        // height: 478px;
-        }
+  @media screen and (min-width: 1024px) {
+    width: 320px;
+    // height: 478px;
+  }
 }
 
 .about_film-card {
@@ -107,18 +107,18 @@ body.modal-open {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     margin-top: 10px;
   }
-        @media screen and (min-width: 1024px) {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(378px, 1fr));
-          margin-top: 0px;
-        }
+  @media screen and (min-width: 1024px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(378px, 1fr));
+    margin-top: 0px;
+  }
 }
 
-.about_film-info {
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: flex-start;
-}
+// .about_film-info {
+//   // display: flex;
+//   // flex-direction: column;
+//   // justify-content: flex-start;
+// }
 
 .about_film-item {
   display: flex;
@@ -139,9 +139,9 @@ body.modal-open {
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 0;
-@media screen and (min-width: 768px) {
+  @media screen and (min-width: 768px) {
     margin-top: 0;
-    }
+  }
 }
 
 .about_film-text {
@@ -175,8 +175,6 @@ body.modal-open {
   margin-bottom: 8px;
 }
 
-
-
 .modal_film__button--close {
   display: flex;
   width: 30px;
@@ -195,7 +193,7 @@ body.modal-open {
   border: 1px solid rgba(0, 0, 0, 0.1);
   color: #000000;
 
-  &:hover{
+  &:hover {
     color: rgb(255, 106, 0);
   }
 }
@@ -220,7 +218,7 @@ body.modal-open {
 }
 
 .btn {
-   font-family: 'Roboto';
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
@@ -243,12 +241,13 @@ body.modal-open {
     margin-left: 20px;
   }
 }
-.modal_fix_btn{
-@media screen and (min-width: 768px) {
+.modal_fix_btn {
+  @media screen and (min-width: 768px) {
     margin-top: 0;
- 
-position: absolute;
-  right: 129px;
-  // top: 20px;
-  bottom: 20px; }
+
+    position: absolute;
+    right: 129px;
+    // top: 20px;
+    bottom: 20px;
+  }
 }
