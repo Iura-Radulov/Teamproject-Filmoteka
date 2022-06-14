@@ -43,8 +43,6 @@ refs.btnLogout.addEventListener('click', logout);
 // Create new account using email/password
 
 export async function createAccount(displayName, email, password) {  
-//    const email = refs.txtEmailRegister.value;
-//    const password = refs.txtPasswordRegister.value;
 
    try {
        await createUserWithEmailAndPassword(auth, email, password);
@@ -67,9 +65,7 @@ export async function createAccount(displayName, email, password) {
 // Login using email/password
 
 export async function loginEmailPassword (email, password) {
-//    const email = refs.txtEmailLogin.value;
-//     const password = refs.txtPasswordLogin.value;
-    console.log(password);
+    
    try {
        const userCredintial = await signInWithEmailAndPassword(auth, email, password);
        
@@ -150,11 +146,7 @@ refs.registerFormSignIn.addEventListener('submit', e => {
 
 
 
-// const data = {
-//     name: 'Mike',
-//     email: 'some@mail.ru',
-//     password: 12345,
-// }
+
 class Firebase {
     constructor() {
         this.URL = "https://filmoteka-goit-6e05f-default-rtdb.firebaseio.com/users.json"; 

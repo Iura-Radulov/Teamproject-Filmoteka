@@ -28,7 +28,7 @@ function hideLoginError() {
 
 export function showLoginError (error) {
    refs.divLoginError.style.display = 'block';
-   console.log(error.message);
+   
    if (error.code == 'auth/wrong-password') {
       refs.lblLoginErrorMessage.innerHTML = `Wrong password. Try again.`;
    } else {
