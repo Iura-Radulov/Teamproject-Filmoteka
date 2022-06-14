@@ -1,169 +1,253 @@
 body.modal-open {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 6;
-    background-color: rgba(0, 0, 0, 0.2);
-    visibility: visible;
-    opacity: 1;
-    pointer-events: initial;
-    overflow-y: scroll;
-    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
-        visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 6;
+  background-color: rgba(0, 0, 0, 0.2);
+  visibility: visible;
+  opacity: 1;
+  pointer-events: initial;
+  overflow-y: scroll;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-    &.is-hidden {
-        opacity: 0;
-        pointer-events: none;
-        visibility: hidden;
-    }
+  &.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
 
-    &.is-hidden>.modal {
-        transform: translate(-50%, -50%) scale(0.9);
-        opacity: 0;
-    }
+  &.is-hidden > .modal {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+  }
 }
 
 // Modal
 
 .modal_film {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    padding: 40px 16px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  // padding: 40px 16px;
 
+  // width: 814px;
+  // height: 558px;
+
+  background-color: white;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    opaсity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media screen and (min-width: 320px) {
+    width: 280px;
+    height: 940px;
+    padding: 40px 16px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 704px;
+    height: 552px;
+  }
+
+  @media screen and (min-width: 1024px) {
     width: 814px;
     height: 558px;
-
-    background-color: white;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
-        0px 2px 1px rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-
-    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1),
-        opaсity 250ms cubic-bezier(0.4, 0, 0.2, 1);
-
-    //     @media screen and (min-width: 480px) {
-    //         width: 450px;
-    //     }
-
-    //     @media screen and (min-width: 1200px) {
-    //         width: 528px;
-    //     } 
+  }
 }
 
 .modal_film-info {
-    background-color: #fff;
-    border: none;
+  background-color: #fff;
+  border: none;
 }
 
 .about_film-img {
-    width: 375px;
-    height: 478px;
-    margin-right: 15px;
+  // width: 375px;
+  // height: 478px;
+  // margin-right: 15px;
+  @media screen and (min-width: 320px) {
+    width: auto;
+    // height: 375px;
+    // padding: 40px 16px;
+    margin: 0, auto;
+  }
+  @media screen and (min-width: 768px) {
+    width: 264px;
+    // height: 375px;
+    // padding: 40px 16px;
+    margin: 0, auto;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 320px;
+    // height: 478px;
+  }
 }
-
-
 
 .about_film-card {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    background-color: #fff;
-    padding: 0;
-
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: space-around;
+  background-color: #fff;
+  // padding: 0;
+  margin-top: 18px;
+  @media screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    margin-top: 10px;
+  }
+  @media screen and (min-width: 1024px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(378px, 1fr));
+    margin-top: 0px;
+  }
 }
 
-.about_film-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
+// .about_film-info {
+//   // display: flex;
+//   // flex-direction: column;
+//   // justify-content: flex-start;
+// }
 
 .about_film-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
 }
 
 .about_film-name {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 30px;
-    line-height: 1.17;
-    text-align: start;
-    color: #000000;
-    margin-bottom: 20px;
-    padding: 0;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.17;
+  text-align: start;
+  color: #000000;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 0;
+  @media screen and (min-width: 768px) {
+    margin-top: 0;
+  }
 }
 
 .about_film-text {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.33;
-    color: #8C8C8C;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  color: #8c8c8c;
 }
 
 .about_film-date {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.33;
-    color: #000000;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  color: #000000;
 }
 
 .about_film-pretitle {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.33;
-    text-align: start;
-    text-transform: uppercase;
-    color: #000000;
-    margin-top: 20px;
-    margin-bottom: 8px;
-}
-
-.about_film-overview {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.67;
-    text-align: start;
-    color: #000000;
-
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-align: start;
+  text-transform: uppercase;
+  color: #000000;
+  margin-top: 20px;
+  margin-bottom: 8px;
 }
 
 .modal_film__button--close {
-    display: flex;
-    width: 30px;
-    height: 30px;
-    padding: 0;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    font-size: 40px;
-    text-align: center;
+  display: flex;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 40px;
+  text-align: center;
 
-    background-color: white;
-    border-radius: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #000000;
+
+  &:hover {
+    color: rgb(255, 106, 0);
+  }
+}
+
+.about_film_vote {
+  height: 36px;
+  width: 16px;
+
+  background: rgb(255, 106, 0);
+  border-radius: 5px;
+  border: 1px solid rgb(255, 106, 0);
+}
+.about_film-overview {
+  position: relative;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.67;
+  text-align: start;
+  color: #000000;
+}
+
+.btn {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 133%;
+  color: #000000;
+  margin-top: 20px;
+  width: 110px;
+  height: 44px;
+  text-transform: uppercase;
+
+  border: 1px solid #000000;
+  border-radius: 5px;
+
+  &:hover,
+  &:focus {
+    background: #ff6b01;
+  }
+
+  &:last-child {
+    margin-left: 20px;
+  }
+}
+.modal_fix_btn {
+  @media screen and (min-width: 768px) {
+    margin-top: 0;
+
+    position: absolute;
+    right: 129px;
+    // top: 20px;
+    bottom: 20px;
+  }
 }

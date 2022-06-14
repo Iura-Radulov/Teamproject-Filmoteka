@@ -1,110 +1,141 @@
-class LibraryApi {
-  constructor() {
-    //   button references
-    this.addToWatchedBtn = document.getElementById('add-to-watched');
-    this.addToQueueBtn = document.getElementById('add-to-queue');
-    this.showWatchedBtn = document.getElementById('show-watched');
-    this.showQueueBtn = document.getElementById('show-queue');
+import { getDatabase, ref, set, child, get } from 'firebase/database';
+import { app } from './firebase/firebase';
+import { Notify } from 'notiflix';
 
-    // arrays of data (to be replaced by firebase database)
-    this.watched = [];
-    this.queue = [];
+const database = getDatabase(app);
 
-    // button event listeners
-    this.addToWatchedBtn.addEventListener(
-      'click',
-      this.addToWatched.bind(this)
-    );
-    this.addToQueueBtn.addEventListener('click', this.addToQueue.bind(this));
-    this.showWatchedBtn.addEventListener('click', this.showWatched.bind(this));
-    this.showQueueBtn.addEventListener('click', this.showQueue.bind(this));
-  }
+const addToWatchedBtn = document.getElementById('add-to-watched');
+const addToQueueBtn = document.getElementById('add-to-queue');
+// const showWatchedBtn = document.getElementById('show-watched');
+// const showQueueBtn = document.getElementById('show-queue');
+const showLibraryBtn = document.getElementById('library');
+const container = document.querySelector('.films__container');
 
-  // awaits an object describing current movie
-  addToWatched = movie => {
-    const myMovie = {
-      genres: movie.genres,
-      original_title: movie.original_title,
-      poster_path: movie.poster_path,
-      original_name: movie.original_name,
-      first_air_date: movie.first_air_date,
-      id: movie.id,
-    };
-    this.watched.push(myMovie);
-  };
-  addToQueue = movie => {
-    const myMovie = {
-      genres: movie.genres,
-      original_title: movie.original_title,
-      poster_path: movie.poster_path,
-      original_name: movie.original_name,
-      first_air_date: movie.first_air_date,
-      id: movie.id,
-    };
-    this.queue.push(myMovie);
-  };
+const WATCHED_MOVIES = 'watchedMovies/';
+const MOVIES_QUEUE = 'queueOfMovies/';
 
-  // awaits reference to element in which it will render
-  showWatched = container => {
-    container.innerHTML = '';
+addToWatchedBtn.addEventListener('click', onAddButtonClick);
+addToQueueBtn.addEventListener('click', onAddButtonClick);
+showLibraryBtn.addEventListener('click', onLibraryBtnClick);
 
-    const markup = this.watched.map(
-      () => `<div class="film-card">
-        <img src="https://image.tmdb.org/t/p/w500${poster_path}"  alt="" loading="lazy" data-id=${id} />
-        <div class="info">
-          <p class="film-name">${
-            original_title ? original_title : original_name
-          }
-          </p>
-          <p class="info-item">
-            <b>${genreArray
-              .reduce((listGenre, genre) => {
-                if (genre_ids.includes(genre.id)) {
-                  listGenre.push(` ${genre.name}`);
-                }
-                return listGenre;
-              }, [])
-              .slice(0, 2)
-              .concat([' Other'])} </b >
-            <b>|</b>
-            <b>${first_air_date ? first_air_date.slice(0, 4) : '-'}</b>
-          </p>
-        </div>
-      </div>`
-    );
-
-    container.insertAdjacentHtml('beforeend', markup);
-  };
-  showQueue = container => {
-    container.innerHTML = '';
-
-    const markup = this.queue.map(
-      () => `<div class="film-card">
-        <img src="https://image.tmdb.org/t/p/w500${poster_path}"  alt="" loading="lazy" data-id=${id} />
-        <div class="info">
-          <p class="film-name">${
-            original_title ? original_title : original_name
-          }
-          </p>
-          <p class="info-item">
-            <b>${genreArray
-              .reduce((listGenre, genre) => {
-                if (genre_ids.includes(genre.id)) {
-                  listGenre.push(` ${genre.name}`);
-                }
-                return listGenre;
-              }, [])
-              .slice(0, 2)
-              .concat([' Other'])} </b >
-            <b>|</b>
-            <b>${first_air_date ? first_air_date.slice(0, 4) : '-'}</b>
-          </p>
-        </div>
-      </div>`
-    );
-
-    container.insertAdjacentHtml('beforeend', markup);
-  };
+async function onLibraryBtnClick() {
+  const response = await fetchMoviesFromDatabase(WATCHED_MOVIES);
+  showLibrary(response);
 }
 
-export default LibraryApi;
+function onAddButtonClick(event) {
+  const movieJson = event.target.dataset.movie;
+  const id = Number(event.target.dataset.id);
+  switch (event.target.id) {
+    case 'add-to-watched':
+      set(ref(database, `watchedMovies/${id}`), movieJson);
+
+      removeBtnDataAttributes();
+      break;
+
+    case 'add-to-queue':
+      set(ref(database, `queueOfMovies/${id}`), movieJson);
+
+      removeBtnDataAttributes();
+      break;
+
+    default:
+      break;
+  }
+}
+
+export function addBtnDataAttributes(movie) {
+  addToWatchedBtn.setAttribute('data-movie', JSON.stringify(movie));
+  addToQueueBtn.setAttribute('data-movie', JSON.stringify(movie));
+  addToWatchedBtn.setAttribute('data-id', movie.id);
+  addToQueueBtn.setAttribute('data-id', movie.id);
+}
+
+export function removeBtnDataAttributes() {
+  addToWatchedBtn.removeAttribute('data-movie');
+  addToQueueBtn.removeAttribute('data-movie');
+  addToWatchedBtn.removeAttribute('data-id');
+  addToQueueBtn.removeAttribute('data-id');
+}
+
+function showLibrary(response) {
+  const arrayOfJsons = Object.values(response);
+  renderWatched(arrayOfJsons);
+}
+function fetchMoviesFromDatabase(category) {
+  const dbRef = ref(database);
+  return get(child(dbRef, category)).then(snapshot => {
+    if (snapshot.exists()) {
+      const response = snapshot.val();
+      return response;
+    } else {
+      Notify.failure('Your library is empty');
+    }
+  });
+}
+
+function renderWatched(arrayOfJsons) {
+  container.innerHTML = '';
+
+  console.log(arrayOfJsons.map(json => JSON.parse(json)));
+  const markup = arrayOfJsons
+    .map(json => JSON.parse(json))
+    .map(
+      ({
+        poster_path,
+        original_title,
+        original_name,
+        genres,
+        release_date,
+        id,
+      }) => `<div class="film-card">
+        <img src="https://image.tmdb.org/t/p/w500${poster_path}"  alt="" loading="lazy" data-id=${id} />
+        <div class="info">
+          <p class="film-name">${
+            original_title ? original_title : original_name
+          }
+          </p>
+          <p class="info-item">
+            <b>${genres.map(genre => genre.name)}</b >
+            <b>|</b>
+            <b>${release_date ? release_date.slice(0, 4) : '-'}</b>
+          </p>
+        </div>
+      </div>`
+    )
+    .join('');
+
+  container.insertAdjacentHTML('beforeend', markup);
+}
+
+function renderQueue(arrayOfJsons) {
+  container.innerHTML = '';
+
+  const markup = arrayOfJsons
+    .map(json => JSON.parse(json))
+    .map(
+      ({
+        poster_path,
+        original_title,
+        original_name,
+        genres,
+        release_date,
+        id,
+      }) => `<div class="film-card">
+        <img src="https://image.tmdb.org/t/p/w500${poster_path}"  alt="" loading="lazy" data-id=${id} />
+        <div class="info">
+          <p class="film-name">${
+            original_title ? original_title : original_name
+          }
+          </p>
+          <p class="info-item">
+            <b>${genres.map(genre => genre.name)}</b >
+            <b>|</b>
+            <b>${release_date ? release_date.slice(0, 4) : '-'}</b>
+          </p>
+        </div>
+      </div>`
+    );
+
+  container.insertAdjacentHtml('beforeend', markup);
+}

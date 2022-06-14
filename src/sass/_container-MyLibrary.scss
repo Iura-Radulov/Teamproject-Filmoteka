@@ -1,8 +1,10 @@
 .films__container {
     display: flex;
+
         flex-flow: row wrap;
         // justify-content: space-between;
         justify-content: flex-start;
+
         padding-top: 20px;
         @media screen and (min-width: 768px){
             padding-top: 60px;
@@ -10,10 +12,12 @@
         @media screen and (min-width: 1024px){
         padding-top: 60px;
 
+
                 &::after {
                         content: "";
                         flex: auto;
                     
+
                     }
         }
 }
@@ -22,6 +26,7 @@
             margin-bottom: 20px;
             
 @media screen and (min-width: 768px) {
+
 margin:0px 32px;
         flex-basis: calc(54.5% - 64px);
     justify-content: space-between;
@@ -31,6 +36,7 @@ margin:0px 32px;
 @media screen and (min-width: 1024px) {
             flex: 0 0 calc(35.2% - 34px);;
             margin:16px 8px;
+
     }
 }
 
