@@ -17,7 +17,7 @@
         width: 100%;
         background-repeat: no-repeat;
         background-size: 320px;
-        background-color: #000;
+        background-color: getColor('black-color');
         background-position: center;
 
         @media screen and (min-device-pixel-ratio: 2),
@@ -75,7 +75,7 @@
     height: 14px;
     border: none;
     text-transform: uppercase;
-    color: #FFF;
+    color: getColor('white-color');
     transition: border-bottom 250ms cubic-bezier(0.4, 0, 0.2, 1);
     background-color: transparent;
     cursor: pointer;
@@ -83,7 +83,7 @@
     &:focus,
     &:hover {
         padding-bottom: 5px;
-        border-bottom: 3px solid #FF6B08;
+        border-bottom: 3px solid getColor('pin-color');
     }
 }
 
@@ -101,7 +101,7 @@
 .logo-text {
     font-size: 30px;
     line-height: 1.16px;
-    color: #fff;
+    color: getColor('white-color');
 
     @media screen and (max-width: 767px) {
         display: none;
@@ -126,8 +126,8 @@
     line-height: 1.14;
     padding-left: 4px;
     padding-right: 20px;
-    color: #fff;
-    border-bottom: 0.5px solid #fff;
+    color: getColor('white-color');
+    border-bottom: 0.5px solid getColor('white-color');
     transition: border-bottom 250ms cubic-bezier(0.4, 0, 0.2, 1);
     @media screen and (min-width: 768px) {
             width: 336px;
@@ -135,7 +135,7 @@
     
         &:focus,
         &:hover {
-            border-bottom: 0.5px solid #FF6B08;
+            border-bottom: 0.5px solid getColor('pin-color');
         }
 }
 .search-form{
@@ -164,13 +164,13 @@
     line-height: 1.17;
     display: flex;
     align-items: center;
-    color: #fff;
+    color: getColor('white-color');
 }
 
 
 .current-link {
     padding-bottom: 5px;
-    border-bottom: 3px solid #FF6B08;
+    border-bottom: 3px solid getColor('pin-color');
     cursor: auto;
 }
 
@@ -183,7 +183,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #FF001B;
+    color: getColor('red-color');
     position: absolute;
      margin-top: 22px;
         
@@ -194,6 +194,6 @@
         }
 }
 
-.display-none {
+.is-hidden {
     display: none;
 }
