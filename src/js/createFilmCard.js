@@ -10,7 +10,7 @@ export default function createFilmCard(movie) {
     overview,
     id,
   } = movie;
-  console.log(genres);
+  // console.log(genres);
 
   return `<div class="about_film-card">
          <img src=${
