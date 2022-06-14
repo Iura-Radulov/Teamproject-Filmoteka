@@ -5,11 +5,14 @@ const refs = {
     registerFormSignUp: document.querySelector('.register-form__sign-up'),
     registerFormSignIn: document.querySelector('.register-form__sign-in'),
     signInContainer: document.querySelector('.sign-in-container'),
-   signUpContainer: document.querySelector('.sign-up-container'),
+    signUpContainer: document.querySelector('.sign-up-container'),
+   signInLogin: document.querySelector('.sign-in-login'),
 
    btnLogin: document.getElementById('btnLoginBtn'),
    btnSignup: document.getElementById('btnSignUpBtn'),
-   btnLogout: document.getElementById('btnLogout'),
+    btnLogout: document.getElementById('btnLogout'),
+    signUpBtn: document.querySelector('.sign-up-btn'),
+   signInBtn: document.querySelector('.sign-in-btn'),
 
    formLogin: document.getElementById('formLogin'),
 

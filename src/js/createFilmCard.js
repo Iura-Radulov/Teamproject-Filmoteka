@@ -10,7 +10,7 @@ export default function createFilmCard(movie) {
     overview,
     id,
   } = movie;
-  console.log(genres);
+  // console.log(genres);
 
   return `<div class="about_film-card">
          <img src=${
@@ -25,7 +25,7 @@ export default function createFilmCard(movie) {
           </h1>
           <div class="about_film-item">
           <p class="about_film-text">Vote / Votes</p>
-          <b class="about_film-date">${vote_average} / ${vote_count}</b>
+          <b class="about_film-date"><span class = about_film_vote>${vote_average}</span> / ${vote_count}</b>
           </div>
           <div class="about_film-item">
           <p class="about_film-text">Popularity</p>
@@ -40,7 +40,12 @@ export default function createFilmCard(movie) {
           <div class="about_film-item">
           <p class="about_film-text">Genre</p>
           <b class="about_film-date">${
-            genres ? genres.map(genre => genre.name) : ' '
+            genres.length > 2
+              ? genres
+                  .map(genre => genre.name)
+                  .slice(0, 2)
+                  .concat([' Other'])
+              : genres.map(genre => genre.name)
           }</b>
           </div>
           <h2 class="about_film-pretitle">ABOUT</h2>

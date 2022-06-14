@@ -2,17 +2,23 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import refs from "./refs";
 import { loginEmailPassword } from './firebase';
 import {resetForm, hideFormLoginRegister, showFormLoginRegister} from './handleRegister';
-refs.registerFormSignIn.addEventListener('submit', handleLogin);
+// refs.registerFormSignIn.addEventListener('submit', handleLogin);
 
 
 
-function handleLogin() {
-    loginEmailPassword();
-    hideLoginError();
+ function handleLogin() {
+   
+   loginEmailPassword();
+   // if (!error) {
       resetForm();
       hideFormLoginRegister();
+   // }
+   // else {
+   //    showLoginError(error)
+   //    }
         
-           
+   
+   
 }
     
 function hideLoginError() {
@@ -20,9 +26,10 @@ function hideLoginError() {
    refs.lblLoginErrorMessage.innerHTML = '';
 };
 
-function showLoginError (error) {
+export function showLoginError (error) {
    refs.divLoginError.style.display = 'block';
-   if (error.code == AuthErrorCodes.INVALID_PASSWORD) {
+   
+   if (error.code == 'auth/wrong-password') {
       refs.lblLoginErrorMessage.innerHTML = `Wrong password. Try again.`;
    } else {
       refs.lblLoginErrorMessage.innerHTML = `Error: ${error.message}`;
@@ -30,12 +37,12 @@ function showLoginError (error) {
 };
 
 function showFormLogin() {
-    refs.signInContainer.style.display = 'flex';
+   refs.signInContainer.style.display = 'flex';    
 }
 
 
-function hideFormRegister() {
-    refs.signUpContainer.style.display = 'none';
+export function hideFormRegister() {
+    refs.signUpContainer.style.display = 'none';   
 }
 
 function onBtnSignIn() {
@@ -45,3 +52,5 @@ function onBtnSignIn() {
 }
 
 // onBtnSignIn()
+refs.signInBtn.addEventListener('click', onBtnSignIn);
+refs.signInLogin.addEventListener('click', onBtnSignIn);
