@@ -1,7 +1,7 @@
 import refs from "./refs";
 // import Firebase from './firebase'
 import {hideFormRegister} from './handleLogin'
-refs.registerFormSignUp.addEventListener('submit', handleRegister);
+// refs.registerFormSignUp.addEventListener('submit', handleRegister);
 
 
 
@@ -48,7 +48,7 @@ function showFormRegister() {
 }
 
 // showFormLoginRegister()
-hideFormLoginRegister()
+// hideFormLoginRegister()
 
 function onBtnSignUp() {
     showFormLoginRegister();

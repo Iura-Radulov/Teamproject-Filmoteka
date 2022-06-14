@@ -2,20 +2,20 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import refs from "./refs";
 import { loginEmailPassword } from './firebase';
 import {resetForm, hideFormLoginRegister, showFormLoginRegister} from './handleRegister';
-refs.registerFormSignIn.addEventListener('submit', handleLogin);
+// refs.registerFormSignIn.addEventListener('submit', handleLogin);
 
 
 
-function handleLogin() {
+ function handleLogin() {
    
    loginEmailPassword();
-   if (!error) {
+   // if (!error) {
       resetForm();
       hideFormLoginRegister();
-   }
-   else {
-      showLoginError(error)
-      }
+   // }
+   // else {
+   //    showLoginError(error)
+   //    }
         
    
    
@@ -28,7 +28,8 @@ function hideLoginError() {
 
 export function showLoginError (error) {
    refs.divLoginError.style.display = 'block';
-   if (error.code == AuthErrorCodes.INVALID_PASSWORD) {
+   console.log(error.message);
+   if (error.code == 'auth/wrong-password') {
       refs.lblLoginErrorMessage.innerHTML = `Wrong password. Try again.`;
    } else {
       refs.lblLoginErrorMessage.innerHTML = `Error: ${error.message}`;
