@@ -10,7 +10,7 @@ import {
    signOut,
 } from 'firebase/auth';
 import refs from "./refs";
-import { showLoginError, showFormLogin, hideLoginError } from "./handleLogin";
+import { showLoginError, showFormLogin, hideLoginError, onBtnSignIn } from "./handleLogin";
 import { hideFormLoginRegister, resetForm, showFormLoginRegister } from "./handleRegister";
 import authWithEmailPassword from "./authWithEmailPassword";
 import handleLogin from "./handleLogin";
@@ -145,21 +145,21 @@ refs.registerFormSignIn.addEventListener('submit', e => {
 
 
 function showOverlay() {
-   showFormLoginRegister();
-   refs.overlayContainer.style.display = 'block';
+   // showFormLoginRegister();
+   refs.overlayBackdrop.style.display = 'flex';
 }
 
 
 
 
-function hideOverlay() {
-   hideFormLoginRegister();
-   refs.overlayContainer.style.display = 'none';
+export function hideOverlay() {
+   // hideFormLoginRegister();
+   refs.overlayBackdrop.style.display = 'none';
 }
 
 refs.overlayBtnClose.addEventListener('click', hideOverlay);
 
-refs.overlayBtn.addEventListener('click', showFormLogin)
+refs.overlayBtn.addEventListener('click', onBtnSignIn);
 
 
 

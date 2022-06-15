@@ -2,6 +2,7 @@ const refs = {
     signUpButton: document.getElementById('signUpBtn'),
    signInButton: document.getElementById('signInBtn'),
     container: document.getElementById('container'),
+    overlayBackdrop: document.querySelector('.overlay__backdrop'),
     registerFormSignUp: document.querySelector('.register-form__sign-up'),
     registerFormSignIn: document.querySelector('.register-form__sign-in'),
     signInContainer: document.querySelector('.sign-in-container'),
