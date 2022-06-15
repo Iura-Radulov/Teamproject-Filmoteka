@@ -108,14 +108,8 @@
   left: 0;
   width: 100%;
   z-index: 2;
-  //   opacity: 0;
   display: none;
-  // display: flex;
 }
-
-// .sign-in-login {
-
-// }
 
 .register-form__box.right-panel-active .sign-in-container {
   transform: translateX(100%);
@@ -124,10 +118,8 @@
 .sign-up-container {
   left: 0;
   width: 100%;
-  //   opacity: 0;
   z-index: 1;
   display: none;
-  // display: flex;
 }
 
 .register-form__box.right-panel-active .sign-up-container {
