@@ -9,6 +9,7 @@ const addToQueueBtn = document.getElementById('add-to-queue');
 // const showWatchedBtn = document.getElementById('show-watched');
 // const showQueueBtn = document.getElementById('show-queue');
 const showLibraryBtn = document.getElementById('library');
+const showHomeBtn = document.getElementById('home');
 const container = document.querySelector('.films__container');
 
 const WATCHED_MOVIES = 'watchedMovies/';
@@ -19,6 +20,8 @@ addToQueueBtn.addEventListener('click', onAddButtonClick);
 showLibraryBtn.addEventListener('click', onLibraryBtnClick);
 
 async function onLibraryBtnClick() {
+  showLibraryBtn.classList.add('current-link');
+  showHomeBtn.classList.remove('current-link');
   const response = await fetchMoviesFromDatabase(WATCHED_MOVIES);
   showLibrary(response);
 }
