@@ -4,8 +4,8 @@ import { Notify } from 'notiflix';
 
 const database = getDatabase(app);
 
-const addToWatchedBtn = document.getElementById('add-to-watched');
-const addToQueueBtn = document.getElementById('add-to-queue');
+// const addToWatchedBtn = document.getElementById('add-to-watched');
+// const addToQueueBtn = document.getElementById('add-to-queue');
 // const showWatchedBtn = document.getElementById('show-watched');
 // const showQueueBtn = document.getElementById('show-queue');
 const showLibraryBtn = document.getElementById('library');
@@ -15,8 +15,8 @@ const container = document.querySelector('.films__container');
 const WATCHED_MOVIES = 'watchedMovies/';
 const MOVIES_QUEUE = 'queueOfMovies/';
 
-addToWatchedBtn.addEventListener('click', onAddButtonClick);
-addToQueueBtn.addEventListener('click', onAddButtonClick);
+// addToWatchedBtn.addEventListener('click', onAddButtonClick);
+// addToQueueBtn.addEventListener('click', onAddButtonClick);
 showLibraryBtn.addEventListener('click', onLibraryBtnClick);
 
 async function onLibraryBtnClick() {
@@ -33,32 +33,42 @@ function onAddButtonClick(event) {
     case 'add-to-watched':
       set(ref(database, `watchedMovies/${id}`), movieJson);
 
-      removeBtnDataAttributes();
+      removeBtnDataAttributes(event.target);
       break;
 
     case 'add-to-queue':
       set(ref(database, `queueOfMovies/${id}`), movieJson);
 
-      removeBtnDataAttributes();
+      removeBtnDataAttributes(event.target);
       break;
 
     default:
       break;
   }
 }
+export function createButtonRefs() {
+  const addToWatchedBtn = document.getElementById('add-to-watched');
+  const addToQueueBtn = document.getElementById('add-to-queue');
+  return { addToWatchedBtn, addToQueueBtn };
+}
 
-export function addBtnDataAttributes(movie) {
+export function addBtnEventListeners(buttons) {
+  const { addToWatchedBtn, addToQueueBtn } = buttons;
+  addToWatchedBtn.addEventListener('click', onAddButtonClick);
+  addToQueueBtn.addEventListener('click', onAddButtonClick);
+}
+
+export function addBtnDataAttributes(movie, buttons) {
+  const { addToWatchedBtn, addToQueueBtn } = buttons;
   addToWatchedBtn.setAttribute('data-movie', JSON.stringify(movie));
   addToQueueBtn.setAttribute('data-movie', JSON.stringify(movie));
   addToWatchedBtn.setAttribute('data-id', movie.id);
   addToQueueBtn.setAttribute('data-id', movie.id);
 }
 
-export function removeBtnDataAttributes() {
-  addToWatchedBtn.removeAttribute('data-movie');
-  addToQueueBtn.removeAttribute('data-movie');
-  addToWatchedBtn.removeAttribute('data-id');
-  addToQueueBtn.removeAttribute('data-id');
+function removeBtnDataAttributes(button) {
+  button.removeAttribute('data-movie');
+  button.removeAttribute('data-movie');
 }
 
 function showLibrary(response) {
