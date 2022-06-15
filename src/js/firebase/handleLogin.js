@@ -1,6 +1,6 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import refs from "./refs";
-import { loginEmailPassword } from './firebase';
+import { loginEmailPassword, monitorAuthState } from './firebase';
 import {resetForm, hideFormLoginRegister, showFormLoginRegister, hideFormLogin} from './handleRegister';
 // refs.registerFormSignIn.addEventListener('submit', handleLogin);
 
@@ -36,7 +36,7 @@ export function showLoginError (error) {
    }
 };
 
-function showFormLogin() {
+export function showFormLogin() {
    refs.signInContainer.style.display = 'flex';    
 }
 
@@ -56,6 +56,7 @@ refs.signInBtn.addEventListener('click', onBtnSignIn);
 refs.signInLogin.addEventListener('click', onBtnSignIn);
 refs.signInButtonClose.addEventListener('click', () => {
    hideFormLoginRegister();
-   hideFormLogin();   
+   hideFormLogin();
+   monitorAuthState()
 })
 

@@ -10,9 +10,8 @@ import {
    signOut,
 } from 'firebase/auth';
 import refs from "./refs";
-import { showLoginError } from "./handleLogin";
-import { showFormLoginRegister } from "./handleRegister";
-import { hideFormLoginRegister, resetForm } from "./handleRegister";
+import { showLoginError, showFormLogin } from "./handleLogin";
+import { hideFormLoginRegister, resetForm, showFormLoginRegister } from "./handleRegister";
 import authWithEmailPassword from "./authWithEmailPassword";
 import handleLogin from "./handleLogin";
 import handleRegister from "./handleRegister";
@@ -90,30 +89,35 @@ export async function loginEmailPassword (email, password) {
 // Log out
 async function logout() {
    try {
-      await signOut(auth);
-    //    showFormLoginRegister();
+       await signOut(auth);
+    //    monitorAuthState()
+       showFormLoginRegister();
+      showFormLogin()
        console.log('loged out');
     //   openHomePage();
    } catch (error) {}
 };
 
 // Monitor auth state
-async function monitorAuthState () {
+export async function monitorAuthState () {
    onAuthStateChanged(auth, user => {
       if (user) {
-         console.log(user);
+        //   console.log(user);
+          refs.boxLoginLogout.style.display = 'flex';
          refs.loginUser.innerHTML = `${user.email} `;
          refs.btnLogout.removeEventListener('click', showFormLoginRegister);
          refs.btnLogout.addEventListener('click', logout);
           refs.btnLogout.innerHTML = 'Log out';
-          refs.signInBtn.classList.add('is-hidden');
-          refs.signUpBtn.classList.add('is-hidden');
+          refs.loginContainer.classList.add('is-hidden');
+         
       } else {
-         // showFormLoginRegister();
-         refs.loginUser.innerHTML = `You're not logged in.`;
+        //  showFormLoginRegister();
+          refs.loginContainer.classList.remove('is-hidden');
+          refs.boxLoginLogout.style.display = 'none';
+        //  refs.loginUser.innerHTML = `You're not logged in.`;
          refs.btnLogout.removeEventListener('click', logout);
          refs.btnLogout.addEventListener('click', showFormLoginRegister);
-         refs.btnLogout.innerHTML = 'Log in';
+        //  refs.btnLogout.innerHTML = 'Log in';
       }
    });
 };
@@ -143,6 +147,38 @@ refs.registerFormSignIn.addEventListener('submit', e => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function showbtnSignInSignUp() {
+//     const markup = `<button class="sign-up-btn" type="submit">Sign up</button>
+//       <button class="sign-in-btn" type="submit">Sign in</button>  `;
+//     refs.loginContainer.innerHTML = markup;
+
+// } 
+
+// function showBtnSignOut() {
+//     const markup = `<div class="boxLoginLogout">
+//     <span id="loginUser">none</span>
+//     <button id="btnLogout" class="btnLoginLogout" type="button">Log out</button>
+// </div>`;
+//     refs.loginContainer.innerHTML = markup;
+// }
+
+// showBtnSignOut()
 
 
 

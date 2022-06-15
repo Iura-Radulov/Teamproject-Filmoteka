@@ -16,7 +16,9 @@ const refs = {
     signUpButtonClose: document.querySelector('.signUp__btnClose'),
     signInButtonClose: document.querySelector('.signIn__btnClose'),
 
-   formLogin: document.getElementById('formLogin'),
+    formLogin: document.getElementById('formLogin'),
+    loginContainer: document.querySelector('.login-container'),
+   boxLoginLogout: document.querySelector('.boxLoginLogout'),
 
    txtEmailLogin: document.getElementById('txtEmailLogin'),
    txtPasswordLogin: document.getElementById('txtPasswordLogin'),
