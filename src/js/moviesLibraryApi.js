@@ -4,26 +4,49 @@ import { Notify } from 'notiflix';
 
 const database = getDatabase(app);
 
-// const addToWatchedBtn = document.getElementById('add-to-watched');
-// const addToQueueBtn = document.getElementById('add-to-queue');
-// const showWatchedBtn = document.getElementById('show-watched');
-// const showQueueBtn = document.getElementById('show-queue');
+const showWatchedBtn = document.getElementById('watched');
+const showQueueBtn = document.getElementById('queue');
 const showLibraryBtn = document.getElementById('library');
 const showHomeBtn = document.getElementById('home');
+const search = document.querySelector('.search-wrapper');
 const container = document.querySelector('.films__container');
+const libraryButtons = document.querySelector('.buttons');
 
 const WATCHED_MOVIES = 'watchedMovies/';
 const MOVIES_QUEUE = 'queueOfMovies/';
+const IS_HIDDEN = 'is-hidden';
+const CURRENT_LINK = 'current-link';
 
-// addToWatchedBtn.addEventListener('click', onAddButtonClick);
-// addToQueueBtn.addEventListener('click', onAddButtonClick);
+showWatchedBtn.addEventListener('click', onWatchedBtnClick);
+showQueueBtn.addEventListener('click', onQueueBtnClick);
 showLibraryBtn.addEventListener('click', onLibraryBtnClick);
+showHomeBtn.addEventListener('click', onHomeBtnClick);
+
+function onHomeBtnClick() {
+  libraryButtons.classList.add(IS_HIDDEN);
+  search.classList.remove(IS_HIDDEN);
+}
 
 async function onLibraryBtnClick() {
-  showLibraryBtn.classList.add('current-link');
-  showHomeBtn.classList.remove('current-link');
+  showLibraryBtn.classList.add(CURRENT_LINK);
+  showHomeBtn.classList.remove(CURRENT_LINK);
+  libraryButtons.classList.remove(IS_HIDDEN);
+  search.classList.add(IS_HIDDEN);
+
   const response = await fetchMoviesFromDatabase(WATCHED_MOVIES);
   showLibrary(response);
+}
+
+async function onWatchedBtnClick() {
+  const response = await fetchMoviesFromDatabase(WATCHED_MOVIES);
+  const arrayOfJsons = Object.values(response);
+  renderWatched(arrayOfJsons);
+}
+
+async function onQueueBtnClick() {
+  const response = await fetchMoviesFromDatabase(MOVIES_QUEUE);
+  const arrayOfJsons = Object.values(response);
+  renderQueue(arrayOfJsons);
 }
 
 function onAddButtonClick(event) {
@@ -46,6 +69,7 @@ function onAddButtonClick(event) {
       break;
   }
 }
+
 export function createButtonRefs() {
   const addToWatchedBtn = document.getElementById('add-to-watched');
   const addToQueueBtn = document.getElementById('add-to-queue');
@@ -75,6 +99,7 @@ function showLibrary(response) {
   const arrayOfJsons = Object.values(response);
   renderWatched(arrayOfJsons);
 }
+
 function fetchMoviesFromDatabase(category) {
   const dbRef = ref(database);
   return get(child(dbRef, category)).then(snapshot => {
@@ -90,7 +115,6 @@ function fetchMoviesFromDatabase(category) {
 function renderWatched(arrayOfJsons) {
   container.innerHTML = '';
 
-  console.log(arrayOfJsons.map(json => JSON.parse(json)));
   const markup = arrayOfJsons
     .map(json => JSON.parse(json))
     .map(
@@ -168,5 +192,5 @@ function renderQueue(arrayOfJsons) {
       </div>`
     );
 
-  container.insertAdjacentHtml('beforeend', markup);
+  container.insertAdjacentHTML('beforeend', markup);
 }
