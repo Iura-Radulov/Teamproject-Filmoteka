@@ -17,7 +17,6 @@ export default function createFilmsList(dates) {
           poster_path !== null
             ? `https://image.tmdb.org/t/p/w500${poster_path}`
             : `https://www.online-tech-tips.com/wp-content/uploads/2022/03/image-41.jpeg`
-
         } alt="" loading="lazy" width="310" height="449" data-id=${id} />
 
         <div class="info">
@@ -39,7 +38,7 @@ export default function createFilmsList(dates) {
 
             <b>|</b>
             <b>${release_date ? release_date.slice(0, 4) : '-'}</b>
-            <b class="rating">${vote_average}</b>
+            <b class="rating is-hidden">${vote_average}</b>
           </p>
         </div>
       </div>`;
