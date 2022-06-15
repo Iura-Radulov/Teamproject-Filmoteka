@@ -2,7 +2,7 @@
     <div class="container">
         <!-- логотип і навігація -->
         <nav class="navigation">
-            <a class="logo" href="#">
+            <a class="logo" href="./index.html">
                 <svg class="logo-icon" width="24" height="24"><use href="./images/svg/film.svg"></use></svg>
                 <span class="logo-text">Filmoteka</span>
             </a>
@@ -27,13 +27,25 @@
                     <svg class="search-icon" width="12" height="12"><use href="./images/svg/search.svg"></use></svg>
                 </button>
                 <!-- warning -->
-                <div class="warning is hidden">
+                <div class="warning is-hidden">
                     Search result not successful. Enter the correct movie name and
-                </div>
-            </form>
-        </div>
+                </div>              
+      </form> 
+        <!-- кнопки регистрації -->
+        <div class="login-container">
+    <button class="sign-up-btn" type="submit">Sign up</button>
+    <button class="sign-in-btn" type="submit">Sign in</button>
     </div>
-   
-   
-
+    <div class="boxLoginLogout">
+        <span class="logOutName" id="loginUser">none</span>
+        <button id="btnLogout" class="btnLoginLogout" type="button">Log out</button>
+    </div>
+    </div>
+    <!-- кнопки My library -->
+    <div class="buttons is-hidden">
+        <button class="button_library" id="watched" type="button">Watched</button>
+        <button class="button_library" type="button" id="queue">Queue</button>
+    </div>
+    </div>      
 </header>
+

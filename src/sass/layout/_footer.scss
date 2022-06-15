@@ -2,7 +2,6 @@
     display: flex;
     justify-content: center;
     text-align: center;
-    font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -15,8 +14,6 @@
 
     width: 100%;
     height: 100px;
-    // padding-left: 48px;
-    // padding-right: 36px;
     padding-top: 28.71px;
     padding-bottom: 29.7px;
 
@@ -24,6 +21,30 @@
             flex-direction: column;
         }
     
+}
+
+.svg {
+    background-image: url(../images/svg/heart.svg);
+    margin-left: 10px;
+    margin-right: 10px;
+
+    animation: heartbeat 1s infinite;
+}
+
+;
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(0.5);
+    }
+
+    40% {
+        transform: scale(2);
+    }
+
+    40% {
+        transform: scale(2);
+    }
 }
 
 .footer_left{
@@ -40,7 +61,7 @@
 
 .footer_text{
     @media screen and (max-width: 768px) {
-            margin-top: 9.9px;
+            margin-top: 10px;
         }
 }
 
@@ -48,26 +69,4 @@
     text-decoration: underline;
 }
 
-.svg{
-    background-image: url(../images/svg/heart.svg);
-    margin-left: 10px;
-    margin-right: 10px;
 
-        animation: heartbeat .60s infinite;
-        }
-        
-        ;
-        
-        @keyframes heartbeat {
-            0% {
-                transform: scale(0.5);
-            }
-        
-            40% {
-                transform: scale(2);
-            }
-                         40% {
-                             transform: scale(2);
-                         }
-                    
-}

@@ -61,7 +61,9 @@ body.modal-open {
 
   @media screen and (min-width: 1024px) {
     width: 814px;
+
     height: auto;
+
   }
 }
 
@@ -78,8 +80,10 @@ body.modal-open {
     width: 264px;
   }
   @media screen and (min-width: 1024px) {
+
     width: auto;
     padding-right: 16px;
+
   }
 }
 
@@ -92,9 +96,11 @@ body.modal-open {
     margin-top: 10px;
   }
   @media screen and (min-width: 1024px) {
+
     margin-top: 0px;
   }
 }
+
 
 .about_film-item {
   display: flex;
@@ -194,7 +200,9 @@ body.modal-open {
 }
 
 .btn {
+
   position: relative;
+
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
@@ -216,11 +224,12 @@ body.modal-open {
   &:focus {
     background: #ff6b01;
   }
-  
+ 
      
     &:last-child {
       // @media screen and (min-width: 768px) {
         margin-left: 20px;
       // }
      }
+
 }
