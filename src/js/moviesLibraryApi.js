@@ -11,21 +11,37 @@ const showHomeBtn = document.getElementById('home');
 const search = document.querySelector('.search-form');
 const container = document.querySelector('.films__container');
 const libraryButtons = document.querySelector('.buttons');
+const header = document.querySelector('.header');
 
 const WATCHED_MOVIES = 'watchedMovies/';
 const MOVIES_QUEUE = 'queueOfMovies/';
 const IS_HIDDEN = 'is-hidden';
 const CURRENT_LINK = 'current-link';
+const HEADER_BGR = 'header__background';
+const HEADER_BGR_LIBRARY = 'header__background-library';
 
 showWatchedBtn.addEventListener('click', onWatchedBtnClick);
 showQueueBtn.addEventListener('click', onQueueBtnClick);
 showLibraryBtn.addEventListener('click', onLibraryBtnClick);
+
+showHomeBtn.addEventListener('click', onHomeBtnClick);
+
+function onHomeBtnClick() {
+  libraryButtons.classList.add(IS_HIDDEN);
+  search.classList.remove(IS_HIDDEN);
+  header.classList.remove(HEADER_BGR_LIBRARY);
+  header.classList.add(HEADER_BGR);
+}
+
 
 async function onLibraryBtnClick() {
   showLibraryBtn.classList.add(CURRENT_LINK);
   showHomeBtn.classList.remove(CURRENT_LINK);
   libraryButtons.classList.remove(IS_HIDDEN);
   search.classList.add(IS_HIDDEN);
+  header.classList.remove(HEADER_BGR);
+  header.classList.add(HEADER_BGR_LIBRARY);
+
 
   const response = await fetchMoviesFromDatabase(WATCHED_MOVIES);
   showLibrary(response);
