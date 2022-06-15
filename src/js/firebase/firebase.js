@@ -10,7 +10,7 @@ import {
    signOut,
 } from 'firebase/auth';
 import refs from "./refs";
-import { showLoginError, showFormLogin } from "./handleLogin";
+import { showLoginError, showFormLogin, hideLoginError } from "./handleLogin";
 import { hideFormLoginRegister, resetForm, showFormLoginRegister } from "./handleRegister";
 import authWithEmailPassword from "./authWithEmailPassword";
 import handleLogin from "./handleLogin";
@@ -74,7 +74,8 @@ export async function loginEmailPassword (email, password) {
            token: user.accessToken;
        };
        console.log(userCredintial.user);
-       resetForm();
+      resetForm();
+      hideLoginError();
       hideFormLoginRegister();
       
    } catch (error) {
@@ -90,19 +91,20 @@ export async function loginEmailPassword (email, password) {
 async function logout() {
    try {
        await signOut(auth);
-    //    monitorAuthState()
-       showFormLoginRegister();
-      showFormLogin()
+    //    monitorAuthState()       
+     showOverlay()
        console.log('loged out');
     //   openHomePage();
-   } catch (error) {}
+   } catch (error) {
+      console.log(error);
+   }
 };
 
 // Monitor auth state
 export async function monitorAuthState () {
    onAuthStateChanged(auth, user => {
       if (user) {
-        //   console.log(user);
+         hideLoginError();
           refs.boxLoginLogout.style.display = 'flex';
          refs.loginUser.innerHTML = `${user.email} `;
          refs.btnLogout.removeEventListener('click', showFormLoginRegister);
@@ -142,13 +144,22 @@ refs.registerFormSignIn.addEventListener('submit', e => {
 
 
 
+function showOverlay() {
+   showFormLoginRegister();
+   refs.overlayContainer.style.display = 'block';
+}
 
 
 
 
+function hideOverlay() {
+   hideFormLoginRegister();
+   refs.overlayContainer.style.display = 'none';
+}
 
+refs.overlayBtnClose.addEventListener('click', hideOverlay);
 
-
+refs.overlayBtn.addEventListener('click', showFormLogin)
 
 
 

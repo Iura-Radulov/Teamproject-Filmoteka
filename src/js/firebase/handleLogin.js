@@ -21,7 +21,7 @@ import {resetForm, hideFormLoginRegister, showFormLoginRegister, hideFormLogin} 
    
 }
     
-function hideLoginError() {
+export function hideLoginError() {
    refs.divLoginError.style.display = 'none';
    refs.lblLoginErrorMessage.innerHTML = '';
 };
