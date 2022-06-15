@@ -1,0 +1,96 @@
+// ========================
+//  кнопка регистрації
+.sign-up-btn {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.16;
+  color: getColor('white-color');
+  background-color: transparent;
+  text-transform: uppercase;
+  border: 2px solid getColor('white-color');
+  border-radius: 2px;
+  width: 140px;
+  height: 30px;
+  position: absolute;
+  right: 0;
+  top: -10px;
+  &:focus,
+  &:hover {
+    border: 3px solid getColor('btn-color');
+    color: getColor('btn-color');
+  }
+  @media screen and (max-width: 768px) {
+    width: 65px;
+    right: 75;
+    top: -40px;
+  }
+}
+
+.sign-in-btn {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.16;
+  color: getColor('white-color');
+  background-color: transparent;
+  text-transform: uppercase;
+  border: 2px solid getColor('white-color');
+  border-radius: 2px;
+  width: 140px;
+  height: 30px;
+  position: absolute;
+  right: 0;
+  top: 27px;
+  &:focus,
+  &:hover {
+    border: 3px solid getColor('btn-color');
+    color: getColor('btn-color');
+  }
+  @media screen and (max-width: 768px) {
+    width: 65px;
+    right: 0;
+    top: -40px;
+  }
+}
+
+.boxLoginLogout {
+  display: none;
+  justify-content: end;
+  align-items: center;
+  height: 75px;
+  padding-bottom: 50px;
+  padding-right: 50px;
+}
+.btnLoginLogout {
+  margin: 0 20px;
+  padding: 10px;
+  color: getColor('white-color');
+  border-radius: 20px;
+  background: getColor('pin-color');
+}
+
+.logOutName {
+  color: getColor('white-color');
+}
+.signUp__btnClose,
+.signIn__btnClose {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 40px;
+  text-align: center;
+
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #000000;
+
+  &:hover {
+    color: rgb(255, 106, 0);
+  }
+}
