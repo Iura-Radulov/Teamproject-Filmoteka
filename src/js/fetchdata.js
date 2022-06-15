@@ -5,7 +5,11 @@ import createFilmCard from './createFilmCard';
 import fetchFilmModal from './fetchFilmModal';
 import Notiflix from 'notiflix';
 
-import { addBtnDataAttributes } from './moviesLibraryApi';
+import {
+  addBtnDataAttributes,
+  addBtnEventListeners,
+  createButtonRefs,
+} from './moviesLibraryApi';
 
 const newApiSearchFilm = new NewApiSearchFilms();
 const newApiPopularFilms = new NewApiPopularFilms();
@@ -55,7 +59,6 @@ function onFilmClick(event) {
         if (!movie) {
           return alert('The resource you requested could not be found.');
         } else {
-          addBtnDataAttributes(movie);
           const markup = createFilmCard(movie);
           backdropEl.classList.remove('is-hidden');
           document.body.classList.toggle('modal-open');
@@ -63,6 +66,10 @@ function onFilmClick(event) {
           backdropEl.addEventListener('click', onBackdropClick);
           document.addEventListener('keydown', onEscKeyPress);
           modalFilmInfoEl.insertAdjacentHTML('beforeend', markup);
+
+          const buttons = createButtonRefs();
+          addBtnEventListeners(buttons);
+          addBtnDataAttributes(movie, buttons);
         }
       })
       .catch(error => console.log(error));
