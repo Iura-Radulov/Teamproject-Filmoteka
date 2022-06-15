@@ -10,8 +10,8 @@ import {
    signOut,
 } from 'firebase/auth';
 import refs from "./refs";
-import { showLoginError } from "./handleLogin";
-import { hideFormLoginRegister, resetForm } from "./handleRegister";
+import { showLoginError, showFormLogin } from "./handleLogin";
+import { hideFormLoginRegister, resetForm, showFormLoginRegister } from "./handleRegister";
 import authWithEmailPassword from "./authWithEmailPassword";
 import handleLogin from "./handleLogin";
 import handleRegister from "./handleRegister";
@@ -37,12 +37,11 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+refs.btnLogout.addEventListener('click', logout);
 
 // Create new account using email/password
 
-export async function createAccount() {  
-   const email = refs.txtEmailRegister.value;
-   const password = refs.txtPasswordRegister.value;
+export async function createAccount(displayName, email, password) {  
 
    try {
        await createUserWithEmailAndPassword(auth, email, password);
@@ -51,7 +50,10 @@ export async function createAccount() {
                 email: user.email;
                 id: user.uid;
                 token: user.accessToken;               
-            }
+       }
+       await updateProfile(auth.currentUser, {
+         displayName,
+      });
   
    } catch (error) {
       console.log(`There was an error: ${error}`);
@@ -61,27 +63,82 @@ export async function createAccount() {
 
 // Login using email/password
 
-export async function loginEmailPassword () {
-   const email = refs.txtEmailLogin.value;
-   const password = refs.txtPasswordLogin.value;
+export async function loginEmailPassword (email, password) {
+    
    try {
-       await signInWithEmailAndPassword(auth, email, password);
+       const userCredintial = await signInWithEmailAndPassword(auth, email, password);
+       
        ({ user }) => {
            email: user.email;
            id: user.uid;
            token: user.accessToken;
        };
-    //    resetForm();
-    //   hideFormLoginRegister();
+       console.log(userCredintial.user);
+       resetForm();
+      hideFormLoginRegister();
       
    } catch (error) {
       console.log(error);
        showLoginError(error);
+       resetForm();
    }
 };
 
 
 
+// Log out
+async function logout() {
+   try {
+       await signOut(auth);
+    //    monitorAuthState()
+       showFormLoginRegister();
+      showFormLogin()
+       console.log('loged out');
+    //   openHomePage();
+   } catch (error) {}
+};
+
+// Monitor auth state
+export async function monitorAuthState () {
+   onAuthStateChanged(auth, user => {
+      if (user) {
+        //   console.log(user);
+          refs.boxLoginLogout.style.display = 'flex';
+         refs.loginUser.innerHTML = `${user.email} `;
+         refs.btnLogout.removeEventListener('click', showFormLoginRegister);
+         refs.btnLogout.addEventListener('click', logout);
+          refs.btnLogout.innerHTML = 'Log out';
+          refs.loginContainer.classList.add('is-hidden');
+         
+      } else {
+        //  showFormLoginRegister();
+          refs.loginContainer.classList.remove('is-hidden');
+          refs.boxLoginLogout.style.display = 'none';
+        //  refs.loginUser.innerHTML = `You're not logged in.`;
+         refs.btnLogout.removeEventListener('click', logout);
+         refs.btnLogout.addEventListener('click', showFormLoginRegister);
+        //  refs.btnLogout.innerHTML = 'Log in';
+      }
+   });
+};
+
+monitorAuthState()
+
+refs.registerFormSignUp.addEventListener('submit', e => {
+   e.preventDefault();
+   const displayName = e.target.name.value;
+   const email = e.target.email.value;
+   const password = e.target.password.value;
+   createAccount(displayName, email, password);
+});
+
+
+refs.registerFormSignIn.addEventListener('submit', e => {
+   e.preventDefault();
+   const email = e.target.email.value;
+   const password = e.target.password.value;
+   loginEmailPassword(email, password);
+});
 
 
 
@@ -93,11 +150,41 @@ export async function loginEmailPassword () {
 
 
 
-// const data = {
-//     name: 'Mike',
-//     email: 'some@mail.ru',
-//     password: 12345,
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function showbtnSignInSignUp() {
+//     const markup = `<button class="sign-up-btn" type="submit">Sign up</button>
+//       <button class="sign-in-btn" type="submit">Sign in</button>  `;
+//     refs.loginContainer.innerHTML = markup;
+
+// } 
+
+// function showBtnSignOut() {
+//     const markup = `<div class="boxLoginLogout">
+//     <span id="loginUser">none</span>
+//     <button id="btnLogout" class="btnLoginLogout" type="button">Log out</button>
+// </div>`;
+//     refs.loginContainer.innerHTML = markup;
 // }
+
+// showBtnSignOut()
+
+
+
+
+
+
 class Firebase {
     constructor() {
         this.URL = "https://filmoteka-goit-6e05f-default-rtdb.firebaseio.com/users.json"; 

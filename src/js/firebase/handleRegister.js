@@ -1,7 +1,7 @@
 import refs from "./refs";
 // import Firebase from './firebase'
 import {hideFormRegister} from './handleLogin'
-refs.registerFormSignUp.addEventListener('submit', handleRegister);
+// refs.registerFormSignUp.addEventListener('submit', handleRegister);
 
 
 
@@ -36,7 +36,7 @@ export function hideFormLoginRegister() {
 };
 
 
-function hideFormLogin() {
+export function hideFormLogin() {
     refs.signInContainer.style.display = 'none';
    // refs.signInContainer.classList.add('is-hidden');
 }
@@ -48,7 +48,7 @@ function showFormRegister() {
 }
 
 // showFormLoginRegister()
-hideFormLoginRegister()
+// hideFormLoginRegister()
 
 function onBtnSignUp() {
     showFormLoginRegister();
@@ -56,4 +56,10 @@ function onBtnSignUp() {
     showFormRegister();
 }
 
+
+
 refs.signUpBtn.addEventListener('click', onBtnSignUp);
+refs.signUpButtonClose.addEventListener('click', () => {  
+   hideFormLoginRegister();   
+      hideFormRegister();
+})

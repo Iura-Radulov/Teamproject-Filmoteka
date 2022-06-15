@@ -17,7 +17,7 @@
         width: 100%;
         background-repeat: no-repeat;
         background-size: 320px;
-        background-color: #000;
+        background-color: getColor('black-color');
         background-position: center;
 
         @media screen and (min-device-pixel-ratio: 2),
@@ -49,6 +49,43 @@
         }
     }
 }
+.header__background-library {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/background/library-mobile.jpg');
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: 320px;
+        background-color: getColor('black-color');
+        background-position: center;
+    
+        @media screen and (min-device-pixel-ratio: 2),
+        screen and (min-resolution: 192dpi),
+        screen and (min-resolution: 2dppx) {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/background/library-mobile2x.jpg');
+        }
+    
+        @media screen and (min-width: 360px) {
+            background-size: cover;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/background/library-tablet.jpg');
+    
+            @media screen and (min-device-pixel-ratio: 2),
+            screen and (min-resolution: 192dpi),
+            screen and (min-resolution: 2dppx) {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/background/library-tablet2x.jpg');
+            }
+        }
+    
+        @media screen and (min-width: 768px) {
+            background-size: 1024px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/background/library-desktop.jpg');
+    
+            @media screen and (min-device-pixel-ratio: 2),
+            screen and (min-resolution: 192dpi),
+            screen and (min-resolution: 2dppx) {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/background/library-desktop2x.jpg');
+            }
+        }
+}
+
 .navigation {
     display: flex;
     justify-content: space-between;
@@ -75,7 +112,7 @@
     height: 14px;
     border: none;
     text-transform: uppercase;
-    color: #FFF;
+    color: getColor('white-color');
     transition: border-bottom 250ms cubic-bezier(0.4, 0, 0.2, 1);
     background-color: transparent;
     cursor: pointer;
@@ -83,7 +120,7 @@
     &:focus,
     &:hover {
         padding-bottom: 5px;
-        border-bottom: 3px solid #FF6B08;
+        border-bottom: 3px solid getColor('pin-color');
     }
 }
 
@@ -101,7 +138,7 @@
 .logo-text {
     font-size: 30px;
     line-height: 1.16px;
-    color: #fff;
+    color: getColor('white-color');
 
     @media screen and (max-width: 767px) {
         display: none;
@@ -127,8 +164,8 @@
     line-height: 1.14;
     padding-left: 4px;
     padding-right: 20px;
-    color: #fff;
-    border-bottom: 0.5px solid #fff;
+    color: getColor('white-color');
+    border-bottom: 0.5px solid getColor('white-color');
     transition: border-bottom 250ms cubic-bezier(0.4, 0, 0.2, 1);
     @media screen and (min-width: 768px) {
             width: 336px;
@@ -136,7 +173,7 @@
     
         &:focus,
         &:hover {
-            border-bottom: 0.5px solid #FF6B08;
+            border-bottom: 0.5px solid getColor('pin-color');
         }
 }
 .search-form{
@@ -165,13 +202,13 @@
     line-height: 1.17;
     display: flex;
     align-items: center;
-    color: #fff;
+    color: getColor('white-color');
 }
 
 
 .current-link {
     padding-bottom: 5px;
-    border-bottom: 3px solid #FF6B08;
+    border-bottom: 3px solid getColor('pin-color');
     cursor: auto;
 }
 
@@ -184,7 +221,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #FF001B;
+    color: getColor('red-color');
     position: absolute;
      margin-top: 22px;
         
@@ -195,16 +232,14 @@
         }
 }
 
-.display-none {
-    display: none;
-}
+
 
 // ========================
 //  кнопка регистрації
 .sign-up-btn {
     font-weight: 400;
-    font-size: 14px;
-    line-height: 1.14;
+    font-size: 12px;
+    line-height: 1.16;
     color:  getColor('white-color');
     background-color: transparent;
     text-transform: uppercase;
@@ -229,8 +264,8 @@
 
 .sign-in-btn {
     font-weight: 400;
-    font-size: 14px;
-    line-height: 1.14;
+    font-size: 12px;
+    line-height: 1.16;
     color: getColor('white-color');
     background-color: transparent;
     text-transform: uppercase;
@@ -252,4 +287,53 @@
         top: -40px;
     }
 }
-   
+
+    .buttons{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        margin: 0 auto;
+        cursor: pointer;
+    }
+   .button_library{
+        font-size: 12px;
+        line-height: 1.14;
+        text-transform: uppercase;
+        background-color: transparent;
+        padding: 13px 35px;
+        min-width: 130px;
+        
+        border-radius: 5px;
+        border: 1px solid getColor('white-color');
+        color: getColor('white-color');
+        outline: none;
+
+        &:focus,
+        &:hover {
+            background-color: getColor('btn-color');
+            border-color: getColor('btn-color');
+            box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+        }
+
+         &:not(:last-child) {
+            margin-right: 20px;
+        }
+
+        @media  screen and (min-width: 768px) {
+            min-width: 152px;
+            &:not(:last-child) {
+                    margin-right: 32px;
+                }
+        }
+
+         @media screen and (min-width: 1024px) {
+            min-width: 148px;
+            &:not(:last-child) {
+                    margin-right: 16px;
+                }
+        }
+   }
+.is-hidden {
+    display: none;
+}
+
