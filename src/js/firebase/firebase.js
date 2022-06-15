@@ -102,6 +102,7 @@ async function logout() {
 
 // Monitor auth state
 export async function monitorAuthState () {
+   let login;
    onAuthStateChanged(auth, user => {
       if (user) {
          hideLoginError();
@@ -111,6 +112,7 @@ export async function monitorAuthState () {
          refs.btnLogout.addEventListener('click', logout);
           refs.btnLogout.innerHTML = 'Log out';
           refs.loginContainer.classList.add('is-hidden');
+          return login = true;
          
       } else {
         //  showFormLoginRegister();
@@ -120,6 +122,7 @@ export async function monitorAuthState () {
          refs.btnLogout.removeEventListener('click', logout);
          refs.btnLogout.addEventListener('click', showFormLoginRegister);
         //  refs.btnLogout.innerHTML = 'Log in';
+        return login = false;
       }
    });
 };

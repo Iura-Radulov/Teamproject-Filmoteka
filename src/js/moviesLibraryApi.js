@@ -1,5 +1,5 @@
 import { getDatabase, ref, set, child, get } from 'firebase/database';
-import { app } from './firebase/firebase';
+import { app, monitorAuthState } from './firebase/firebase';
 import { Notify } from 'notiflix';
 
 const database = getDatabase(app);
@@ -35,16 +35,29 @@ function onHomeBtnClick() {
 
 
 async function onLibraryBtnClick() {
+  
+let logStatus = monitorAuthState();
+if( logStatus===true){
   showLibraryBtn.classList.add(CURRENT_LINK);
   showHomeBtn.classList.remove(CURRENT_LINK);
   libraryButtons.classList.remove(IS_HIDDEN);
   search.classList.add(IS_HIDDEN);
   header.classList.remove(HEADER_BGR);
   header.classList.add(HEADER_BGR_LIBRARY);
-
-
+  
   const response = await fetchMoviesFromDatabase(WATCHED_MOVIES);
-  showLibrary(response);
+  showLibrary(response);}
+  else{
+    return Notify.warning("You need to sign in!", {
+      //height: '10px',
+      width: '12%',
+      borderRadius: '3px',
+      timeout: 1000,
+      clickToClose: true,
+      opacity: 0.9,
+      pauseOnHover: false,
+    })
+  }
 }
 
 async function onWatchedBtnClick() {
