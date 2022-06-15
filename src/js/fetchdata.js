@@ -4,7 +4,9 @@ import createFilmsList from './createFilmsList';
 import createFilmCard from './createFilmCard';
 import fetchFilmModal from './fetchFilmModal';
 import Notiflix from 'notiflix';
-// import { addBtnDataAttributes } from './libraryApi';
+
+import { addBtnDataAttributes } from './moviesLibraryApi';
+
 const newApiSearchFilm = new NewApiSearchFilms();
 const newApiPopularFilms = new NewApiPopularFilms();
 
