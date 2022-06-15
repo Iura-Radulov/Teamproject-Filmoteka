@@ -102,21 +102,23 @@ async function monitorAuthState () {
    onAuthStateChanged(auth, user => {
       if (user) {
          console.log(user);
-         refs.loginUser.innerHTML = `(email: ${user.email}) `;
+         refs.loginUser.innerHTML = `${user.email} `;
          refs.btnLogout.removeEventListener('click', showFormLoginRegister);
          refs.btnLogout.addEventListener('click', logout);
-         refs.btnLogout.innerHTML = 'Logout';
+          refs.btnLogout.innerHTML = 'Log out';
+          refs.signInBtn.classList.add('is-hidden');
+          refs.signUpBtn.classList.add('is-hidden');
       } else {
          // showFormLoginRegister();
          refs.loginUser.innerHTML = `You're not logged in.`;
          refs.btnLogout.removeEventListener('click', logout);
          refs.btnLogout.addEventListener('click', showFormLoginRegister);
-         refs.btnLogout.innerHTML = 'Login';
+         refs.btnLogout.innerHTML = 'Log in';
       }
    });
 };
 
-
+monitorAuthState()
 
 refs.registerFormSignUp.addEventListener('submit', e => {
    e.preventDefault();

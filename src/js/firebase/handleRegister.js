@@ -36,7 +36,7 @@ export function hideFormLoginRegister() {
 };
 
 
-function hideFormLogin() {
+export function hideFormLogin() {
     refs.signInContainer.style.display = 'none';
    // refs.signInContainer.classList.add('is-hidden');
 }
@@ -56,4 +56,10 @@ function onBtnSignUp() {
     showFormRegister();
 }
 
+
+
 refs.signUpBtn.addEventListener('click', onBtnSignUp);
+refs.signUpButtonClose.addEventListener('click', () => {  
+   hideFormLoginRegister();   
+      hideFormRegister();
+})

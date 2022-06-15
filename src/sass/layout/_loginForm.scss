@@ -244,3 +244,27 @@
   border-radius: 20px;
   background: getColor('pin-color');
 }
+
+.signUp__btnClose,
+.signIn__btnClose {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 40px;
+  text-align: center;
+
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #000000;
+
+  &:hover {
+    color: rgb(255, 106, 0);
+  }
+}

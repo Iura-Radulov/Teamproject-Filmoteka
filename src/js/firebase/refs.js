@@ -12,7 +12,9 @@ const refs = {
    btnSignup: document.getElementById('btnSignUpBtn'),
     btnLogout: document.getElementById('btnLogout'),
     signUpBtn: document.querySelector('.sign-up-btn'),
-   signInBtn: document.querySelector('.sign-in-btn'),
+    signInBtn: document.querySelector('.sign-in-btn'),
+    signUpButtonClose: document.querySelector('.signUp__btnClose'),
+    signInButtonClose: document.querySelector('.signIn__btnClose'),
 
    formLogin: document.getElementById('formLogin'),
 
