@@ -81,7 +81,6 @@ function onFilmClick(event) {
 
 function onSearchFilm(event) {
   event.preventDefault();
-  clearFilmsContainer();
   console.log(event.currentTarget);
 
   newApiSearchFilm.query =
@@ -106,6 +105,7 @@ function onSearchFilm(event) {
           'Sorry, there are no movies matching your search query. Please try again.'
         );
       } else {
+        clearFilmsContainer();
         const markup = createFilmsList(dates);
         filmsContainer.insertAdjacentHTML('afterbegin', markup);
       }
