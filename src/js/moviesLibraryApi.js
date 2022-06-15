@@ -8,7 +8,7 @@ const showWatchedBtn = document.getElementById('watched');
 const showQueueBtn = document.getElementById('queue');
 const showLibraryBtn = document.getElementById('library');
 const showHomeBtn = document.getElementById('home');
-const search = document.querySelector('.search-wrapper');
+const search = document.querySelector('.search-form');
 const container = document.querySelector('.films__container');
 const libraryButtons = document.querySelector('.buttons');
 
@@ -20,12 +20,6 @@ const CURRENT_LINK = 'current-link';
 showWatchedBtn.addEventListener('click', onWatchedBtnClick);
 showQueueBtn.addEventListener('click', onQueueBtnClick);
 showLibraryBtn.addEventListener('click', onLibraryBtnClick);
-showHomeBtn.addEventListener('click', onHomeBtnClick);
-
-function onHomeBtnClick() {
-  libraryButtons.classList.add(IS_HIDDEN);
-  search.classList.remove(IS_HIDDEN);
-}
 
 async function onLibraryBtnClick() {
   showLibraryBtn.classList.add(CURRENT_LINK);
@@ -133,7 +127,7 @@ function renderWatched(arrayOfJsons) {
             original_title ? original_title : original_name
           }
           </p>
-          <p class="info-item">
+          <p class="info-item film__info-desc">
             <b>${
               genres.length > 2
                 ? genres

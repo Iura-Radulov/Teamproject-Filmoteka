@@ -22,6 +22,7 @@ const formEl = document.querySelector('.search-form');
 const showHomeBtn = document.getElementById('home');
 const showLibraryBtn = document.getElementById('library');
 const logoBtn = document.querySelector('.logo');
+const libraryButtons = document.querySelector('.buttons');
 console.log(showHomeBtn);
 
 document.addEventListener('DOMContentLoaded', startPopularFilms);
@@ -35,6 +36,8 @@ async function startPopularFilms() {
   newApiPopularFilms.resetPage();
   showHomeBtn.classList.add('current-link');
   showLibraryBtn.classList.remove('current-link');
+  formEl.classList.remove('is-hidden');
+  libraryButtons.classList.add('is-hidden');
   try {
     const dates = await newApiPopularFilms.fetchFilmsCards();
     console.log(dates);
