@@ -1,6 +1,6 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import refs from "./refs";
-import { loginEmailPassword, monitorAuthState } from './firebase';
+import { hideOverlay, loginEmailPassword, monitorAuthState } from './firebase';
 import {resetForm, hideFormLoginRegister, showFormLoginRegister, hideFormLogin} from './handleRegister';
 // refs.registerFormSignIn.addEventListener('submit', handleLogin);
 
@@ -45,9 +45,10 @@ export function hideFormRegister() {
     refs.signUpContainer.style.display = 'none';   
 }
 
-function onBtnSignIn() {
+export function onBtnSignIn() {
     showFormLoginRegister();
-    hideFormRegister();
+   hideFormRegister();
+   hideOverlay();
     showFormLogin();
 }
 
