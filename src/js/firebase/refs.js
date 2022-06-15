@@ -15,10 +15,13 @@ const refs = {
     signInBtn: document.querySelector('.sign-in-btn'),
     signUpButtonClose: document.querySelector('.signUp__btnClose'),
     signInButtonClose: document.querySelector('.signIn__btnClose'),
+    overlayBtnClose: document.querySelector('.overlayBtnClose'),
+    overlayBtn: document.querySelector('.overlayBtn'),
 
     formLogin: document.getElementById('formLogin'),
     loginContainer: document.querySelector('.login-container'),
-   boxLoginLogout: document.querySelector('.boxLoginLogout'),
+    boxLoginLogout: document.querySelector('.boxLoginLogout'),
+   overlayContainer: document.querySelector('.overlay-container'),
 
    txtEmailLogin: document.getElementById('txtEmailLogin'),
    txtPasswordLogin: document.getElementById('txtPasswordLogin'),
