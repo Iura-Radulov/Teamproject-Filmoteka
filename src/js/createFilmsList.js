@@ -16,7 +16,7 @@ export default function createFilmsList(dates) {
         <img src=${
           poster_path !== null
             ? `https://image.tmdb.org/t/p/w500${poster_path}`
-            : `https://www.online-tech-tips.com/wp-content/uploads/2022/03/image-41.jpeg`
+            : `https://mysteriouswritings.com/wp-content/uploads/2017/02/movie.jpg`
         } alt="" loading="lazy" width="310" height="449" data-id=${id} />
 
         <div class="info">
