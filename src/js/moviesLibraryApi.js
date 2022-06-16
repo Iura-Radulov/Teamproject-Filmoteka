@@ -1,8 +1,10 @@
 import { getDatabase, ref, set, child, get } from 'firebase/database';
 import { app } from './firebase/firebase';
+import { getAuth } from 'firebase/auth';
 import { Notify } from 'notiflix';
 
 const database = getDatabase(app);
+const auth = getAuth(app);
 
 const showWatchedBtn = document.getElementById('watched');
 const showQueueBtn = document.getElementById('queue');
@@ -23,8 +25,11 @@ const HEADER_BGR_LIBRARY = 'header__background-library';
 showWatchedBtn.addEventListener('click', onWatchedBtnClick);
 showQueueBtn.addEventListener('click', onQueueBtnClick);
 showLibraryBtn.addEventListener('click', onLibraryBtnClick);
-
 showHomeBtn.addEventListener('click', onHomeBtnClick);
+
+function getUserId() {
+  return auth.currentUser?.uid;
+}
 
 function onHomeBtnClick() {
   libraryButtons.classList.add(IS_HIDDEN);
@@ -33,15 +38,19 @@ function onHomeBtnClick() {
   header.classList.add(HEADER_BGR);
 }
 
-
 async function onLibraryBtnClick() {
+  const userId = getUserId();
+  if (!userId) {
+    Notify.warning('You should log in first');
+    return;
+  }
+
   showLibraryBtn.classList.add(CURRENT_LINK);
   showHomeBtn.classList.remove(CURRENT_LINK);
   libraryButtons.classList.remove(IS_HIDDEN);
   search.classList.add(IS_HIDDEN);
   header.classList.remove(HEADER_BGR);
   header.classList.add(HEADER_BGR_LIBRARY);
-
 
   const response = await fetchMoviesFromDatabase(WATCHED_MOVIES);
   showLibrary(response);
@@ -60,17 +69,24 @@ async function onQueueBtnClick() {
 }
 
 function onAddButtonClick(event) {
+  const userId = getUserId();
+
+  if (!userId) {
+    Notify.warning('You should log in first');
+    return;
+  }
+
   const movieJson = event.target.dataset.movie;
   const id = Number(event.target.dataset.id);
   switch (event.target.id) {
     case 'add-to-watched':
-      set(ref(database, `watchedMovies/${id}`), movieJson);
+      set(ref(database, `users/${userId}/watchedMovies/${id}`), movieJson);
 
       removeBtnDataAttributes(event.target);
       break;
 
     case 'add-to-queue':
-      set(ref(database, `queueOfMovies/${id}`), movieJson);
+      set(ref(database, `users/${userId}/queueOfMovies/${id}`), movieJson);
 
       removeBtnDataAttributes(event.target);
       break;
@@ -111,13 +127,14 @@ function showLibrary(response) {
 }
 
 function fetchMoviesFromDatabase(category) {
+  const userId = getUserId();
   const dbRef = ref(database);
-  return get(child(dbRef, category)).then(snapshot => {
+  return get(child(dbRef, `users/${userId}/${category}`)).then(snapshot => {
     if (snapshot.exists()) {
       const response = snapshot.val();
       return response;
     } else {
-      Notify.failure('Your library is empty');
+      Notify.failure('This movies list is empty');
     }
   });
 }
