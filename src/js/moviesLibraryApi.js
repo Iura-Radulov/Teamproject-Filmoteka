@@ -1,5 +1,5 @@
 import { getDatabase, ref, set, child, get } from 'firebase/database';
-import { app, monitorAuthState } from './firebase/firebase';
+import { app } from './firebase/firebase';
 import { getAuth } from 'firebase/auth';
 import { Notify } from 'notiflix';
 
@@ -39,7 +39,6 @@ function onHomeBtnClick() {
 }
 
 async function onLibraryBtnClick() {
-  
   const userId = getUserId();
   if (!userId) {
     Notify.warning('You should log in first');
@@ -52,21 +51,9 @@ async function onLibraryBtnClick() {
   search.classList.add(IS_HIDDEN);
   header.classList.remove(HEADER_BGR);
   header.classList.add(HEADER_BGR_LIBRARY);
-  
 
   const response = await fetchMoviesFromDatabase(WATCHED_MOVIES);
-  showLibrary(response);}
-  else{
-    return Notify.warning("You need to sign in!", {
-      //height: '10px',
-      width: '12%',
-      borderRadius: '3px',
-      timeout: 1000,
-      clickToClose: true,
-      opacity: 0.9,
-      pauseOnHover: false,
-    })
-  }
+  showLibrary(response);
 }
 
 async function onWatchedBtnClick() {
