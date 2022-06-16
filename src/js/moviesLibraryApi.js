@@ -53,6 +53,7 @@ async function onLibraryBtnClick() {
   search.classList.add(IS_HIDDEN);
   header.classList.remove(HEADER_BGR);
   header.classList.add(HEADER_BGR_LIBRARY);
+
   makeBtnActive(showWatchedBtn);
 
   const response = await fetchMoviesFromDatabase(WATCHED_MOVIES);
