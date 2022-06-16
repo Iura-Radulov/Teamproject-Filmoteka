@@ -35,6 +35,7 @@ const refs = {
 
    divLoginError: document.getElementById('divLoginError'),
    lblLoginErrorMessage: document.getElementById('lblLoginErrorMessage'),
+   btnMyLibrary: document.querySelector('#library'),
 }
 //        footer
 
