@@ -1,3 +1,4 @@
+import './js/loader';
 import './js/fetchdata';
 import './js/firebase/firebase';
 import './js/pagination';

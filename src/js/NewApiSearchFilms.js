@@ -5,6 +5,7 @@ export default class NewApiSearchFilms {
   }
 
   async searchFilm() {
+
     const KEY_API = '024bf82d4805f650033dc69997860333';
     const festFetch = `https://api.themoviedb.org/3/search/movie?api_key=${KEY_API}&language=en-US&page=${this.page}&include_adult=false&query=${this.searchQuery}`;
     const secondFetch = `https://api.themoviedb.org/3/genre/movie/list?api_key=${KEY_API}&language=en-US`;
@@ -17,8 +18,8 @@ export default class NewApiSearchFilms {
 
     const dates = await Promise.all(arrayOfPromises);
     return dates;
+    
   }
-
   get query() {
     return this.searchQuery;
   }
@@ -26,7 +27,6 @@ export default class NewApiSearchFilms {
   set query(newQuery) {
     this.searchQuery = newQuery;
   }
-
   resetPage() {
     this.page = 1;
   }
