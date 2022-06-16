@@ -4,6 +4,14 @@
   gap: 32px 16px;
   padding: 60px 0;
   justify-content: center;
+
+  @media screen and (max-width: 1024px) {
+    gap: 32px;
+  }
+  @media screen and (max-width: 768px) {
+    gap: 20px 0;
+  }
+
 }
 .film__info {
   &-name {
@@ -42,4 +50,17 @@
   background: #f7f7f7;
   border-radius: 5px;
   padding: 1px 4px;
+}
+
+.films__empty-list-thumb {
+  width: 300px;
+  border-radius: 5px;
+  text-align: center; 
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 120px;
+}
+.films__empty-list-message {
+  color: getColor('another-text-color');
+  font-size: 30px;
 }

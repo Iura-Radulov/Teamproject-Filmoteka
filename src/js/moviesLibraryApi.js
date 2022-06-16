@@ -1,42 +1,122 @@
-import { getDatabase, ref, set, child, get } from 'firebase/database';
+import { getDatabase, ref, set, child, get, remove } from 'firebase/database';
 import { app } from './firebase/firebase';
+import { getAuth } from 'firebase/auth';
 import { Notify } from 'notiflix';
 
 const database = getDatabase(app);
+const auth = getAuth(app);
 
-const addToWatchedBtn = document.getElementById('add-to-watched');
-const addToQueueBtn = document.getElementById('add-to-queue');
-// const showWatchedBtn = document.getElementById('show-watched');
-// const showQueueBtn = document.getElementById('show-queue');
+const showWatchedBtn = document.getElementById('watched');
+const showQueueBtn = document.getElementById('queue');
 const showLibraryBtn = document.getElementById('library');
+const showHomeBtn = document.getElementById('home');
+const search = document.querySelector('.search-form');
 const container = document.querySelector('.films__container');
+const libraryButtons = document.querySelector('.buttons');
+const header = document.querySelector('.header');
+const emptyListMessage = document.querySelector('.films__empty-list-thumb');
 
 const WATCHED_MOVIES = 'watchedMovies/';
 const MOVIES_QUEUE = 'queueOfMovies/';
+const IS_HIDDEN = 'is-hidden';
+const CURRENT_LINK = 'current-link';
+const HEADER_BGR = 'header__background';
+const HEADER_BGR_LIBRARY = 'header__background-library';
 
-addToWatchedBtn.addEventListener('click', onAddButtonClick);
-addToQueueBtn.addEventListener('click', onAddButtonClick);
+showWatchedBtn.addEventListener('click', onWatchedBtnClick);
+showQueueBtn.addEventListener('click', onQueueBtnClick);
 showLibraryBtn.addEventListener('click', onLibraryBtnClick);
+showHomeBtn.addEventListener('click', onHomeBtnClick);
+
+function getUserId() {
+  return auth.currentUser?.uid;
+}
+
+function onHomeBtnClick() {
+  hideEmptyListMessage();
+  libraryButtons.classList.add(IS_HIDDEN);
+  search.classList.remove(IS_HIDDEN);
+  header.classList.remove(HEADER_BGR_LIBRARY);
+  header.classList.add(HEADER_BGR);
+}
 
 async function onLibraryBtnClick() {
+  const userId = getUserId();
+  if (!userId) {
+    Notify.warning('You should log in first');
+    return;
+  }
+
+  showLibraryBtn.classList.add(CURRENT_LINK);
+  showHomeBtn.classList.remove(CURRENT_LINK);
+  libraryButtons.classList.remove(IS_HIDDEN);
+  search.classList.add(IS_HIDDEN);
+  header.classList.remove(HEADER_BGR);
+  header.classList.add(HEADER_BGR_LIBRARY);
+
+  makeBtnActive(showWatchedBtn);
+
   const response = await fetchMoviesFromDatabase(WATCHED_MOVIES);
   showLibrary(response);
 }
 
+async function onWatchedBtnClick() {
+  makeBtnActive(showWatchedBtn);
+  hideEmptyListMessage();
+
+  const response = await fetchMoviesFromDatabase(WATCHED_MOVIES);
+  if (!response) {
+    return;
+  }
+  const arrayOfJsons = Object.values(response);
+  renderWatched(arrayOfJsons);
+}
+
+async function onQueueBtnClick() {
+  makeBtnActive(showQueueBtn);
+  hideEmptyListMessage();
+
+  const response = await fetchMoviesFromDatabase(MOVIES_QUEUE);
+  if (!response) {
+    return;
+  }
+  const arrayOfJsons = Object.values(response);
+  renderQueue(arrayOfJsons);
+}
+
 function onAddButtonClick(event) {
+  const userId = getUserId();
+
+  if (!userId) {
+    Notify.warning('You should log in first');
+    return;
+  }
+
   const movieJson = event.target.dataset.movie;
   const id = Number(event.target.dataset.id);
   switch (event.target.id) {
     case 'add-to-watched':
-      set(ref(database, `watchedMovies/${id}`), movieJson);
+      set(ref(database, `users/${userId}/watchedMovies/${id}`), movieJson);
 
-      removeBtnDataAttributes();
+      removeBtnDataAttributes(event.target);
       break;
 
     case 'add-to-queue':
-      set(ref(database, `queueOfMovies/${id}`), movieJson);
+      set(ref(database, `users/${userId}/queueOfMovies/${id}`), movieJson);
 
-      removeBtnDataAttributes();
+      removeBtnDataAttributes(event.target);
+      break;
+
+    case 'remove-from-watched':
+      remove(ref(database, `users/${userId}/watchedMovies/${id}`));
+
+      removeBtnDataAttributes(event.target);
+      break;
+
+    case 'remove-from-queue':
+      remove(ref(database, `users/${userId}/queueOfMovies/${id}`));
+
+      removeBtnDataAttributes(event.target);
       break;
 
     default:
@@ -44,32 +124,81 @@ function onAddButtonClick(event) {
   }
 }
 
-export function addBtnDataAttributes(movie) {
+function databaseContainsMovie(category, movieId, userId) {
+  return get(ref(database, `users/${userId}/${category}${movieId}`)).then(
+    snapshot => snapshot.exists()
+  );
+}
+
+export function createButtonRefs() {
+  const addToWatchedBtn = document.getElementById('add-to-watched');
+  const addToQueueBtn = document.getElementById('add-to-queue');
+
+  return { addToWatchedBtn, addToQueueBtn };
+}
+
+export function addBtnEventListeners(buttons) {
+  const { addToWatchedBtn, addToQueueBtn } = buttons;
+  addToWatchedBtn.addEventListener('click', onAddButtonClick);
+  addToQueueBtn.addEventListener('click', onAddButtonClick);
+}
+
+export async function addBtnDataAttributes(movie, buttons) {
+  const { addToWatchedBtn, addToQueueBtn } = buttons;
+  const userId = getUserId();
+
   addToWatchedBtn.setAttribute('data-movie', JSON.stringify(movie));
   addToQueueBtn.setAttribute('data-movie', JSON.stringify(movie));
   addToWatchedBtn.setAttribute('data-id', movie.id);
   addToQueueBtn.setAttribute('data-id', movie.id);
+
+  const isInWatchlist = await databaseContainsMovie(
+    WATCHED_MOVIES,
+    movie.id,
+    userId
+  );
+
+  if (isInWatchlist) {
+    changeWatchedBtn(addToWatchedBtn);
+  }
+  const isInQueue = await databaseContainsMovie(MOVIES_QUEUE, movie.id, userId);
+  if (isInQueue) {
+    changeQueueBtn(addToQueueBtn);
+  }
 }
 
-export function removeBtnDataAttributes() {
-  addToWatchedBtn.removeAttribute('data-movie');
-  addToQueueBtn.removeAttribute('data-movie');
-  addToWatchedBtn.removeAttribute('data-id');
-  addToQueueBtn.removeAttribute('data-id');
+function removeBtnDataAttributes(button) {
+  button.removeAttribute('data-movie');
+  button.removeAttribute('data-id');
+}
+function changeWatchedBtn(addToWatchedBtn) {
+  addToWatchedBtn.id = 'remove-from-watched';
+  addToWatchedBtn.textContent = 'Delete from watched';
+}
+function changeQueueBtn(addToQueueBtn) {
+  addToQueueBtn.id = 'remove-from-queue';
+  addToQueueBtn.textContent = 'Delete from queue';
 }
 
 function showLibrary(response) {
+  if (!response) {
+    return;
+  }
   const arrayOfJsons = Object.values(response);
   renderWatched(arrayOfJsons);
 }
+
 function fetchMoviesFromDatabase(category) {
+  const userId = getUserId();
   const dbRef = ref(database);
-  return get(child(dbRef, category)).then(snapshot => {
+  return get(child(dbRef, `users/${userId}/${category}`)).then(snapshot => {
     if (snapshot.exists()) {
       const response = snapshot.val();
       return response;
     } else {
-      Notify.failure('Your library is empty');
+      container.innerHTML = '';
+      showEmptyListMessage();
+      return;
     }
   });
 }
@@ -77,7 +206,6 @@ function fetchMoviesFromDatabase(category) {
 function renderWatched(arrayOfJsons) {
   container.innerHTML = '';
 
-  console.log(arrayOfJsons.map(json => JSON.parse(json)));
   const markup = arrayOfJsons
     .map(json => JSON.parse(json))
     .map(
@@ -96,7 +224,7 @@ function renderWatched(arrayOfJsons) {
             original_title ? original_title : original_name
           }
           </p>
-          <p class="info-item">
+          <p class="info-item film__info-desc">
             <b>${
               genres.length > 2
                 ? genres
@@ -155,5 +283,15 @@ function renderQueue(arrayOfJsons) {
       </div>`
     );
 
-  container.insertAdjacentHtml('beforeend', markup);
+  container.insertAdjacentHTML('beforeend', markup);
+}
+
+function makeBtnActive(button) {
+  button.focus();
+}
+function showEmptyListMessage() {
+  emptyListMessage.classList.remove(IS_HIDDEN);
+}
+function hideEmptyListMessage() {
+  emptyListMessage.classList.add(IS_HIDDEN);
 }

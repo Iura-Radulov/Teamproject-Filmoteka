@@ -2,6 +2,7 @@ const refs = {
     signUpButton: document.getElementById('signUpBtn'),
    signInButton: document.getElementById('signInBtn'),
     container: document.getElementById('container'),
+    overlayBackdrop: document.querySelector('.overlay__backdrop'),
     registerFormSignUp: document.querySelector('.register-form__sign-up'),
     registerFormSignIn: document.querySelector('.register-form__sign-in'),
     signInContainer: document.querySelector('.sign-in-container'),
@@ -15,8 +16,13 @@ const refs = {
     signInBtn: document.querySelector('.sign-in-btn'),
     signUpButtonClose: document.querySelector('.signUp__btnClose'),
     signInButtonClose: document.querySelector('.signIn__btnClose'),
+    overlayBtnClose: document.querySelector('.overlayBtnClose'),
+    overlayBtn: document.querySelector('.overlayBtn'),
 
-   formLogin: document.getElementById('formLogin'),
+    formLogin: document.getElementById('formLogin'),
+    loginContainer: document.querySelector('.login-container'),
+    boxLoginLogout: document.querySelector('.boxLoginLogout'),
+   overlayContainer: document.querySelector('.overlay-container'),
 
    txtEmailLogin: document.getElementById('txtEmailLogin'),
    txtPasswordLogin: document.getElementById('txtPasswordLogin'),
@@ -29,6 +35,7 @@ const refs = {
 
    divLoginError: document.getElementById('divLoginError'),
    lblLoginErrorMessage: document.getElementById('lblLoginErrorMessage'),
+   btnMyLibrary: document.querySelector('#library'),
 }
 //        footer
 

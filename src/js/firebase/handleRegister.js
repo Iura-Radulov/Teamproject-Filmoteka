@@ -5,7 +5,7 @@ import {hideFormRegister} from './handleLogin'
 
 
 
-import { createAccount } from "./firebase";
+import { createAccount, hideOverlay } from "./firebase";
 
 function handleRegister() {
    createAccount();
@@ -52,7 +52,8 @@ function showFormRegister() {
 
 function onBtnSignUp() {
     showFormLoginRegister();
-    hideFormLogin();
+   hideFormLogin();
+   hideOverlay();
     showFormRegister();
 }
 
