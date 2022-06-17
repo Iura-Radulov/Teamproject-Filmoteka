@@ -12,15 +12,9 @@ import {
 import refs from "./refs";
 import { showLoginError, showFormLogin, hideLoginError, onBtnSignIn } from "./handleLogin";
 import { hideFormLoginRegister, resetForm, showFormLoginRegister } from "./handleRegister";
-import authWithEmailPassword from "./authWithEmailPassword";
-import handleLogin from "./handleLogin";
-import handleRegister from "./handleRegister";
 
 
-const URL = "https://filmoteka-goit-6e05f-default-rtdb.firebaseio.com/users.json";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -37,7 +31,6 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-refs.btnLogout.addEventListener('click', logout);
 
 // Create new account using email/password
 
@@ -66,14 +59,14 @@ export async function createAccount(displayName, email, password) {
 export async function loginEmailPassword (email, password) {
     
    try {
-       const userCredintial = await signInWithEmailAndPassword(auth, email, password);
+       await signInWithEmailAndPassword(auth, email, password);
        
        ({ user }) => {
            email: user.email;
            id: user.uid;
            token: user.accessToken;
        };
-       console.log(userCredintial.user);
+       
       resetForm();
       hideLoginError();
       hideFormLoginRegister();
@@ -90,19 +83,17 @@ export async function loginEmailPassword (email, password) {
 // Log out
 async function logout() {
    try {
-       await signOut(auth);
-    //    monitorAuthState()       
-     showOverlay()
-       console.log('loged out');
-    //   openHomePage();
-   } catch (error) {
+       await signOut(auth);        
+      showOverlay();
+     
+    } catch (error) {
       console.log(error);
    }
 };
 
 // Monitor auth state
 export async function monitorAuthState () {
-   let login;
+   
    onAuthStateChanged(auth, user => {
       if (user) {
          hideLoginError();
@@ -111,18 +102,14 @@ export async function monitorAuthState () {
          refs.btnLogout.removeEventListener('click', showFormLoginRegister);
          refs.btnLogout.addEventListener('click', logout);
           refs.btnLogout.innerHTML = 'Log out';
-          refs.loginContainer.classList.add('is-hidden');
-          return login = true;
+          refs.loginContainer.classList.add('is-hidden');          
          
       } else {
-        //  showFormLoginRegister();
           refs.loginContainer.classList.remove('is-hidden');
           refs.boxLoginLogout.style.display = 'none';
-        //  refs.loginUser.innerHTML = `You're not logged in.`;
-         refs.btnLogout.removeEventListener('click', logout);
+          refs.btnLogout.removeEventListener('click', logout);
          refs.btnLogout.addEventListener('click', showFormLoginRegister);
-        //  refs.btnLogout.innerHTML = 'Log in';
-        return login = false;
+             
       }
    });
 };
@@ -132,23 +119,22 @@ monitorAuthState()
 refs.registerFormSignUp.addEventListener('submit', e => {
    e.preventDefault();
    const displayName = e.target.name.value;
-   const email = e.target.email.value;
-   const password = e.target.password.value;
+   const email = e.target.email.value.trim();
+   const password = e.target.password.value.trim();
    createAccount(displayName, email, password);
 });
 
 
 refs.registerFormSignIn.addEventListener('submit', e => {
    e.preventDefault();
-   const email = e.target.email.value;
-   const password = e.target.password.value;
+   const email = e.target.email.value.trim();
+   const password = e.target.password.value.trim();
    loginEmailPassword(email, password);
 });
 
 
 
 function showOverlay() {
-   // showFormLoginRegister();
    refs.overlayBackdrop.style.display = 'flex';
 }
 
@@ -156,7 +142,6 @@ function showOverlay() {
 
 
 export function hideOverlay() {
-   // hideFormLoginRegister();
    refs.overlayBackdrop.style.display = 'none';
 }
 
@@ -164,101 +149,8 @@ refs.overlayBtnClose.addEventListener('click', hideOverlay);
 
 refs.overlayBtn.addEventListener('click', onBtnSignIn);
 
+refs.btnLogout.addEventListener('click', logout);
 
 
-
-
-
-
-
-
-
-
-
-
-
-// function showbtnSignInSignUp() {
-//     const markup = `<button class="sign-up-btn" type="submit">Sign up</button>
-//       <button class="sign-in-btn" type="submit">Sign in</button>  `;
-//     refs.loginContainer.innerHTML = markup;
-
-// } 
-
-// function showBtnSignOut() {
-//     const markup = `<div class="boxLoginLogout">
-//     <span id="loginUser">none</span>
-//     <button id="btnLogout" class="btnLoginLogout" type="button">Log out</button>
-// </div>`;
-//     refs.loginContainer.innerHTML = markup;
-// }
-
-// showBtnSignOut()
-
-
-
-
-
-
-class Firebase {
-    constructor() {
-        this.URL = "https://filmoteka-goit-6e05f-default-rtdb.firebaseio.com/users.json"; 
-    }
-    
-
-
-    create(data) {
-         
-       return fetch(this.URL, {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'applicatiom/json'
-            }
-        })
-           .then(response => response.json())
-           .then(response => {
-               data.id = response.name;
-               return data;
-         })
-           
-    }
-      getUser() {
-          return fetch(this.URL).then(response => response.json())
-          .then(response => console.log(response))
-        
-      }
-     fetch(token) {
-         if (!token) {
-             return Promise.resolve(console.error(error))
-         }
-         return fetch(`${URL}?auth=${token}`)
-             .then(response => response.json())
-             .then(data => {
-                 if (data && data.error) {
-                 return `<p>${data.error}</p>`
-                 }
-                 return data ? Object.keys(data).map(key => ({
-                     ...data[key],
-                     id: key
-                 })) : []
-         })
-     }
-}
-function sentData(data) {
-    const user1 = new Firebase();
-    const sentDat = user1.create(data);
-console.log(sentDat);
-}
-
-// sentData(data)
-
-const gettingDate = new Firebase();
-// gettingDate.getUser()
-const email = 'some1@mail.ru';
-const password = '123467';
-
-// handleLogin(email, password)
-
-// authWithEmailPassword(email, password).then(token => gettingDate.fetch(token)).then(console.log)
 
 
