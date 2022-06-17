@@ -16,7 +16,7 @@
       url('../images/background/home-mobile.jpg');
     width: 100%;
     background-repeat: no-repeat;
-    background-size: 320px;
+    background-size: cover;
     background-color: getColor('black-color');
     background-position: center;
 
@@ -30,7 +30,7 @@
         url('../images/background/home-mobile2x.jpg');
     }
 
-    @media screen and (min-width: 360px) {
+    @media screen and (min-width: 768px) {
       background-size: cover;
       background-image: linear-gradient(
           rgba(0, 0, 0, 0.56),
@@ -49,7 +49,7 @@
       }
     }
 
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 1024px) {
       background-size: 1024px;
       background-image: linear-gradient(
           rgba(0, 0, 0, 0.56),
@@ -74,7 +74,7 @@
     url('../images/background/library-mobile.jpg');
   width: 100%;
   background-repeat: no-repeat;
-  background-size: 320px;
+  background-size: cover;
   background-color: getColor('black-color');
   background-position: center;
 
@@ -85,7 +85,7 @@
       url('../images/background/library-mobile2x.jpg');
   }
 
-  @media screen and (min-width: 360px) {
+  @media screen and (min-width: 768px) {
     background-size: cover;
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url('../images/background/library-tablet.jpg');
@@ -101,7 +101,7 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     background-size: 1024px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url('../images/background/library-desktop.jpg');
