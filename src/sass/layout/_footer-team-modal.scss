@@ -2,10 +2,14 @@
   position: fixed;
   left: 0;
   top: 0;
-  width: 100%;
+  right: 0;
+  bottom: 0;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.2);
-
+  z-index: 10;
   opacity: 1;
   overflow-y: scroll;
 }
@@ -16,13 +20,9 @@
 }
 
 .modal-window {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-
+  position: relative;
+  margin: auto 0;
   padding: 20px;
-  transform: translate(-50%, -50%) scale(1);
-
   width: 300px;
   height: auto;
 
@@ -33,12 +33,10 @@
 
   @media screen and (min-width: 768px) {
     min-width: 700px;
-    
   }
 
   @media screen and (min-width: 1024px) {
     min-width: 1000px;
-    
   }
 }
 
@@ -117,11 +115,10 @@
   height: 250px;
   object-fit: cover;
 
-    @media screen and (min-width: 768px) {
-            width: 300px;
-            height: 300px;
-        }
-
+  @media screen and (min-width: 768px) {
+    width: 300px;
+    height: 300px;
+  }
 }
 
 // .card-set__image:hover{
