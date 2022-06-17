@@ -7,21 +7,22 @@
   color: getColor('white-color');
   background-color: transparent;
   text-transform: uppercase;
-  border: 2px solid getColor('white-color');
-  border-radius: 2px;
-  width: 140px;
+  border: 3px solid getColor('pin-color');
+  border-radius: 7px;
+  width: 65px;
   height: 30px;
   position: absolute;
-  right: 0;
-  top: -10px;
+  right: 76;
+  top: -11px;
   &:focus,
   &:hover {
-    border: 3px solid getColor('btn-color');
-    color: getColor('btn-color');
+    // border: 3px solid getColor('btn-color');
+    // color: getColor('btn-color');
+    background-color: getColor('pin-color');
   }
-  @media screen and (max-width: 768px) {
-    width: 65px;
-    right: 75;
+  @media screen and (max-width: 767px) {
+    // width: 65px;
+    // right: 75;
     top: -40px;
   }
 }
@@ -33,21 +34,21 @@
   color: getColor('white-color');
   background-color: transparent;
   text-transform: uppercase;
-  border: 2px solid getColor('white-color');
-  border-radius: 2px;
-  width: 140px;
+  border: 3px solid getColor('pin-color');
+  border-radius: 7px;
+  width: 65px;
   height: 30px;
   position: absolute;
   right: 0;
-  top: 27px;
+  top: -11px;
   &:focus,
   &:hover {
-    border: 3px solid getColor('btn-color');
-    color: getColor('btn-color');
+    // border: 3px solid getColor('btn-color');
+    // color: getColor('btn-color');
+    background-color: getColor('pin-color');
   }
-  @media screen and (max-width: 768px) {
-    width: 65px;
-    right: 0;
+  @media screen and (max-width: 767px) {
+    // width: 65px;
     top: -40px;
   }
 }
@@ -61,16 +62,37 @@
   padding-right: 50px;
 }
 .btnLoginLogout {
-  margin: 0 20px;
-  padding: 10px;
+  // margin: 0 20px;
+  // padding: 10px;
   color: getColor('white-color');
-  border-radius: 20px;
-  background: getColor('pin-color');
+
+  text-transform: uppercase;
+  border: 3px solid getColor('pin-color');
+  border-radius: 7px;
+  width: 65px;
+  height: 30px;
+  position: absolute;
+  right: 0;
+  top: -11px;
+  // border-radius: 20px;
+  // background: getColor('pin-color');
+  background-color: transparent;
+  &:focus,
+  &:hover {
+    background-color: getColor('pin-color');
+  }
+  @media screen and (max-width: 767px) {
+    top: -40px;
+  }
 }
 
 .logOutName {
   color: getColor('white-color');
+  position: absolute;
+  right: 70;
+  top: 5px;
 }
+
 .signUp__btnClose,
 .signIn__btnClose {
   display: flex;
