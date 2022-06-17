@@ -1,17 +1,7 @@
 import refs from "./refs";
-// import Firebase from './firebase'
 import {hideFormRegister} from './handleLogin'
-// refs.registerFormSignUp.addEventListener('submit', handleRegister);
-
-
-
 import { createAccount, hideOverlay } from "./firebase";
 
-function handleRegister() {
-   createAccount();
-    resetForm();
-    hideFormLoginRegister()
-}
     
 export function resetForm() {
    refs.txtEmailLogin.value = '';
@@ -38,17 +28,13 @@ export function hideFormLoginRegister() {
 
 export function hideFormLogin() {
     refs.signInContainer.style.display = 'none';
-   // refs.signInContainer.classList.add('is-hidden');
-}
+   }
 
 
 function showFormRegister() {
-   refs.signUpContainer.style.display = 'flex';
-   // refs.signUpContainer.classList.remove('is-hidden');
+   refs.signUpContainer.style.display = 'flex';  
 }
 
-// showFormLoginRegister()
-// hideFormLoginRegister()
 
 function onBtnSignUp() {
     showFormLoginRegister();

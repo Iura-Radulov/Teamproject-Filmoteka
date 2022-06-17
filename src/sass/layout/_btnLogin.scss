@@ -91,9 +91,11 @@
   position: absolute;
   right: 70;
   top: 5px;
+  
   @media screen and (max-width: 767px) {
     top: -25px;
   }
+
 }
 
 .signUp__btnClose,
