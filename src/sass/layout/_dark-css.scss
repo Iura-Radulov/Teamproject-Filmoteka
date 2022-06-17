@@ -1,0 +1,21 @@
+.dark_btn{
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 25px;
+    transition: 1s;
+    
+}
+
+.dark{
+    margin-left: 360px;
+    margin-top: 50px;
+    
+}
+
+.dark_btn:hover{
+    transform: scale(1.2);
+    
+}
