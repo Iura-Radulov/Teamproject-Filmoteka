@@ -1,21 +1,36 @@
-.dark_btn{
+.dark_btn {
     width: 20px;
     height: 20px;
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 25px;
+    font-size: 15px;
     transition: 1s;
-    
+
+    @media screen and (min-width: 768px) {
+        width: 25px;
+        height: 25px;
+    }
+
+    @media screen and (min-width:1024px) {
+        width: 30px;
+        height: 30px;
+    }
 }
 
-.dark{
-    margin-left: 360px;
-    margin-top: 50px;
-    
+.dark {
+    margin-left: 10px;
+    margin-top: 60px;
+
+    @media screen and (min-width: 768px) {
+        margin-left: 20px;
+    }
+
+    @media screen and (min-width:1200px) {
+        margin-left: 110px;
+    }
 }
 
-.dark_btn:hover{
+.dark_btn:hover {
     transform: scale(1.2);
-    
 }
