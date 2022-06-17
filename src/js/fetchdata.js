@@ -10,6 +10,7 @@ import {
   addBtnEventListeners,
   createButtonRefs,
 } from './moviesLibraryApi';
+import { renderPagination } from './pagination';
 
 const newApiSearchFilm = new NewApiSearchFilms();
 const newApiPopularFilms = new NewApiPopularFilms();
@@ -40,6 +41,7 @@ async function startPopularFilms() {
   libraryButtons.classList.add('is-hidden');
   try {
     const dates = await newApiPopularFilms.fetchFilmsCards();
+    renderPagination(dates[0].total_pages);
     console.log(dates);
     const markup = createFilmsList(dates);
     filmsContainer.insertAdjacentHTML('afterbegin', markup);
