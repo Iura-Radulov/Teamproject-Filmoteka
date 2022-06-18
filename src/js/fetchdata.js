@@ -108,6 +108,7 @@ function onSearchFilm(event) {
         );
       } else {
         clearFilmsContainer();
+        loadData();
         const markup = createFilmsList(dates);
         filmsContainer.insertAdjacentHTML('afterbegin', markup);
       }

@@ -44,14 +44,10 @@ refs.ul.addEventListener('click', changePage);
 async function changePage(e) {
     const page = e.target.dataset.page;
     
-   
-    
- 
-
-
    refs.filmsContainer.innerHTML = '';
   newApiPopularFilms.setPage( Number(page));
   try {
+    
       const dates = await newApiPopularFilms.fetchFilmsCards();
       const totalPage = dates[0].total_pages;
      
@@ -61,7 +57,7 @@ async function changePage(e) {
   } catch (error) {
     console.log(error.message);
   }
-
+loadData();
  
 
 };
