@@ -49,7 +49,6 @@ async function onLibraryBtnClick() {
       clickToClose: true,
       pauseOnHover: false,
     });
-    showLibraryBtn.disabled = true;
     return;
   }
 
