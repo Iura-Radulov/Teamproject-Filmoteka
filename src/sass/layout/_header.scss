@@ -311,3 +311,9 @@
 .is-hidden {
   display: none;
 }
+
+.button_library.active {
+  background-color: getColor('btn-color');
+  border-color: getColor('btn-color');
+  box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+}

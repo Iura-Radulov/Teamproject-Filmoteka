@@ -53,8 +53,6 @@
 }
 
 .films__empty-list-thumb {
-  width: 300px;
-  border-radius: 5px;
   text-align: center; 
   margin-left: auto;
   margin-right: auto;
@@ -62,5 +60,19 @@
 }
 .films__empty-list-message {
   color: getColor('another-text-color');
-  font-size: 30px;
+  font-size: 26px;
+}
+.films__empty-list-message-icon {
+  margin-top: 15px;
+
+  background-image: url(../images/svg/sad.svg);
+  opacity: 0;
+
+  animation: appearing 2000ms linear 0ms 1 forwards;
+}
+
+@keyframes appearing {
+  0% {opacity: 0;}
+  50% {opacity: 50%;}
+  100% {opacity: 100%;}
 }
