@@ -1,4 +1,5 @@
 import createFilmsList from "./createFilmsList";
+import { openLoading , closeLoading} from "./loader";
 import NewApiPopularFilms from "./NewApiPopularFilms";
 
 
@@ -76,7 +77,7 @@ refs.ul.addEventListener('click', changeActivePage);
 
 
 async function changePage(page) {
-    
+    openLoading();
    refs.filmsContainer.innerHTML = '';
   newApiPopularFilms.setPage( page);
   try {
@@ -89,7 +90,7 @@ async function changePage(page) {
   } catch (error) {
     console.log(error.message);
   }
-
+closeLoading();
 };
 
 function changeActivePage(e) {

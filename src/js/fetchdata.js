@@ -9,14 +9,13 @@ import './language';
 import { changeLanguage } from './language';
 import { chooseLanguageApi } from './language';
 import { genreLang } from './genre';
-
+import { openLoading , closeLoading} from './loader';
 import {
   addBtnDataAttributes,
   addBtnEventListeners,
   createButtonRefs,
 } from './moviesLibraryApi';
 import { renderPagination } from './pagination';
-import { openLoading } from './loader';
 
 const newApiSearchFilm = new NewApiSearchFilms();
 const newApiPopularFilms = new NewApiPopularFilms();
@@ -47,7 +46,7 @@ export async function startPopularFilms() {
   showLibraryBtn.classList.remove('current-link');
   formEl.classList.remove('is-hidden');
   libraryButtons.classList.add('is-hidden');
-  openLoading();
+
   const currentLanguage = chooseLanguageApi();
   try {
     const dates = await newApiPopularFilms.fetchFilmsCards(currentLanguage);
@@ -55,12 +54,14 @@ export async function startPopularFilms() {
     console.log(dates);
     const markup = createFilmsList(dates);
     filmsContainer.insertAdjacentHTML('afterbegin', markup);
+    
   } catch (error) {
     console.log(error.message);
   }
 }
 
 function onFilmClick(event) {
+  openLoading();
   modalFilmInfoEl.innerHTML = '';
   console.log(event.target);
   console.log(event.currentTarget);
@@ -91,6 +92,7 @@ function onFilmClick(event) {
       })
       .catch(error => console.log(error));
   }
+  closeLoading();
 }
 
 function onSearchFilm(event) {
@@ -101,8 +103,15 @@ function onSearchFilm(event) {
     event.currentTarget.elements.searchQuery.value.trim();
   console.log(newApiSearchFilm.searchQuery);
   if (newApiSearchFilm.query === '') {
-    return Notiflix.Notify.info('Please enter search data.');
+    return Notiflix.Notify.info('Please enter search data.',{
+      timeout: 1000,
+      opacity: 0.9,
+      width: '150px',
+      clickToClose: true,
+      pauseOnHover: false,
+    });
   }
+  openLoading();
   newApiSearchFilm.resetPage();
   const currentLanguage = chooseLanguageApi();
 
@@ -117,7 +126,13 @@ function onSearchFilm(event) {
 
       if (filmArray.length === 0) {
         return Notiflix.Notify.info(
-          'Sorry, there are no movies matching your search query. Please try again.'
+          'Sorry, there are no movies matching your search query. Please try again.',{
+            timeout: 1000,
+            opacity: 0.9,
+            width: '150px',
+            clickToClose: true,
+            pauseOnHover: false,
+          }
         );
       } else {
         clearFilmsContainer();
@@ -126,6 +141,7 @@ function onSearchFilm(event) {
       }
     })
     .catch(error => console.log(error));
+    closeLoading();
 }
 
 function onBackdropClick() {
