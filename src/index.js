@@ -1,3 +1,6 @@
+import loadData from './js/loader';
+loadData();
+import './js/loader';
 import './js/fetchdata';
 import './js/firebase/firebase';
 import './js/pagination';

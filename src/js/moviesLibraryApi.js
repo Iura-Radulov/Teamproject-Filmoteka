@@ -43,7 +43,13 @@ function onHomeBtnClick() {
 async function onLibraryBtnClick() {
   const userId = getUserId();
   if (!userId) {
-    Notify.warning('You should log in first');
+    Notify.warning('You should sign in first!', {
+      timeout: 1000,
+      opacity: 0.9,
+      width: '150px',
+      clickToClose: true,
+      pauseOnHover: false,
+    });
     return;
   }
 
@@ -88,7 +94,7 @@ function onAddButtonClick(event) {
   const userId = getUserId();
 
   if (!userId) {
-    Notify.warning('You should log in first');
+    Notify.warning('You should sign in first');
     return;
   }
 
