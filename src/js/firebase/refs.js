@@ -27,7 +27,7 @@ const refs = {
    txtEmailLogin: document.getElementById('txtEmailLogin'),
    txtPasswordLogin: document.getElementById('txtPasswordLogin'),
 
-   txtNameRegister: document.getElementById('txtNameRegister'),
+//    txtNameRegister: document.getElementById('txtNameRegister'),
    txtEmailRegister: document.getElementById('txtEmailRegister'),
    txtPasswordRegister: document.getElementById('txtPasswordRegister'),
 

@@ -16,7 +16,7 @@ export default function createFilmCard(movie) {
          <img src=${
            poster_path !== null
              ? `https://image.tmdb.org/t/p/w500${poster_path}`
-             : `https://www.online-tech-tips.com/wp-content/uploads/2022/03/image-41.jpeg`
+             : `https://mysteriouswritings.com/wp-content/uploads/2017/02/movie.jpg`
          } class="about_film-img" alt="" loading="lazy" data-id=${id} />
         <div class="about_film-info">
           <h1 class="about_film-name">${

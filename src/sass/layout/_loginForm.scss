@@ -19,6 +19,7 @@
 }
 
 .register-form__tite {
+  margin-bottom: 50px;
   font-size: 28px;
   font-weight: bold;
 }
@@ -40,10 +41,11 @@
 }
 
 .register-form__btn {
+  margin-top: 30px;
   border-radius: 20px;
   border: 1px solid getColor('btn-color');
   background-color: getColor('btn-color');
-  color: #ffffff;
+  color: getColor('white-color');
 
   padding: 12px 45px;
   letter-spacing: 1px;
@@ -55,18 +57,20 @@
   transform: scale(0.95);
 }
 
-.register-form__btn:focus {
+.register-form__btn:focus,
+.register-form__btn:hover {
   outline: none;
+  opacity: 0.8;
 }
 
 .ghost {
   background-color: transparent;
-  border-color: #ffffff;
+  border-color: getColor('white-color');
 }
 
 .register-form__sign-in,
 .register-form__sign-up {
-  background-color: #ffffff;
+  background-color: getColor('white-color');
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,7 +91,7 @@
 }
 
 .register-form__box {
-  background-color: #fff;
+  background-color: getColor('white-color');
   border-radius: 10px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   position: relative;
@@ -111,9 +115,9 @@
   display: none;
 }
 
-.register-form__box.right-panel-active .sign-in-container {
-  transform: translateX(100%);
-}
+// .register-form__box.right-panel-active .sign-in-container {
+//   transform: translateX(100%);
+// }
 
 .sign-up-container {
   left: 0;
@@ -122,25 +126,10 @@
   display: none;
 }
 
-.register-form__box.right-panel-active .sign-up-container {
-  transform: translateX(100%);
-  opacity: 1;
-  z-index: 5;
-  animation: show 0.6s;
-}
-
-@keyframes show {
-  0%,
-  49.99% {
-    opacity: 0;
-    z-index: 1;
-  }
-
-  50%,
-  100% {
-    opacity: 1;
-    z-index: 5;
-  }
+.sign-in-login {
+  margin: 10px 0;
+  font-size: 16px;
+  color: getColor('pin-color');
 }
 
 // error box
@@ -155,9 +144,9 @@
   -webkit-appearance: none;
   display: block;
   background: #fafafa;
-  color: #ff0000;
+  color: getColor('red-color');
   width: 100%;
   border: none;
   border-radius: 0;
-  border-bottom: 1px solid #ff0000;
+  border-bottom: 1px solid getColor('red-color');
 }

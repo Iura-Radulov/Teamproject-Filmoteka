@@ -1,26 +1,8 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import refs from "./refs";
 import { hideOverlay, loginEmailPassword, monitorAuthState } from './firebase';
 import {resetForm, hideFormLoginRegister, showFormLoginRegister, hideFormLogin} from './handleRegister';
-// refs.registerFormSignIn.addEventListener('submit', handleLogin);
 
 
-
- function handleLogin() {
-   
-   loginEmailPassword();
-   // if (!error) {
-      resetForm();
-      hideFormLoginRegister();
-   // }
-   // else {
-   //    showLoginError(error)
-   //    }
-        
-   
-   
-}
-    
 export function hideLoginError() {
    refs.divLoginError.style.display = 'none';
    refs.lblLoginErrorMessage.innerHTML = '';
@@ -52,7 +34,6 @@ export function onBtnSignIn() {
     showFormLogin();
 }
 
-// onBtnSignIn()
 refs.signInBtn.addEventListener('click', onBtnSignIn);
 refs.signInLogin.addEventListener('click', onBtnSignIn);
 refs.signInButtonClose.addEventListener('click', () => {

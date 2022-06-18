@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, child, get } from 'firebase/database';
+import { getDatabase, ref, set, child, get, remove } from 'firebase/database';
 import { app } from './firebase/firebase';
 import { getAuth } from 'firebase/auth';
 import { Notify } from 'notiflix';
@@ -14,6 +14,7 @@ const search = document.querySelector('.search-form');
 const container = document.querySelector('.films__container');
 const libraryButtons = document.querySelector('.buttons');
 const header = document.querySelector('.header');
+const emptyListMessage = document.querySelector('.films__empty-list-thumb');
 
 const WATCHED_MOVIES = 'watchedMovies/';
 const MOVIES_QUEUE = 'queueOfMovies/';
@@ -32,6 +33,7 @@ function getUserId() {
 }
 
 function onHomeBtnClick() {
+  hideEmptyListMessage();
   libraryButtons.classList.add(IS_HIDDEN);
   search.classList.remove(IS_HIDDEN);
   header.classList.remove(HEADER_BGR_LIBRARY);
@@ -58,18 +60,32 @@ async function onLibraryBtnClick() {
   header.classList.remove(HEADER_BGR);
   header.classList.add(HEADER_BGR_LIBRARY);
 
+  makeBtnActive(showWatchedBtn);
+
   const response = await fetchMoviesFromDatabase(WATCHED_MOVIES);
   showLibrary(response);
 }
 
 async function onWatchedBtnClick() {
+  makeBtnActive(showWatchedBtn);
+  hideEmptyListMessage();
+
   const response = await fetchMoviesFromDatabase(WATCHED_MOVIES);
+  if (!response) {
+    return;
+  }
   const arrayOfJsons = Object.values(response);
   renderWatched(arrayOfJsons);
 }
 
 async function onQueueBtnClick() {
+  makeBtnActive(showQueueBtn);
+  hideEmptyListMessage();
+
   const response = await fetchMoviesFromDatabase(MOVIES_QUEUE);
+  if (!response) {
+    return;
+  }
   const arrayOfJsons = Object.values(response);
   renderQueue(arrayOfJsons);
 }
@@ -97,14 +113,33 @@ function onAddButtonClick(event) {
       removeBtnDataAttributes(event.target);
       break;
 
+    case 'remove-from-watched':
+      remove(ref(database, `users/${userId}/watchedMovies/${id}`));
+
+      removeBtnDataAttributes(event.target);
+      break;
+
+    case 'remove-from-queue':
+      remove(ref(database, `users/${userId}/queueOfMovies/${id}`));
+
+      removeBtnDataAttributes(event.target);
+      break;
+
     default:
       break;
   }
 }
 
+function databaseContainsMovie(category, movieId, userId) {
+  return get(ref(database, `users/${userId}/${category}${movieId}`)).then(
+    snapshot => snapshot.exists()
+  );
+}
+
 export function createButtonRefs() {
   const addToWatchedBtn = document.getElementById('add-to-watched');
   const addToQueueBtn = document.getElementById('add-to-queue');
+
   return { addToWatchedBtn, addToQueueBtn };
 }
 
@@ -114,20 +149,47 @@ export function addBtnEventListeners(buttons) {
   addToQueueBtn.addEventListener('click', onAddButtonClick);
 }
 
-export function addBtnDataAttributes(movie, buttons) {
+export async function addBtnDataAttributes(movie, buttons) {
   const { addToWatchedBtn, addToQueueBtn } = buttons;
+  const userId = getUserId();
+
   addToWatchedBtn.setAttribute('data-movie', JSON.stringify(movie));
   addToQueueBtn.setAttribute('data-movie', JSON.stringify(movie));
   addToWatchedBtn.setAttribute('data-id', movie.id);
   addToQueueBtn.setAttribute('data-id', movie.id);
+
+  const isInWatchlist = await databaseContainsMovie(
+    WATCHED_MOVIES,
+    movie.id,
+    userId
+  );
+
+  if (isInWatchlist) {
+    changeWatchedBtn(addToWatchedBtn);
+  }
+  const isInQueue = await databaseContainsMovie(MOVIES_QUEUE, movie.id, userId);
+  if (isInQueue) {
+    changeQueueBtn(addToQueueBtn);
+  }
 }
 
 function removeBtnDataAttributes(button) {
   button.removeAttribute('data-movie');
-  button.removeAttribute('data-movie');
+  button.removeAttribute('data-id');
+}
+function changeWatchedBtn(addToWatchedBtn) {
+  addToWatchedBtn.id = 'remove-from-watched';
+  addToWatchedBtn.textContent = 'Delete from watched';
+}
+function changeQueueBtn(addToQueueBtn) {
+  addToQueueBtn.id = 'remove-from-queue';
+  addToQueueBtn.textContent = 'Delete from queue';
 }
 
 function showLibrary(response) {
+  if (!response) {
+    return;
+  }
   const arrayOfJsons = Object.values(response);
   renderWatched(arrayOfJsons);
 }
@@ -140,7 +202,9 @@ function fetchMoviesFromDatabase(category) {
       const response = snapshot.val();
       return response;
     } else {
-      Notify.failure('This movies list is empty');
+      container.innerHTML = '';
+      showEmptyListMessage();
+      return;
     }
   });
 }
@@ -226,4 +290,14 @@ function renderQueue(arrayOfJsons) {
     );
 
   container.insertAdjacentHTML('beforeend', markup);
+}
+
+function makeBtnActive(button) {
+  button.focus();
+}
+function showEmptyListMessage() {
+  emptyListMessage.classList.remove(IS_HIDDEN);
+}
+function hideEmptyListMessage() {
+  emptyListMessage.classList.add(IS_HIDDEN);
 }
