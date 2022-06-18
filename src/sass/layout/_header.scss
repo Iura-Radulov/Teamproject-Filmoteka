@@ -312,6 +312,12 @@
   display: none;
 }
 
+
+.lang{
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .button_library.active {
   background-color: getColor('btn-color');
   border-color: getColor('btn-color');

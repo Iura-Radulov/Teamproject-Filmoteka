@@ -1,3 +1,4 @@
+import genreLang from './genre';
 export default function createFilmsList(dates) {
   const filmArray = dates[0].results;
   const genreArray = dates[1].genres;
@@ -26,15 +27,7 @@ export default function createFilmsList(dates) {
           </p>
 
           <p class="film__info-desc">
-            <b>${genreArray
-              .reduce((listGenre, genre) => {
-                if (genre_ids.includes(genre.id)) {
-                  listGenre.push(` ${genre.name}`);
-                }
-                return listGenre;
-              }, [])
-              .slice(0, 2)
-              .concat([' Other'])} </b >
+            <b>${genreLang(genreArray, genre_ids)} </b >
 
             <b>|</b>
             <b>${release_date ? release_date.slice(0, 4) : '-'}</b>

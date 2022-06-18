@@ -3,15 +3,15 @@
         <div class="register-form__container sign-up-container">
             <form class="register-form__sign-up" action="#">
                 <button type="button" class="signUp__btnClose">&times</button>
-                <h1 class="register-form__tite">Create Account</h1>                
-                <span class="register-form__text">or use your email for registration</span>
-                <a href="#" class="sign-in-login">Login</a>
+                <h1 class="register-form__tite lang-create">Create Account</h1>                
+                <span class="register-form__text lang-text">or use your email for registration</span>
+                <a href="#" class="sign-in-login lang-login">Login</a>
                 <input class="register-form__input" id="txtEmailRegister" type="email" name="email"
                     placeholder="Email" />
                 <input class="register-form__input" id="txtPasswordRegister" type="password" name="password"
                     placeholder="Password" />
                 
-                <button id="btnSignUpBtn" class="register-form__btn" type="submit">
+                <button id="btnSignUpBtn" class="register-form__btn lang-up1" type="submit">
                     Sign Up
                 </button>
             </form>
@@ -19,17 +19,17 @@
         <div class="register-form__container sign-in-container">
             <form class="register-form__sign-in" autocomplete="on">
                 <button type="button" class="signIn__btnClose">&times</button>
-                <h1 class="register-form__tite">Sign in</h1>              
+                <h1 class="register-form__tite lang-in1">Sign in</h1>              
                 
                 <input class="register-form__input" id="txtEmailLogin" type="email" name="email" placeholder="Email" />
                 <input class="register-form__input" id="txtPasswordLogin" type="password" name="password"
                     placeholder="Password" />              
                 <div id="divLoginError" class="group">
-                    <div id="lblLoginErrorMessage" class="errorlabel">
+                    <div id="lblLoginErrorMessage" class="errorlabel lang-error">
                         Error message
                     </div>
                 </div>
-                <button id="btnLoginBtn" class="register-form__btn" type="submit">
+                <button id="btnLoginBtn" class="register-form__btn lang-in2" type="submit">
                     Sign In
                 </button>
             </form>
@@ -43,11 +43,11 @@
         <div class="overlay">
              <div class="overlay-panel">
                 <button type="button" class="overlayBtnClose">&times</button>
-                <h1 class="register-form__tite">Hello!</h1>
-                <p class="register-form__pre-tite">
+                <h1 class="register-form__tite lang-hello">Hello!</h1>
+                <p class="register-form__pre-tite lang-ask">
                     You want to change your email and password ?
                 </p>
-                <button class="overlayBtn ghost">
+                <button class="overlayBtn ghost lang-in3">
                     Sign In
                 </button>
             </div>
