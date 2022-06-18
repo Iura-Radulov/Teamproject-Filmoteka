@@ -12,7 +12,7 @@ import {
 import refs from "./refs";
 import { showLoginError, showFormLogin, hideLoginError, onBtnSignIn } from "./handleLogin";
 import { hideFormLoginRegister, resetForm, showFormLoginRegister } from "./handleRegister";
-
+import { startPopularFilms } from "../fetchdata";
 
 
 
@@ -143,6 +143,7 @@ function showOverlay() {
 
 export function hideOverlay() {
    refs.overlayBackdrop.style.display = 'none';
+   startPopularFilms();
 }
 
 refs.overlayBtnClose.addEventListener('click', hideOverlay);

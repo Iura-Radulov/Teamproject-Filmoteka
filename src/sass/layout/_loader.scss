@@ -2,9 +2,13 @@
 //   height: 100%;
 // }
 
-// body {
-//   background-image: radial-gradient(circle farthest-corner at center, #3C4B57 0%, #1C262B 100%);
-// }
+body.loader {
+  background-image: radial-gradient(
+    circle farthest-corner at center,
+    #3c4b57 0%,
+    #1c262b 100%
+  );
+}
 
 .loader {
   top: calc(50% - 32px);

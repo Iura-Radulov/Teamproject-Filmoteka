@@ -4,11 +4,15 @@ bodyEl.insertAdjacentHTML('afterbegin',
 '<div class = "mask"><div class = "loader"><div class = "inner one"></div><div class = "inner two"></div><div class = "inner three"></div></div></div>'
 
 );*/
-export default function loadData () {
 
-window.onload = function loading(){
 const maskEl = document.querySelector(".mask");
 const spinner = document.querySelectorAll(".inner");
+const loader = document.querySelector('.loader');
+
+export function loadData () {
+
+window.onload = function loading(){
+
     
     setInterval(() => {
     maskEl.classList.add('hide'); 
@@ -19,3 +23,13 @@ const spinner = document.querySelectorAll(".inner");
 }
 
 }
+
+export function openLoading() {
+    maskEl.classList.remove('hide');
+    loader.classList.remove('hide');
+    loadData();
+}
+
+
+
+openLoading()

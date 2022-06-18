@@ -4,6 +4,7 @@ import createFilmsList from './createFilmsList';
 import createFilmCard from './createFilmCard';
 import fetchFilmModal from './fetchFilmModal';
 import Notiflix from 'notiflix';
+import { openLoading } from './loader';
 
 import {
   addBtnDataAttributes,
@@ -11,6 +12,7 @@ import {
   createButtonRefs,
 } from './moviesLibraryApi';
 import { renderPagination } from './pagination';
+import { openLoading } from './loader';
 
 const newApiSearchFilm = new NewApiSearchFilms();
 const newApiPopularFilms = new NewApiPopularFilms();
@@ -32,13 +34,14 @@ logoBtn.addEventListener('click', startPopularFilms);
 filmsContainer.addEventListener('click', onFilmClick);
 formEl.addEventListener('submit', onSearchFilm);
 
-async function startPopularFilms() {
+export async function startPopularFilms() {
   clearFilmsContainer();
   newApiPopularFilms.resetPage();
   showHomeBtn.classList.add('current-link');
   showLibraryBtn.classList.remove('current-link');
   formEl.classList.remove('is-hidden');
   libraryButtons.classList.add('is-hidden');
+  openLoading();
   try {
     const dates = await newApiPopularFilms.fetchFilmsCards();
     renderPagination(dates[0].total_pages);
