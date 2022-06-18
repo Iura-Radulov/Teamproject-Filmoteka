@@ -1,3 +1,4 @@
+import loadData from "./loader";
 import createFilmsList from "./createFilmsList";
 import NewApiPopularFilms from "./NewApiPopularFilms";
 

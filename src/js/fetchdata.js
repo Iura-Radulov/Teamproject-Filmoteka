@@ -1,3 +1,4 @@
+import loadData from './loader';
 import NewApiSearchFilms from './NewApiSearchFilms';
 import NewApiPopularFilms from './NewApiPopularFilms';
 import createFilmsList from './createFilmsList';
@@ -81,6 +82,7 @@ function onFilmClick(event) {
 
 function onSearchFilm(event) {
   event.preventDefault();
+  loadData();
   console.log(event.currentTarget);
 
   newApiSearchFilm.query =

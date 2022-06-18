@@ -1,3 +1,5 @@
+import loadData from "./loader";
+
 export default function createFilmCard(movie) {
   const {
     vote_average,

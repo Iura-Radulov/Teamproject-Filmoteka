@@ -1,3 +1,4 @@
+import loadData from "./loader";
 export default class NewApiSearchFilms {
   constructor() {
     this.searchQuery = '';
@@ -12,14 +13,15 @@ export default class NewApiSearchFilms {
     const dateIds = [festFetch, secondFetch];
 
     const arrayOfPromises = dateIds.map(async userId => {
+      
       const response = await fetch(`${userId}`);
       return response.json();
     });
-
     const dates = await Promise.all(arrayOfPromises);
     return dates;
     
   }
+
   get query() {
     return this.searchQuery;
   }

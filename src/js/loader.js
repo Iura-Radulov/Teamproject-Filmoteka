@@ -5,10 +5,15 @@ bodyEl.insertAdjacentHTML('afterbegin',
 
 );*/
 export default function loadData () {
-
-window.onload = function loading(){
 const maskEl = document.querySelector(".mask");
 const spinner = document.querySelectorAll(".inner");
+maskEl.classList.remove('hide');
+spinner.forEach(spin => {
+    spin.classList.remove('hide');
+});
+
+window.onload = function loading(){
+
     
     setInterval(() => {
     maskEl.classList.add('hide'); 
