@@ -3,10 +3,7 @@ import {
    getAuth,
    onAuthStateChanged,
    createUserWithEmailAndPassword,
-   signInWithEmailAndPassword,
-   GoogleAuthProvider,
-   connectAuthEmulator,
-   AuthErrorCodes,
+   signInWithEmailAndPassword, 
    signOut,
 } from 'firebase/auth';
 import refs from "./refs";
@@ -34,7 +31,7 @@ const auth = getAuth(app);
 
 // Create new account using email/password
 
-export async function createAccount(displayName, email, password) {  
+export async function createAccount(email, password) {  
 
    try {
        await createUserWithEmailAndPassword(auth, email, password);
@@ -44,9 +41,8 @@ export async function createAccount(displayName, email, password) {
                 id: user.uid;
                 token: user.accessToken;               
        }
-       await updateProfile(auth.currentUser, {
-         displayName,
-      });
+      resetForm();
+      hideFormLoginRegister();
   
    } catch (error) {
       console.log(`There was an error: ${error}`);
@@ -118,10 +114,9 @@ monitorAuthState()
 
 refs.registerFormSignUp.addEventListener('submit', e => {
    e.preventDefault();
-   const displayName = e.target.name.value;
    const email = e.target.email.value.trim();
    const password = e.target.password.value.trim();
-   createAccount(displayName, email, password);
+   createAccount(email, password);
 });
 
 
