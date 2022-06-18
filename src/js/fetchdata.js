@@ -5,6 +5,10 @@ import createFilmCard from './createFilmCard';
 import fetchFilmModal from './fetchFilmModal';
 import Notiflix from 'notiflix';
 import { openLoading } from './loader';
+import './language';
+import { changeLanguage } from './language';
+import { chooseLanguageApi } from './language';
+import { genreLang } from './genre';
 
 import {
   addBtnDataAttributes,
@@ -27,6 +31,8 @@ const showLibraryBtn = document.getElementById('library');
 const logoBtn = document.querySelector('.logo');
 const libraryButtons = document.querySelector('.buttons');
 console.log(showHomeBtn);
+const array = document.querySelectorAll('.lang-in');
+console.log(array);
 
 document.addEventListener('DOMContentLoaded', startPopularFilms);
 showHomeBtn.addEventListener('click', startPopularFilms);
@@ -42,8 +48,9 @@ export async function startPopularFilms() {
   formEl.classList.remove('is-hidden');
   libraryButtons.classList.add('is-hidden');
   openLoading();
+  const currentLanguage = chooseLanguageApi();
   try {
-    const dates = await newApiPopularFilms.fetchFilmsCards();
+    const dates = await newApiPopularFilms.fetchFilmsCards(currentLanguage);
     renderPagination(dates[0].total_pages);
     console.log(dates);
     const markup = createFilmsList(dates);
@@ -61,7 +68,8 @@ function onFilmClick(event) {
     return;
   } else {
     console.log(event.target.dataset.id);
-    fetchFilmModal(event.target.dataset.id)
+    const currentLanguage = chooseLanguageApi();
+    fetchFilmModal(event.target.dataset.id, currentLanguage)
       .then(movie => {
         console.log(movie);
         if (!movie) {
@@ -74,6 +82,7 @@ function onFilmClick(event) {
           backdropEl.addEventListener('click', onBackdropClick);
           document.addEventListener('keydown', onEscKeyPress);
           modalFilmInfoEl.insertAdjacentHTML('beforeend', markup);
+          changeLanguage();
 
           const buttons = createButtonRefs();
           addBtnEventListeners(buttons);
@@ -95,9 +104,10 @@ function onSearchFilm(event) {
     return Notiflix.Notify.info('Please enter search data.');
   }
   newApiSearchFilm.resetPage();
+  const currentLanguage = chooseLanguageApi();
 
   newApiSearchFilm
-    .searchFilm()
+    .searchFilm(currentLanguage)
     .then(dates => {
       console.log(dates);
       const filmArray = dates[0].results;

@@ -8,12 +8,12 @@
             </a>
             <ul class="navigation__list">
                 <li class="navigation__list-item">
-                    <button class="navigation-link current-link" aria-label="main page switch" type="button" id="home">
+                    <button class="navigation-link current-link lang-home" aria-label="main page switch" type="button" id="home">
                         Home
                     </button>
                 </li>
                 <li class="navigation__list-link">
-                    <button class="navigation-link" aria-label="library page switch" type="button" id="library">
+                    <button class="navigation-link lang-library" aria-label="library page switch" type="button" id="library">
                         My library
                     </button>
                 </li>
@@ -33,25 +33,30 @@
       </form> 
         <!-- кнопки регистрації -->
         <div class="login-container">
-    <button class="sign-up-btn" type="submit">Sign up</button>
-    <button class="sign-in-btn" type="submit">Sign in</button>
+    <button class="sign-up-btn lang-up" type="submit">Sign up</button>
+    <button class="sign-in-btn lang-in" type="submit">Sign in</button>
     </div>
     <div class="boxLoginLogout">
         <span class="logOutName" id="loginUser">none</span>
-        <button id="btnLogout" class="btnLoginLogout" type="button">Log out</button>
+        <button id="btnLogout" class="btnLoginLogout lang-out" type="button">Log out</button>
     </div>
     </div>
 
     <!-- кнопки My library -->
     <div class="buttons is-hidden">
-        <button class="button_library" id="watched" type="button">Watched</button>
-        <button class="button_library" type="button" id="queue">Queue</button>
+        <button class="button_library lang-watch" id="watched" type="button">Watched</button>
+        <button class="button_library lang-queue" type="button" id="queue">Queue</button>
     </div>
     </div>  
     
     <div class="dark">
         <button class="dark_btn">🌕</button>
     </div>
+
+    <select class="lang">
+        <option value='en'>EN</option>
+        <option value='ua'>UA</option>
+    </select>
     
 </header>
 
