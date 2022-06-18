@@ -7,7 +7,7 @@
   color: getColor('white-color');
   background-color: transparent;
   text-transform: uppercase;
-  border: 3px solid getColor('pin-color');
+  border: 1px solid getColor('pin-color');
   border-radius: 7px;
   width: 65px;
   height: 30px;
@@ -34,12 +34,12 @@
   color: getColor('white-color');
   background-color: transparent;
   text-transform: uppercase;
-  border: 3px solid getColor('pin-color');
+  border: 1px solid getColor('pin-color');
   border-radius: 7px;
   width: 65px;
   height: 30px;
   position: absolute;
-  right: 0;
+  right: 1px;
   top: -11px;
   &:focus,
   &:hover {
@@ -70,11 +70,12 @@
 .btnLoginLogout {
   // margin: 0 20px;
   // padding: 10px;
+  margin-right: 1px;
   margin-left: 5px;
   color: getColor('white-color');
 
   text-transform: uppercase;
-  border: 3px solid getColor('pin-color');
+  border: 1px solid getColor('pin-color');
   border-radius: 7px;
   width: 65px;
   height: 30px;
@@ -88,7 +89,8 @@
 }
 
 .logOutName {
-  padding-right: 20px;
+  padding-right: 10px;
+  padding-top: 20px;
   color: getColor('white-color');
 }
 
