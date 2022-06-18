@@ -15,6 +15,7 @@ const container = document.querySelector('.films__container');
 const libraryButtons = document.querySelector('.buttons');
 const header = document.querySelector('.header');
 const emptyListMessage = document.querySelector('.films__empty-list-thumb');
+const mainPagination = document.querySelector('.pagination');
 
 const WATCHED_MOVIES = 'watchedMovies/';
 const MOVIES_QUEUE = 'queueOfMovies/';
@@ -22,6 +23,7 @@ const IS_HIDDEN = 'is-hidden';
 const CURRENT_LINK = 'current-link';
 const HEADER_BGR = 'header__background';
 const HEADER_BGR_LIBRARY = 'header__background-library';
+const ACTIVE = 'active';
 
 showWatchedBtn.addEventListener('click', onWatchedBtnClick);
 showQueueBtn.addEventListener('click', onQueueBtnClick);
@@ -34,10 +36,7 @@ function getUserId() {
 
 function onHomeBtnClick() {
   hideEmptyListMessage();
-  libraryButtons.classList.add(IS_HIDDEN);
-  search.classList.remove(IS_HIDDEN);
-  header.classList.remove(HEADER_BGR_LIBRARY);
-  header.classList.add(HEADER_BGR);
+  switchToHomeHeader();
 }
 
 async function onLibraryBtnClick() {
@@ -50,24 +49,20 @@ async function onLibraryBtnClick() {
       clickToClose: true,
       pauseOnHover: false,
     });
+    showLibraryBtn.disabled = true;
     return;
   }
 
-  showLibraryBtn.classList.add(CURRENT_LINK);
-  showHomeBtn.classList.remove(CURRENT_LINK);
-  libraryButtons.classList.remove(IS_HIDDEN);
-  search.classList.add(IS_HIDDEN);
-  header.classList.remove(HEADER_BGR);
-  header.classList.add(HEADER_BGR_LIBRARY);
+  mainPagination.classList.add(IS_HIDDEN);
 
-  makeBtnActive(showWatchedBtn);
+  switchToLibraryHeader();
 
   const response = await fetchMoviesFromDatabase(WATCHED_MOVIES);
   showLibrary(response);
 }
 
 async function onWatchedBtnClick() {
-  makeBtnActive(showWatchedBtn);
+  makeWatchedBtnActive();
   hideEmptyListMessage();
 
   const response = await fetchMoviesFromDatabase(WATCHED_MOVIES);
@@ -79,7 +74,7 @@ async function onWatchedBtnClick() {
 }
 
 async function onQueueBtnClick() {
-  makeBtnActive(showQueueBtn);
+  makeQueueBtnActive();
   hideEmptyListMessage();
 
   const response = await fetchMoviesFromDatabase(MOVIES_QUEUE);
@@ -90,7 +85,7 @@ async function onQueueBtnClick() {
   renderQueue(arrayOfJsons);
 }
 
-function onAddButtonClick(event) {
+async function onAddButtonClick(event) {
   const userId = getUserId();
 
   if (!userId) {
@@ -117,12 +112,16 @@ function onAddButtonClick(event) {
       remove(ref(database, `users/${userId}/watchedMovies/${id}`));
 
       removeBtnDataAttributes(event.target);
+
+      reRenderListOnLibraryChange(WATCHED_MOVIES);
       break;
 
     case 'remove-from-queue':
       remove(ref(database, `users/${userId}/queueOfMovies/${id}`));
 
       removeBtnDataAttributes(event.target);
+
+      reRenderListOnLibraryChange(MOVIES_QUEUE);
       break;
 
     default:
@@ -291,9 +290,35 @@ function renderQueue(arrayOfJsons) {
 
   container.insertAdjacentHTML('beforeend', markup);
 }
+async function reRenderListOnLibraryChange(category) {
+  const response = await fetchMoviesFromDatabase(category);
+  const arrayOfJsons = Object.values(response);
+  renderWatched(arrayOfJsons);
+}
 
-function makeBtnActive(button) {
-  button.focus();
+function makeWatchedBtnActive() {
+  showWatchedBtn.classList.add(ACTIVE);
+  showQueueBtn.classList.remove(ACTIVE);
+}
+function makeQueueBtnActive() {
+  showQueueBtn.classList.add(ACTIVE);
+  showWatchedBtn.classList.remove(ACTIVE);
+}
+function switchToLibraryHeader() {
+  showLibraryBtn.classList.add(CURRENT_LINK);
+  showHomeBtn.classList.remove(CURRENT_LINK);
+  libraryButtons.classList.remove(IS_HIDDEN);
+  search.classList.add(IS_HIDDEN);
+  header.classList.add(HEADER_BGR_LIBRARY);
+  header.classList.remove(HEADER_BGR);
+
+  makeWatchedBtnActive();
+}
+function switchToHomeHeader() {
+  libraryButtons.classList.add(IS_HIDDEN);
+  search.classList.remove(IS_HIDDEN);
+  header.classList.remove(HEADER_BGR_LIBRARY);
+  header.classList.add(HEADER_BGR);
 }
 function showEmptyListMessage() {
   emptyListMessage.classList.remove(IS_HIDDEN);
