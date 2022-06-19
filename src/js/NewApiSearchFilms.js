@@ -28,7 +28,9 @@ export default class NewApiSearchFilms {
   resetPage() {
     this.page = 1;
   }
-
+setPage(page) {
+    this.page = page;
+  }
   incrementPage() {
     this.page += 1;
   }
