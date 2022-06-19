@@ -161,46 +161,58 @@
   color: getColor('white-color');
 }
 
-// .overlay {
-//     position: relative;
-//     overflow: hidden;
-//     width: 200px;
-// }
+.overlay-team {
+    position: relative;
+    overflow: hidden;
+    
+}
 
-// .overlay__wrapper {
-//     position: absolute;
-//     display: inline-block;
-//     content: "";
+.overlay__wrapper {
+    position: absolute;
+    display: inline-block;
+    content: "";
+    text-align: center;
 
-//     width: 100%;
-//     height: 101%;
-//     top: 0;
-//     left: 0;
+    width: 100%;
+    height: 101%;
+    top: 0;
+    left: 0;
 
-//     background: rgba(33, 150, 243, 0.9);
+    background: rgba(255, 106, 0, 0.9);
 
-//     transform: translateY(100%);
-//     transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(100%);
+    transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
 
-//     .card-set__link:hover &,
-//     .card-set__link:focus & {
-//         transform: translateY(0);
-//     }
-// }
+    .card-set__link:hover &,
+    .card-set__link:focus & {
+        transform: translateY(0);
+    }
+}
 
-// .overlay__text {
-//     width: 322px;
-//     height: 168px;
-//     padding-top: 63px;
-//     padding-bottom: 63px;
-//     padding-left: 24px;
-//     padding-right: 24px;
+.overlay__text {
+    width: 322px;
+    height: 168px;
+    // padding-top: 30px;
+    // padding-bottom: 30px;
+    // padding-left: 20px;
+    // padding-right: 20px;
+    padding: 30px;
+    font-size: 25px;
+    font-style: bold;
+    line-height: 1.56;
+    letter-spacing: 0.03em;
+    text-align: left;
 
-//     font-size: 18px;
-//     line-height: 1.56;
-//     letter-spacing: 0.03em;
-//     text-align: left;
+    color: rgb(222, 37, 46);
 
-//     color: white;
-//     z-index: 1;
-// }
+    text-shadow: 1px 1px 2px white, 0 0 1em wheat, 0 0 0.2em whitesmoke;
+
+    z-index: 1;
+}
+
+.team_name{
+    color: rgb(222, 37, 46);
+    text-shadow: 1px 1px 2px white, 0 0 1em wheat, 0 0 0.2em whitesmoke;
+    font-size: 30px;
+    margin: auto;
+}
