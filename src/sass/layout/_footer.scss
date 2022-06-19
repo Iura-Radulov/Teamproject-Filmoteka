@@ -8,7 +8,7 @@
     line-height: 16px;
     align-items: center;
         
-    color: #545454;
+    color: #F7F7F7;
     background-color: #F7F7F7;
     
 
@@ -67,5 +67,6 @@
 
 .footer_link{
     text-decoration: underline;
+    color: getColor('btn-color');
 }
 
