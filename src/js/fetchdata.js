@@ -8,7 +8,7 @@ import './language';
 import { changeLanguage } from './language';
 import { chooseLanguageApi } from './language';
 import { genreLang } from './genre';
-import { openLoading , closeLoading} from './loader';
+import { openLoading, closeLoading } from './loader';
 import {
   addBtnDataAttributes,
   addBtnEventListeners,
@@ -18,6 +18,7 @@ import { renderPagination } from './pagination';
 
 const newApiSearchFilm = new NewApiSearchFilms();
 const newApiPopularFilms = new NewApiPopularFilms();
+const hash = window.location.hash.substring(1);
 
 const filmsContainer = document.querySelector('.films__container');
 const backdropEl = document.querySelector('.backdrop');
@@ -28,9 +29,6 @@ const showHomeBtn = document.getElementById('home');
 const showLibraryBtn = document.getElementById('library');
 const logoBtn = document.querySelector('.logo');
 const libraryButtons = document.querySelector('.buttons');
-console.log(showHomeBtn);
-const array = document.querySelectorAll('.lang-in');
-console.log(array);
 
 document.addEventListener('DOMContentLoaded', startPopularFilms);
 showHomeBtn.addEventListener('click', startPopularFilms);
@@ -45,37 +43,50 @@ export async function startPopularFilms() {
   showLibraryBtn.classList.remove('current-link');
   formEl.classList.remove('is-hidden');
   libraryButtons.classList.add('is-hidden');
-
   const currentLanguage = chooseLanguageApi();
   openLoading();
   try {
     const dates = await newApiPopularFilms.fetchFilmsCards(currentLanguage);
     renderPagination(dates[0].total_pages);
-    console.log(dates);
     const markup = createFilmsList(dates);
     filmsContainer.insertAdjacentHTML('afterbegin', markup);
-    
   } catch (error) {
     console.log(error.message);
   }
-   closeLoading();
+  closeLoading();
 }
 
 function onFilmClick(event) {
   openLoading();
+  event.preventDefault();
   modalFilmInfoEl.innerHTML = '';
-  console.log(event.target);
-  console.log(event.currentTarget);
   if (!event.target.dataset.id) {
     return;
   } else {
-    console.log(event.target.dataset.id);
     const currentLanguage = chooseLanguageApi();
     fetchFilmModal(event.target.dataset.id, currentLanguage)
       .then(movie => {
-        console.log(movie);
         if (!movie) {
-          return alert('The resource you requested could not be found.');
+          if (hash === 'ua') {
+            return Notiflix.Notify.info('Ваш запит не знайдено.', {
+              timeout: 3000,
+              opacity: 0.9,
+              width: '150px',
+              clickToClose: true,
+              pauseOnHover: false,
+            });
+          } else {
+            return Notiflix.Notify.info(
+              'The resource you requested could not be found.',
+              {
+                timeout: 3000,
+                opacity: 0.9,
+                width: '150px',
+                clickToClose: true,
+                pauseOnHover: false,
+              }
+            );
+          }
         } else {
           const markup = createFilmCard(movie);
           backdropEl.classList.remove('is-hidden');
@@ -98,19 +109,27 @@ function onFilmClick(event) {
 
 function onSearchFilm(event) {
   event.preventDefault();
-  console.log(event.currentTarget);
 
   newApiSearchFilm.query =
     event.currentTarget.elements.searchQuery.value.trim();
-  console.log(newApiSearchFilm.searchQuery);
   if (newApiSearchFilm.query === '') {
-    return Notiflix.Notify.info('Please enter search data.',{
-      timeout: 1000,
-      opacity: 0.9,
-      width: '150px',
-      clickToClose: true,
-      pauseOnHover: false,
-    });
+    if (hash === 'ua') {
+      return Notiflix.Notify.info('Введіть, будь ласка, дані пошуку.', {
+        timeout: 3000,
+        opacity: 0.9,
+        width: '150px',
+        clickToClose: true,
+        pauseOnHover: false,
+      });
+    } else {
+      return Notiflix.Notify.info('Please enter search data.', {
+        timeout: 3000,
+        opacity: 0.9,
+        width: '150px',
+        clickToClose: true,
+        pauseOnHover: false,
+      });
+    }
   }
   openLoading();
   newApiSearchFilm.resetPage();
@@ -119,22 +138,33 @@ function onSearchFilm(event) {
   newApiSearchFilm
     .searchFilm(currentLanguage)
     .then(dates => {
-      console.log(dates);
       const filmArray = dates[0].results;
       const genreArray = dates[1].genres;
-      console.log(filmArray);
-      console.log(genreArray);
 
       if (filmArray.length === 0) {
-        return Notiflix.Notify.info(
-          'Sorry, there are no movies matching your search query. Please try again.',{
-            timeout: 1000,
-            opacity: 0.9,
-            width: '150px',
-            clickToClose: true,
-            pauseOnHover: false,
-          }
-        );
+        if (hash === 'ua') {
+          return Notiflix.Notify.info(
+            'На жаль, немає фільмів, які відповідають вашому пошуковому запиту. Будь ласка, спробуйте ще раз.',
+            {
+              timeout: 3000,
+              opacity: 0.9,
+              width: '150px',
+              clickToClose: true,
+              pauseOnHover: false,
+            }
+          );
+        } else {
+          return Notiflix.Notify.info(
+            'Sorry, there are no movies matching your search query. Please try again.',
+            {
+              timeout: 3000,
+              opacity: 0.9,
+              width: '150px',
+              clickToClose: true,
+              pauseOnHover: false,
+            }
+          );
+        }
       } else {
         clearFilmsContainer();
         const markup = createFilmsList(dates);
@@ -142,7 +172,7 @@ function onSearchFilm(event) {
       }
     })
     .catch(error => console.log(error));
-    closeLoading();
+  closeLoading();
 }
 
 function onBackdropClick() {
