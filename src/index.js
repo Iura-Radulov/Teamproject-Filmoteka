@@ -5,3 +5,4 @@ import './js/firebase/handleRegister';
 import './js/firebase/handleLogin';
 import './js/footerTeam';
 import './js/loader';
+import './js/changeTheme';
