@@ -2,6 +2,8 @@ import { getDatabase, ref, set, child, get, remove } from 'firebase/database';
 import { app } from './firebase/firebase';
 import { getAuth } from 'firebase/auth';
 import { Notify } from 'notiflix';
+import { openLoading, closeLoading } from './loader';
+import { renderPagination, changeLibraryActivePage } from './pagination';
 
 const database = getDatabase(app);
 const auth = getAuth(app);
@@ -15,10 +17,10 @@ const container = document.querySelector('.films__container');
 const libraryButtons = document.querySelector('.buttons');
 const header = document.querySelector('.header');
 const emptyListMessage = document.querySelector('.films__empty-list-thumb');
-const mainPagination = document.querySelector('.pagination');
+const paginationButtons = document.getElementById('pagination_list');
 
-const WATCHED_MOVIES = 'watchedMovies/';
-const MOVIES_QUEUE = 'queueOfMovies/';
+export const WATCHED_MOVIES = 'watchedMovies/';
+export const MOVIES_QUEUE = 'queueOfMovies/';
 const IS_HIDDEN = 'is-hidden';
 const CURRENT_LINK = 'current-link';
 const HEADER_BGR = 'header__background';
@@ -38,9 +40,12 @@ function getUserId() {
 function onHomeBtnClick() {
   hideEmptyListMessage();
   switchToHomeHeader();
+  showMainPagination();
 }
 
 async function onLibraryBtnClick() {
+  openLoading();
+
   const userId = getUserId();
   if (!userId) {
     if (hash === 'ua') {
@@ -62,15 +67,19 @@ async function onLibraryBtnClick() {
     }
   }
 
-  mainPagination.classList.add(IS_HIDDEN);
+  showWatchedPagination();
 
   switchToLibraryHeader();
 
   const response = await fetchMoviesFromDatabase(WATCHED_MOVIES);
   showLibrary(response);
+
+  closeLoading();
 }
 
 async function onWatchedBtnClick() {
+  openLoading();
+
   makeWatchedBtnActive();
   hideEmptyListMessage();
 
@@ -78,11 +87,22 @@ async function onWatchedBtnClick() {
   if (!response) {
     return;
   }
-  const arrayOfJsons = Object.values(response);
-  renderWatched(arrayOfJsons);
+  const arrayOfJsons =
+    Object.values(response).length > 20
+      ? Object.values(response).slice(20)
+      : Object.values(response);
+  const totalPages = Math.ceil(Object.values(response).length / 20);
+
+  renderList(arrayOfJsons);
+  showWatchedPagination();
+  renderPagination(totalPages);
+
+  closeLoading();
 }
 
 async function onQueueBtnClick() {
+  openLoading();
+
   makeQueueBtnActive();
   hideEmptyListMessage();
 
@@ -90,11 +110,22 @@ async function onQueueBtnClick() {
   if (!response) {
     return;
   }
-  const arrayOfJsons = Object.values(response);
-  renderQueue(arrayOfJsons);
+  const arrayOfJsons =
+    Object.values(response).length > 20
+      ? Object.values(response).slice(20)
+      : Object.values(response);
+  const totalPages = Math.ceil(Object.values(response).length / 20);
+
+  renderList(arrayOfJsons);
+  showQueuePagination();
+  renderPagination(totalPages);
+
+  closeLoading();
 }
 
 async function onAddButtonClick(event) {
+  openLoading();
+
   const userId = getUserId();
 
   if (!userId) {
@@ -137,6 +168,9 @@ async function onAddButtonClick(event) {
 
       removeBtnDataAttributes(event.target);
 
+      if (!showLibraryBtn.classList.contains(CURRENT_LINK)) {
+        return;
+      }
       reRenderListOnLibraryChange(WATCHED_MOVIES);
       break;
 
@@ -145,12 +179,17 @@ async function onAddButtonClick(event) {
 
       removeBtnDataAttributes(event.target);
 
+      if (!showLibraryBtn.classList.contains(CURRENT_LINK)) {
+        return;
+      }
       reRenderListOnLibraryChange(MOVIES_QUEUE);
       break;
 
     default:
       break;
   }
+
+  closeLoading();
 }
 
 function databaseContainsMovie(category, movieId, userId) {
@@ -186,7 +225,6 @@ export async function addBtnDataAttributes(movie, buttons) {
     movie.id,
     userId
   );
-
   if (isInWatchlist) {
     changeWatchedBtn(addToWatchedBtn);
   }
@@ -217,11 +255,18 @@ function showLibrary(response) {
   if (!response) {
     return;
   }
-  const arrayOfJsons = Object.values(response);
-  renderWatched(arrayOfJsons);
+  const arrayOfJsons =
+    Object.values(response).length > 20
+      ? Object.values(response).slice(20)
+      : Object.values(response);
+  const totalPages = Math.ceil(Object.values(response).length / 20);
+
+  renderList(arrayOfJsons);
+  showWatchedPagination();
+  renderPagination(totalPages);
 }
 
-function fetchMoviesFromDatabase(category) {
+export function fetchMoviesFromDatabase(category) {
   const userId = getUserId();
   const dbRef = ref(database);
   return get(child(dbRef, `users/${userId}/${category}`)).then(snapshot => {
@@ -236,9 +281,8 @@ function fetchMoviesFromDatabase(category) {
   });
 }
 
-function renderWatched(arrayOfJsons) {
+export function renderList(arrayOfJsons) {
   container.innerHTML = '';
-
   const markup = arrayOfJsons
     .map(json => JSON.parse(json))
     .map(
@@ -250,8 +294,12 @@ function renderWatched(arrayOfJsons) {
         release_date,
         id,
         vote_average,
-      }) => `<div class="film-card">
-        <img src="https://image.tmdb.org/t/p/w500${poster_path}"  alt="" width="310" loading="lazy" data-id=${id} />
+      }) => `<a href="#" class="film-card">
+        <img src=${
+          poster_path !== null
+            ? `https://image.tmdb.org/t/p/w500${poster_path}`
+            : `https://mysteriouswritings.com/wp-content/uploads/2017/02/movie.jpg`
+        } alt="" loading="lazy" width="310" height="449" data-id=${id} />
         <div class="info">
           <p class="film__info-name">${
             original_title ? original_title : original_name
@@ -268,7 +316,7 @@ function renderWatched(arrayOfJsons) {
             }</b >
             <b>|</b>
             <b>${release_date ? release_date.slice(0, 4) : '-'}</b>
-            <b class="rating">${vote_average}</b>
+            <b class="rating is-hidden">${vote_average}</b>
           </p>
         </div>
       </div>`
@@ -278,50 +326,10 @@ function renderWatched(arrayOfJsons) {
   container.insertAdjacentHTML('beforeend', markup);
 }
 
-function renderQueue(arrayOfJsons) {
-  container.innerHTML = '';
-
-  const markup = arrayOfJsons
-    .map(json => JSON.parse(json))
-    .map(
-      ({
-        poster_path,
-        original_title,
-        original_name,
-        genres,
-        release_date,
-        id,
-        vote_average,
-      }) => `<div class="film-card">
-        <img src="https://image.tmdb.org/t/p/w500${poster_path}"  alt="" width="310" loading="lazy" data-id=${id} />
-        <div class="info">
-          <p class="film__info-name">${
-            original_title ? original_title : original_name
-          }
-          </p>
-          <p class="info-item">
-            <b>${
-              genres.length > 2
-                ? genres
-                    .map(genre => genre.name)
-                    .slice(0, 2)
-                    .concat([' Other'])
-                : genres.map(genre => genre.name)
-            }</b >
-            <b>|</b>
-            <b>${release_date ? release_date.slice(0, 4) : '-'}</b>
-            <b class="rating">${vote_average}</b>
-          </p>
-        </div>
-      </div>`
-    );
-
-  container.insertAdjacentHTML('beforeend', markup);
-}
 async function reRenderListOnLibraryChange(category) {
   const response = await fetchMoviesFromDatabase(category);
   const arrayOfJsons = Object.values(response);
-  renderWatched(arrayOfJsons);
+  renderList(arrayOfJsons);
 }
 
 function makeWatchedBtnActive() {
@@ -353,4 +361,17 @@ function showEmptyListMessage() {
 }
 function hideEmptyListMessage() {
   emptyListMessage.classList.add(IS_HIDDEN);
+}
+function showMainPagination() {
+  paginationButtons.id = 'pagination_list';
+}
+function showWatchedPagination() {
+  paginationButtons.id = 'library-pagination-watched';
+  const pagination = document.getElementById('library-pagination-watched');
+  pagination.addEventListener('click', changeLibraryActivePage);
+}
+function showQueuePagination() {
+  paginationButtons.id = 'library-pagination-queue';
+  const pagination = document.getElementById('library-pagination-queue');
+  pagination.addEventListener('click', changeLibraryActivePage);
 }
