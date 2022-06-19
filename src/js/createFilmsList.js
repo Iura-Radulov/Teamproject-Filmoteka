@@ -13,7 +13,7 @@ export default function createFilmsList(dates) {
         id,
         vote_average,
       }) => {
-        return `<div class="film-card">
+        return `<a class="film-card">
         <img src=${
           poster_path !== null
             ? `https://image.tmdb.org/t/p/w500${poster_path}`
@@ -34,7 +34,7 @@ export default function createFilmsList(dates) {
             <b class="rating is-hidden">${vote_average}</b>
           </p>
         </div>
-      </div>`;
+      </a>`;
       }
     )
     .join('');

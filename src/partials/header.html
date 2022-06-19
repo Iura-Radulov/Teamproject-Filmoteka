@@ -1,62 +1,86 @@
 <header class="header header__background">
-    <div class="container">
-        <!-- логотип і навігація -->
-        <nav class="navigation">
-            <a class="logo" href="./index.html">
-                <svg class="logo-icon" width="24" height="24"><use href="./images/svg/film.svg"></use></svg>
-                <span class="logo-text">Filmoteka</span>
-            </a>
-            <ul class="navigation__list">
-                <li class="navigation__list-item">
-                    <button class="navigation-link current-link lang-home" aria-label="main page switch" type="button" id="home">
-                        Home
-                    </button>
-                </li>
-                <li class="navigation__list-link">
-                    <button class="navigation-link lang-library" aria-label="library page switch" type="button" id="library">
-                        My library
-                    </button>
-                </li>
-            </ul>
-        </nav>
-        <!-- форма пошуку -->
-        <div class="search-wrapper">
-            <form class="search-form" action="">
-                <input class="search-input" type="text" name="searchQuery" autocomplete="off" placeholder="Search movies...">
-                <button class="search-button" type="submit">
-                    <svg class="search-icon" width="12" height="12"><use href="./images/svg/search.svg"></use></svg>
-                </button>
-                <!-- warning -->
-                <div class="warning is-hidden">
-                    Search result not successful. Enter the correct movie name and
-                </div>              
-      </form> 
-        <!-- кнопки регистрації -->
-        <div class="login-container">
-    <button class="sign-up-btn lang-up" type="submit" >Sign up</button>
-    <button class="sign-in-btn lang-in" type="submit" >Sign in</button>
-    </div>    
-    <div class="boxLoginLogout">
+  <div class="container">
+    <!-- логотип і навігація -->
+    <nav class="navigation">
+      <a class="logo" href="./index.html">
+        <svg class="logo-icon" width="24" height="24">
+          <use href="./images/svg/film.svg"></use>
+        </svg>
+        <span class="logo-text">Filmoteka</span>
+      </a>
+      <ul class="navigation__list">
+        <li class="navigation__list-item">
+          <button
+            class="navigation-link current-link lang-home"
+            aria-label="main page switch"
+            type="button"
+            id="home"
+          >
+            Home
+          </button>
+        </li>
+        <li class="navigation__list-link">
+          <button
+            class="navigation-link lang-library"
+            aria-label="library page switch"
+            type="button"
+            id="library"
+          >
+            My library
+          </button>
+        </li>
+      </ul>
+    </nav>
+    <!-- форма пошуку -->
+    <div class="search-wrapper">
+      <form class="search-form" action="">
+        <input
+          class="search-input"
+          type="text"
+          name="searchQuery"
+          autocomplete="off"
+          placeholder="Search movies..."
+        />
+        <button class="search-button" type="submit">
+          <svg class="search-icon" width="12" height="12">
+            <use href="./images/svg/search.svg"></use>
+          </svg>
+        </button>
+        <!-- warning -->
+        <div class="warning is-hidden">
+          Search result not successful. Enter the correct movie name and
+        </div>
+      </form>
+      <!-- кнопки регистрації -->
+      <div class="login-container">
+        <button class="sign-up-btn lang-up" type="submit">Sign up</button>
+        <button class="sign-in-btn lang-in" type="submit">Sign in</button>
+      </div>
+      <div class="boxLoginLogout">
         <span class="logOutName" id="loginUser">none</span>
-        <button id="btnLogout" class="btnLoginLogout lang-out" type="button" >Log out</button>
-    </div>   
+        <button id="btnLogout" class="btnLoginLogout lang-out" type="button">
+          Log out
+        </button>
+      </div>
     </div>
 
     <!-- кнопки My library -->
     <div class="buttons is-hidden">
-        <button class="button_library lang-watch" id="watched" type="button">Watched</button>
-        <button class="button_library lang-queue" type="button" id="queue">Queue</button>
+      <button class="button_library lang-watch" id="watched" type="button">
+        Watched
+      </button>
+      <button class="button_library lang-queue" type="button" id="queue">
+        Queue
+      </button>
     </div>
-    </div>  
-    
-    
-    <button class="dark_btn" id="change-theme-btn">🌙</button>
-    
 
-    <select class="lang">
-        <option value='en'>EN</option>
-        <option value='ua'>UA</option>
-    </select>
-    
+    <div class="theme-sec">
+      <button class="dark_btn" id="change-theme-btn">🌙</button>
+
+      <select class="lang">
+        <option value="en">EN</option>
+        <option value="ua">UA</option>
+      </select>
+    </div>
+  </div>
 </header>
-
