@@ -13,7 +13,7 @@ export default function createFilmsList(dates) {
         id,
         vote_average,
       }) => {
-        return `<a class="film-card">
+        return `<a href="#" class="film-card">
         <img src=${
           poster_path !== null
             ? `https://image.tmdb.org/t/p/w500${poster_path}`
