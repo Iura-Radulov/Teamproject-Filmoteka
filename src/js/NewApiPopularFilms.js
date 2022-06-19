@@ -4,6 +4,7 @@ export default class NewApiPopularFilms {
   }
 
   async fetchFilmsCards(languageChoose) {
+
     const KEY_API = '024bf82d4805f650033dc69997860333';
     const festFetch = `https://api.themoviedb.org/3/trending/movie/day?api_key=${KEY_API}&page=${this.page}`;
     const secondFetch = `https://api.themoviedb.org/3/genre/movie/list?api_key=${KEY_API}&language=${languageChoose}`;
