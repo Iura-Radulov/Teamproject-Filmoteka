@@ -14,7 +14,7 @@ export function closeLoading(){
     spinner.forEach(spin => {
         spin.classList.add('hide');} 
         );  
-;}, 1500)
+;}, 500)
 
 }
 

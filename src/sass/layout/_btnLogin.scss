@@ -1,5 +1,13 @@
 // ========================
 //  кнопка регистрації
+.login-container {
+  position: absolute;
+  right: 30;
+  top: 110px;
+  @media screen and (max-width: 767px) {
+    top: 40px;
+  }
+}
 .sign-up-btn {
   font-weight: 400;
   font-size: 12px;
@@ -11,19 +19,11 @@
   border-radius: 7px;
   width: 65px;
   height: 30px;
-  position: absolute;
-  right: 76;
-  top: -11px;
+  margin-right: 10px;
+
   &:focus,
   &:hover {
-    // border: 3px solid getColor('btn-color');
-    // color: getColor('btn-color');
     background-color: getColor('pin-color');
-  }
-  @media screen and (max-width: 767px) {
-    // width: 65px;
-    // right: 75;
-    top: -40px;
   }
 }
 
@@ -38,38 +38,27 @@
   border-radius: 7px;
   width: 65px;
   height: 30px;
-  position: absolute;
-  right: 1px;
-  top: -11px;
+
   &:focus,
   &:hover {
-    // border: 3px solid getColor('btn-color');
-    // color: getColor('btn-color');
     background-color: getColor('pin-color');
-  }
-  @media screen and (max-width: 767px) {
-    // width: 65px;
-    top: -40px;
   }
 }
 
 .boxLoginLogout {
   position: absolute;
-  right: -50px;
-  top: -9px;
+  right: 25px;
+  top: 110px;
   display: none;
   justify-content: center;
   align-items: center;
   height: 75px;
   padding-bottom: 50px;
-  padding-right: 50px;
   @media screen and (max-width: 767px) {
-    top: -40px;
+    top: 40px;
   }
 }
 .btnLoginLogout {
-  // margin: 0 20px;
-  // padding: 10px;
   margin-right: 1px;
   margin-left: 5px;
   color: getColor('white-color');
@@ -79,8 +68,6 @@
   border-radius: 7px;
   width: 65px;
   height: 30px;
-  // border-radius: 20px;
-  // background: getColor('pin-color');
   background-color: transparent;
   &:focus,
   &:hover {
@@ -90,7 +77,6 @@
 
 .logOutName {
   padding-right: 10px;
-  padding-top: 20px;
   color: getColor('white-color');
 }
 

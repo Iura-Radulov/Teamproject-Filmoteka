@@ -69,6 +69,10 @@
     }
   }
 }
+
+.header .container {
+  position: relative;
+}
 .header__background-library {
   background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
     url('../images/background/library-mobile.jpg');
@@ -177,7 +181,7 @@
   }
 }
 .search-wrapper {
-  position: relative;
+  // position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -312,8 +316,7 @@
   display: none;
 }
 
-
-.lang{
+.lang {
   font-size: 20px;
   font-weight: bold;
 }

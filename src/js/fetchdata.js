@@ -4,7 +4,6 @@ import createFilmsList from './createFilmsList';
 import createFilmCard from './createFilmCard';
 import fetchFilmModal from './fetchFilmModal';
 import Notiflix from 'notiflix';
-import { openLoading } from './loader';
 import './language';
 import { changeLanguage } from './language';
 import { chooseLanguageApi } from './language';
@@ -48,6 +47,7 @@ export async function startPopularFilms() {
   libraryButtons.classList.add('is-hidden');
 
   const currentLanguage = chooseLanguageApi();
+  openLoading();
   try {
     const dates = await newApiPopularFilms.fetchFilmsCards(currentLanguage);
     renderPagination(dates[0].total_pages);
@@ -58,6 +58,7 @@ export async function startPopularFilms() {
   } catch (error) {
     console.log(error.message);
   }
+   closeLoading();
 }
 
 function onFilmClick(event) {
