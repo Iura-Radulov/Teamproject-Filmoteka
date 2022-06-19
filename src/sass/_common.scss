@@ -9,6 +9,7 @@ $colors: (
   'another-text-color': #545454,
   'grey-color': #818181,
   'btn-color': #ff6b01,
+  'overlay-bcg':rgba(255, 106, 0, 0.9),
 );
 
 @function getColor($key) {
