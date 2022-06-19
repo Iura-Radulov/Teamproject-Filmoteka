@@ -5,13 +5,27 @@
   padding: 60px 0;
   justify-content: center;
 
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 1023px) {
     gap: 32px;
   }
   @media screen and (max-width: 767px) {
     gap: 20px 0;
   }
 }
+
+.film-img {
+  width: 309px;
+  height: 449px;
+  @media screen and (max-width: 1023px) {
+    width: 336px;
+    height: 455px;
+  }
+  @media screen and (max-width: 767px) {
+    width: 280px;
+    height: 398px;
+  }
+}
+
 .film__info {
   &-name {
     margin-top: 8px;
