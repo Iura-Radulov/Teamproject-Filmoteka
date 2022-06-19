@@ -79,8 +79,8 @@ export const translation = {
   },
 
   list: {
-    en: 'This list is empty :(',
-    ua: 'Список порожній :(',
+    en: 'This list is empty',
+    ua: 'Список порожній',
   },
 
   team: {

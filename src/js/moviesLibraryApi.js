@@ -68,7 +68,6 @@ function onHomeBtnClick() {
   switchToHomeHeader();
   showMainPagination();
 }
-
 function onAddButtonClick(event) {
   openLoading();
 
@@ -121,6 +120,30 @@ function onAddButtonClick(event) {
   closeLoading();
 }
 
+function getUserId() {
+  return auth.currentUser?.uid;
+}
+function checkIfLoggedIn(userId) {
+  if (!userId) {
+    if (hash === 'ua') {
+      return Notify.warning('Увійдіть у свій акаунт, будь-ласка', {
+        timeout: 3000,
+        opacity: 0.9,
+        width: '150px',
+        clickToClose: true,
+        pauseOnHover: false,
+      });
+    } else {
+      return Notify.warning('You should sign in first!', {
+        timeout: 3000,
+        opacity: 0.9,
+        width: '150px',
+        clickToClose: true,
+        pauseOnHover: false,
+      });
+    }
+  }
+}
 function databaseContainsMovie(category, movieId, userId) {
   return get(ref(database, `users/${userId}/${category}${movieId}`)).then(
     snapshot => snapshot.exists()
@@ -133,13 +156,11 @@ export function createButtonRefs() {
 
   return { addToWatchedBtn, addToQueueBtn };
 }
-
 export function addBtnEventListeners(buttons) {
   const { addToWatchedBtn, addToQueueBtn } = buttons;
   addToWatchedBtn.addEventListener('click', onAddButtonClick);
   addToQueueBtn.addEventListener('click', onAddButtonClick);
 }
-
 export async function addBtnDataAttributes(movie, buttons) {
   const { addToWatchedBtn, addToQueueBtn } = buttons;
   const userId = getUserId();
@@ -162,7 +183,6 @@ export async function addBtnDataAttributes(movie, buttons) {
     changeQueueBtn(addToQueueBtn);
   }
 }
-
 function removeBtnDataAttributes(button) {
   button.removeAttribute('data-movie');
   button.removeAttribute('data-id');
@@ -179,6 +199,7 @@ function changeQueueBtn(addToQueueBtn) {
     ? (addToQueueBtn.textContent = 'Видалити з обраних')
     : (addToQueueBtn.textContent = 'Delete from queue');
 }
+
 export function fetchMoviesFromDatabase(category) {
   const userId = getUserId();
   const dbRef = ref(database);
@@ -193,7 +214,6 @@ export function fetchMoviesFromDatabase(category) {
     }
   });
 }
-
 export function renderList(arrayOfJsons) {
   refs.filmsContainer.innerHTML = '';
   const markup = arrayOfJsons
@@ -259,30 +279,6 @@ async function handleFetchAndRender(category) {
       break;
   }
 }
-function getUserId() {
-  return auth.currentUser?.uid;
-}
-function checkIfLoggedIn(userId) {
-  if (!userId) {
-    if (hash === 'ua') {
-      return Notify.warning('Увійдіть у свій акаунт, будь-ласка', {
-        timeout: 3000,
-        opacity: 0.9,
-        width: '150px',
-        clickToClose: true,
-        pauseOnHover: false,
-      });
-    } else {
-      return Notify.warning('You should sign in first!', {
-        timeout: 3000,
-        opacity: 0.9,
-        width: '150px',
-        clickToClose: true,
-        pauseOnHover: false,
-      });
-    }
-  }
-}
 function transformResponseToArray(response) {
   const arrayOfJsons =
     Object.values(response).length > 20
@@ -290,49 +286,6 @@ function transformResponseToArray(response) {
       : Object.values(response);
   return arrayOfJsons;
 }
-// function makeWatchedBtnActive() {
-//   refs.showWatchedBtn.classList.add(ACTIVE);
-//   refs.showQueueBtn.classList.remove(ACTIVE);
-// }
-// function makeQueueBtnActive() {
-//   refs.showQueueBtn.classList.add(ACTIVE);
-//   refs.showWatchedBtn.classList.remove(ACTIVE);
-// }
-// function switchToLibraryHeader() {
-//   refs.showLibraryBtn.classList.add(CURRENT_LINK);
-//   refs.showHomeBtn.classList.remove(CURRENT_LINK);
-//   refs.libraryButtons.classList.remove(IS_HIDDEN);
-//   refs.search.classList.add(IS_HIDDEN);
-//   refs.header.classList.add(HEADER_BGR_LIBRARY);
-//   refs.header.classList.remove(HEADER_BGR);
-
-//   makeWatchedBtnActive();
-// }
-// function switchToHomeHeader() {
-//   refs.libraryButtons.classList.add(IS_HIDDEN);
-//   refs.search.classList.remove(IS_HIDDEN);
-//   refs.header.classList.remove(HEADER_BGR_LIBRARY);
-//   refs.header.classList.add(HEADER_BGR);
-// }
-// function showEmptyListMessage() {
-//   refs.emptyListMessage.classList.remove(IS_HIDDEN);
-// }
-// function hideEmptyListMessage() {
-//   refs.emptyListMessage.classList.add(IS_HIDDEN);
-// }
-// function showMainPagination() {
-//   refs.paginationButtons.id = 'pagination_list';
-// }
-// function showWatchedPagination() {
-//   refs.paginationButtons.id = 'library-pagination-watched';
-//   const pagination = document.getElementById('library-pagination-watched');
-//   pagination.addEventListener('click', changeLibraryActivePage);
-// }
-// function showQueuePagination() {
-//   refs.paginationButtons.id = 'library-pagination-queue';
-//   const pagination = document.getElementById('library-pagination-queue');
-//   pagination.addEventListener('click', changeLibraryActivePage);
-// }
 function definePagesQuantity(response) {
   const totalPages = Math.ceil(Object.values(response).length / 20);
   renderPagination(totalPages);
