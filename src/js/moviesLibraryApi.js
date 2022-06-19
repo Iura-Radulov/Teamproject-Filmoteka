@@ -24,6 +24,7 @@ const CURRENT_LINK = 'current-link';
 const HEADER_BGR = 'header__background';
 const HEADER_BGR_LIBRARY = 'header__background-library';
 const ACTIVE = 'active';
+const hash = window.location.hash.substring(1);
 
 showWatchedBtn.addEventListener('click', onWatchedBtnClick);
 showQueueBtn.addEventListener('click', onQueueBtnClick);
@@ -42,14 +43,23 @@ function onHomeBtnClick() {
 async function onLibraryBtnClick() {
   const userId = getUserId();
   if (!userId) {
-    Notify.warning('You should sign in first!', {
-      timeout: 1000,
-      opacity: 0.9,
-      width: '150px',
-      clickToClose: true,
-      pauseOnHover: false,
-    });
-    return;
+    if (hash === 'ua') {
+      return Notify.warning('Увійдіть у свій акаунт, будь-ласка', {
+        timeout: 3000,
+        opacity: 0.9,
+        width: '150px',
+        clickToClose: true,
+        pauseOnHover: false,
+      });
+    } else {
+      return Notify.warning('You should sign in first!', {
+        timeout: 3000,
+        opacity: 0.9,
+        width: '150px',
+        clickToClose: true,
+        pauseOnHover: false,
+      });
+    }
   }
 
   mainPagination.classList.add(IS_HIDDEN);
@@ -88,14 +98,23 @@ async function onAddButtonClick(event) {
   const userId = getUserId();
 
   if (!userId) {
-    Notify.warning('You should sign in first',{
-      timeout: 1000,
-      opacity: 0.9,
-      width: '150px',
-      clickToClose: true,
-      pauseOnHover: false,
-    });
-    return;
+    if (hash === 'ua') {
+      return Notify.warning('Увійдіть у свій акаунт, будь-ласка', {
+        timeout: 3000,
+        opacity: 0.9,
+        width: '150px',
+        clickToClose: true,
+        pauseOnHover: false,
+      });
+    } else {
+      return Notify.warning('You should sign in first!', {
+        timeout: 3000,
+        opacity: 0.9,
+        width: '150px',
+        clickToClose: true,
+        pauseOnHover: false,
+      });
+    }
   }
 
   const movieJson = event.target.dataset.movie;
@@ -183,11 +202,15 @@ function removeBtnDataAttributes(button) {
 }
 function changeWatchedBtn(addToWatchedBtn) {
   addToWatchedBtn.id = 'remove-from-watched';
-  addToWatchedBtn.textContent = 'Delete from watched';
+  hash === 'ua'
+    ? (addToWatchedBtn.textContent = 'Видалити з переглянутих')
+    : (addToWatchedBtn.textContent = 'Delete from watched');
 }
 function changeQueueBtn(addToQueueBtn) {
   addToQueueBtn.id = 'remove-from-queue';
-  addToQueueBtn.textContent = 'Delete from queue';
+  hash === 'ua'
+    ? (addToQueueBtn.textContent = 'Видалити з обраних')
+    : (addToQueueBtn.textContent = 'Delete from queue');
 }
 
 function showLibrary(response) {

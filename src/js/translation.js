@@ -5,7 +5,7 @@ export const translation = {
   },
   home: {
     en: 'Home',
-    ua: 'Home',
+    ua: 'Головна',
   },
   library: {
     en: 'My library',
@@ -48,7 +48,7 @@ export const translation = {
 
   queue: {
     en: 'Queue',
-    ua: 'Додані до перегляду',
+    ua: 'Обрані',
   },
   create: {
     en: 'Create Account',
@@ -207,6 +207,6 @@ export const translation = {
   },
   addq: {
     en: 'Add to Queue',
-    ua: 'Додати до перегляду',
+    ua: 'Додати в обрані',
   },
 };
