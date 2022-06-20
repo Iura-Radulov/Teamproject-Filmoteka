@@ -47,6 +47,7 @@ const refs = {
   header: document.querySelector('.header'),
   emptyListMessage: document.querySelector('.films__empty-list-thumb'),
   paginationButtons: document.getElementById('pagination_list'),
+  paginationContainer: document.querySelector('.pagination'),
 };
 //        footer
 

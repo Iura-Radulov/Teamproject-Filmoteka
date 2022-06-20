@@ -11,6 +11,7 @@ const {
   header,
   emptyListMessage,
   paginationButtons,
+  paginationContainer,
 } = refs;
 
 const IS_HIDDEN = 'is-hidden';
@@ -45,9 +46,11 @@ export function switchToHomeHeader() {
 }
 export function showEmptyListMessage() {
   emptyListMessage.classList.remove(IS_HIDDEN);
+  paginationContainer.classList.add(IS_HIDDEN);
 }
 export function hideEmptyListMessage() {
   emptyListMessage.classList.add(IS_HIDDEN);
+  paginationContainer.classList.remove(IS_HIDDEN);
 }
 export function showMainPagination() {
   paginationButtons.id = 'pagination_list';
