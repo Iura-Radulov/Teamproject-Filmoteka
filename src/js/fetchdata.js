@@ -16,7 +16,6 @@ import {
 } from './moviesLibraryApi';
 import { renderPagination } from './pagination';
 
-
 export let popularSearch;
 export let textSearch;
 const newApiSearchFilm = new NewApiSearchFilms();
@@ -39,7 +38,8 @@ logoBtn.addEventListener('click', startPopularFilms);
 filmsContainer.addEventListener('click', onFilmClick);
 formEl.addEventListener('submit', onSearchFilm);
 
-export async function startPopularFilms() {
+export async function startPopularFilms(event) {
+  event.preventDefault();
   clearFilmsContainer();
   newApiPopularFilms.resetPage();
   showHomeBtn.classList.add('current-link');
@@ -50,7 +50,7 @@ export async function startPopularFilms() {
   openLoading();
   try {
     const dates = await newApiPopularFilms.fetchFilmsCards(currentLanguage);
-    popularSearch = "popular";
+    popularSearch = 'popular';
     renderPagination(dates[0].total_pages);
     const markup = createFilmsList(dates);
     filmsContainer.insertAdjacentHTML('afterbegin', markup);
@@ -114,7 +114,7 @@ function onFilmClick(event) {
 function onSearchFilm(event) {
   event.preventDefault();
 
-textSearch=event.currentTarget.elements.searchQuery.value.trim();
+  textSearch = event.currentTarget.elements.searchQuery.value.trim();
   newApiSearchFilm.query =
     event.currentTarget.elements.searchQuery.value.trim();
   if (newApiSearchFilm.query === '') {
@@ -145,9 +145,9 @@ textSearch=event.currentTarget.elements.searchQuery.value.trim();
     .then(dates => {
       const filmArray = dates[0].results;
       const genreArray = dates[1].genres;
-      
+
       popularSearch = 'search';
-    renderPagination(dates[0].total_pages);
+      renderPagination(dates[0].total_pages);
 
       if (filmArray.length === 0) {
         if (hash === 'ua') {
