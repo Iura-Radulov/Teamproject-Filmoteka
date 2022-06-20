@@ -40,6 +40,8 @@
   }
 }
 
+
+
 .team-close {
   width: 30px;
   height: 30px;
@@ -157,6 +159,13 @@
   color: getColor('white-color');
 }
 
+.card-set__link{
+  font-size: 20px;
+  color: getColor('white-color');
+  text-decoration: underline;
+  padding-left: 30px;
+}
+
 .overlay-team {
     position: relative;
     overflow: hidden;
@@ -198,6 +207,7 @@
     line-height: 1.56;
     letter-spacing: 0.03em;
     text-align: left;
+    
     
 
     color: getColor('white-color');
