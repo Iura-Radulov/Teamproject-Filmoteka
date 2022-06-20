@@ -84,12 +84,12 @@ export const translation = {
   },
 
   our: {
-    en: 'OUR SWEET TEAM',
+    en: 'CODE HUNTERS',
     ua: 'НАША КОМАНДА',
   },
 
   desc: {
-    en: 'Together we learned how to work in a team, support each other and help in solving the tasks. Thank you GO IT!',
+    en: 'Together we learned working in a team, supporting each other and helping in solving the tasks. Thank you GO IT!',
     ua: 'Разом ми навчилися працювати в команді, підтримувати один одного та допомагати у вирішенні завдань. Дякуємо, GO IT!',
   },
 
@@ -194,7 +194,7 @@ export const translation = {
   },
 
   name1: {
-    en: 'Yuriy Radulov',
+    en: 'Iuri Radulov',
     ua: 'Юрій Радулов',
   },
   name2: {
