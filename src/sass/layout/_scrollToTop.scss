@@ -1,0 +1,23 @@
+.scroll-top{
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    width: 40px;
+    z-index: 999;
+    border: none;
+    outline: none;
+    background-color: getColor('btn-color');
+    color: getColor('white-color');
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 30px;
+    text-align: center;
+    transition: 1s;
+
+    &_show{
+        display: none;
+        transition: 1s;
+    }
+}
+
