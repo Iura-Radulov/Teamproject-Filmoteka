@@ -7,7 +7,7 @@ import {
   WATCHED_MOVIES,
   MOVIES_QUEUE,
 } from './moviesLibraryApi';
-import { popularSearch,textSearch } from './fetchdata';
+import { popularSearch, textSearch } from './fetchdata';
 import NewApiSearchFilms from './NewApiSearchFilms';
 import { chooseLanguageApi } from './language';
 import Notiflix from 'notiflix';
