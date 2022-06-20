@@ -7,7 +7,7 @@ import {
   WATCHED_MOVIES,
   MOVIES_QUEUE,
 } from './moviesLibraryApi';
-import { popularSearch, textSearch } from './fetchdata';
+import { popularSearch,  textSearch } from './fetchdata';
 import NewApiSearchFilms from './NewApiSearchFilms';
 import { chooseLanguageApi } from './language';
 import Notiflix from 'notiflix';
@@ -140,7 +140,7 @@ async function changePage(page) {
       const filmArray = dates[0].results;
       const genreArray = dates[1].genres;
       
-      popularSearch = 'search';
+    
     renderPagination(dates[0].total_pages, page);
 
       if (filmArray.length === 0) {
