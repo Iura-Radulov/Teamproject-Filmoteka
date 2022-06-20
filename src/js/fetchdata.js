@@ -16,6 +16,9 @@ import {
 } from './moviesLibraryApi';
 import { renderPagination } from './pagination';
 
+
+export let popularSearch;
+export let textSearch;
 const newApiSearchFilm = new NewApiSearchFilms();
 const newApiPopularFilms = new NewApiPopularFilms();
 const hash = window.location.hash.substring(1);
@@ -47,6 +50,7 @@ export async function startPopularFilms() {
   openLoading();
   try {
     const dates = await newApiPopularFilms.fetchFilmsCards(currentLanguage);
+    popularSearch = "popular";
     renderPagination(dates[0].total_pages);
     const markup = createFilmsList(dates);
     filmsContainer.insertAdjacentHTML('afterbegin', markup);
@@ -110,6 +114,7 @@ function onFilmClick(event) {
 function onSearchFilm(event) {
   event.preventDefault();
 
+textSearch=event.currentTarget.elements.searchQuery.value.trim();
   newApiSearchFilm.query =
     event.currentTarget.elements.searchQuery.value.trim();
   if (newApiSearchFilm.query === '') {
@@ -140,6 +145,9 @@ function onSearchFilm(event) {
     .then(dates => {
       const filmArray = dates[0].results;
       const genreArray = dates[1].genres;
+      
+      popularSearch = 'search';
+    renderPagination(dates[0].total_pages);
 
       if (filmArray.length === 0) {
         if (hash === 'ua') {

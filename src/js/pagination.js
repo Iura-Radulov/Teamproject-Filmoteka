@@ -7,8 +7,17 @@ import {
   WATCHED_MOVIES,
   MOVIES_QUEUE,
 } from './moviesLibraryApi';
+import { popularSearch,textSearch } from './fetchdata';
+import NewApiSearchFilms from './NewApiSearchFilms';
+import { chooseLanguageApi } from './language';
+import Notiflix from 'notiflix';
+
 
 const newApiPopularFilms = new NewApiPopularFilms();
+const newApiSearchFilm = new NewApiSearchFilms();
+const hash = window.location.hash.substring(1);
+
+
 
 const refs = {
   ul: document.getElementById('pagination_list'),
@@ -22,7 +31,35 @@ export function renderPagination(totalPages, page = 1) {
   if (page > 1) {
     str += `<li><button class="arrow" type='button' data-page="previous">&#8592;</button></li>`;
   }
-  if (totalPages <= 7) {
+ if (window.innerWidth<=768) {
+   if (totalPages <= 5) {
+    for (let i = 1; i <= totalPages; i += 1) {
+      if (i === page) {
+        str += `<li><button class="numbers active" type='button' data-page="${i}">${i}</button></li>`;
+      } else {
+        str += `<li><button class="numbers" type='button' data-page="${i}">${i}</button></li>`;
+      }
+    }
+  } else {
+     for (let i = 1; i <= totalPages; i += 1) {
+       if (i === page) {
+         str += `<li><button class="numbers active" type='button' data-page="${i}">${i}</button></li>`;
+   
+       } else if (i > page + 2 || i < page - 2) {
+         if (i < 6&&page<3) {
+        str += `<li><button class="numbers" type='button' data-page="${i}">${i}</button></li>`;
+      
+         }
+          if (i > totalPages-5&&page>totalPages-2) {
+        str += `<li><button class="numbers" type='button' data-page="${i}">${i}</button></li>`;
+      
+    }
+      } else {
+        str += `<li><button class="numbers" type='button' data-page="${i}">${i}</button></li>`;
+      }
+    }
+  }
+ } else { if (totalPages <= 7) {
     for (let i = 1; i <= totalPages; i += 1) {
       if (i === page) {
         str += `<li><button class="numbers active" type='button' data-page="${i}">${i}</button></li>`;
@@ -55,6 +92,8 @@ export function renderPagination(totalPages, page = 1) {
       }
     }
   }
+  
+ }
 
   if (page < totalPages) {
     str += `<li><button class="arrow" type='button' data-page="next">&#8594;</button></li>`;
@@ -67,7 +106,77 @@ refs.ul.addEventListener('click', changeActivePage);
 async function changePage(page) {
   openLoading();
   refs.filmsContainer.innerHTML = '';
-  newApiPopularFilms.setPage(page);
+
+  if (popularSearch === 'search') {
+    newApiSearchFilm.query = textSearch;
+    newApiSearchFilm.setPage(page);
+  
+  if (newApiSearchFilm.query === '') {
+    if (hash === 'ua') {
+      return Notiflix.Notify.info('Введіть, будь ласка, дані пошуку.', {
+        timeout: 3000,
+        opacity: 0.9,
+        width: '150px',
+        clickToClose: true,
+        pauseOnHover: false,
+      });
+    } else {
+      return Notiflix.Notify.info('Please enter search data.', {
+        timeout: 3000,
+        opacity: 0.9,
+        width: '150px',
+        clickToClose: true,
+        pauseOnHover: false,
+      });
+    }
+  }
+ 
+  
+  const currentLanguage = chooseLanguageApi();
+
+  newApiSearchFilm
+    .searchFilm(currentLanguage)
+    .then(dates => {
+      const filmArray = dates[0].results;
+      const genreArray = dates[1].genres;
+      
+      popularSearch = 'search';
+    renderPagination(dates[0].total_pages, page);
+
+      if (filmArray.length === 0) {
+        if (hash === 'ua') {
+          return Notiflix.Notify.info(
+            'На жаль, немає фільмів, які відповідають вашому пошуковому запиту. Будь ласка, спробуйте ще раз.',
+            {
+              timeout: 3000,
+              opacity: 0.9,
+              width: '150px',
+              clickToClose: true,
+              pauseOnHover: false,
+            }
+          );
+        } else {
+          return Notiflix.Notify.info(
+            'Sorry, there are no movies matching your search query. Please try again.',
+            {
+              timeout: 3000,
+              opacity: 0.9,
+              width: '150px',
+              clickToClose: true,
+              pauseOnHover: false,
+            }
+          );
+        }
+      } else {
+        // clearFilmsContainer();
+        const markup = createFilmsList(dates);
+        refs.filmsContainer.insertAdjacentHTML('afterbegin', markup);
+      }
+    })
+    .catch(error => console.log(error));
+  
+  } else {
+    newApiPopularFilms.setPage(page);
   try {
     const dates = await newApiPopularFilms.fetchFilmsCards();
     const totalPage = dates[0].total_pages;
@@ -78,6 +187,9 @@ async function changePage(page) {
   } catch (error) {
     console.log(error.message);
   }
+  
+}
+
   closeLoading();
 }
 
