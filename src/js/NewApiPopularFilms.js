@@ -3,19 +3,11 @@ export default class NewApiPopularFilms {
     this.page = 1;
   }
 
-  async fetchFilmsCards(languageChoose) {
-
+  async fetchFilmsCards() {
     const KEY_API = '024bf82d4805f650033dc69997860333';
-    const festFetch = `https://api.themoviedb.org/3/trending/movie/day?api_key=${KEY_API}&page=${this.page}`;
-    const secondFetch = `https://api.themoviedb.org/3/genre/movie/list?api_key=${KEY_API}&language=${languageChoose}`;
-    const dateIds = [festFetch, secondFetch];
-
-    const arrayOfPromises = dateIds.map(async userId => {
-      const response = await fetch(`${userId}`);
-      return response.json();
-    });
-
-    const dates = await Promise.all(arrayOfPromises);
+    const url = `https://api.themoviedb.org/3/trending/movie/day?api_key=${KEY_API}&page=${this.page}`;
+    const response = await fetch(url);
+    const dates = await response.json();
     return dates;
   }
 

@@ -1,10 +1,7 @@
 import createFilmsList from './createFilmsList';
 import { openLoading, closeLoading } from './loader';
 import NewApiPopularFilms from './NewApiPopularFilms';
-import {  
-  WATCHED_MOVIES,
-  MOVIES_QUEUE,
-} from './library/moviesLibraryApi';
+import { WATCHED_MOVIES, MOVIES_QUEUE } from './library/moviesLibraryApi';
 import renderList from './library/renderList';
 import { fetchMoviesFromDatabase } from './library/libraryDatabase';
 import { popularSearch, textSearch } from './fetchdata';
@@ -130,10 +127,10 @@ async function changePage(page) {
     newApiSearchFilm
       .searchFilm(currentLanguage)
       .then(dates => {
-        const filmArray = dates[0].results;
-        const genreArray = dates[1].genres;
+        const filmArray = dates.results;
+        // const genreArray = dates[1].genres;
 
-        renderPagination(dates[0].total_pages, page);
+        renderPagination(dates.total_pages, page);
 
         if (filmArray.length === 0) {
           if (hash === 'ua') {
@@ -170,7 +167,7 @@ async function changePage(page) {
     newApiPopularFilms.setPage(page);
     try {
       const dates = await newApiPopularFilms.fetchFilmsCards();
-      const totalPage = dates[0].total_pages;
+      const totalPage = dates.total_pages;
 
       renderPagination(totalPage, page);
       const markup = createFilmsList(dates);

@@ -9,7 +9,7 @@ $colors: (
   'another-text-color': #545454,
   'grey-color': #818181,
   'btn-color': #ff6b01,
-  'overlay-bcg':rgba(255, 106, 0, 0.9),
+  'overlay-bcg': rgba(255, 106, 0, 0.9),
 );
 
 @function getColor($key) {
@@ -17,6 +17,8 @@ $colors: (
 }
 
 body {
+  height: 100%;
+
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
   line-height: 1.52;
@@ -60,4 +62,14 @@ a {
 
 .is-hidden {
   display: none;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.flex-wraper {
+  flex: 1 1 auto;
 }

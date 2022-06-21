@@ -1,25 +1,22 @@
 .filmoteka_footer {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
-    align-items: center;
-            
-    color: getColor('another-text-color');
-    background-color: #F7F7F7;
-    
-    width: 100%;
-    height: 100px;
-    padding-top: 28.71px;
-    padding-bottom: 29.7px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  align-items: center;
+  color: getColor('another-text-color');
+  background-color: #f7f7f7;
+  width: 100%;
+  height: 100px;
+  padding-top: 28.71px;
+  padding-bottom: 29.7px;
 
-    @media screen and (max-width: 768px) {
-            flex-direction: column;
-        }
-    
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 // .footer-content{
@@ -28,49 +25,46 @@
 // }
 
 .svg {
-    background-image: url(../images/svg/heart.svg);
-    margin-left: 10px;
-    margin-right: 10px;
+  background-image: url(../images/svg/heart.svg);
+  margin-left: 10px;
+  margin-right: 10px;
 
-    animation: heartbeat 1s infinite;
+  animation: heartbeat 1s infinite;
 }
-
-;
 
 @keyframes heartbeat {
-    0% {
-        transform: scale(0.5);
-    }
+  0% {
+    transform: scale(0.5);
+  }
 
-    40% {
-        transform: scale(2);
-    }
+  40% {
+    transform: scale(2);
+  }
 
-    40% {
-        transform: scale(2);
-    }
+  40% {
+    transform: scale(2);
+  }
 }
 
-.footer_left{
-    position: relative;
-    display: flex;
-    text-align: center;
+.footer_left {
+  position: relative;
+  display: flex;
+  text-align: center;
 }
 
-.footer_right{
-    position: relative;
-    display: flex;
-    text-align: center;
+.footer_right {
+  position: relative;
+  display: flex;
+  text-align: center;
 }
 
-.footer_text{
-    @media screen and (max-width: 768px) {
-            margin-top: 10px;
-        }
+.footer_text {
+  @media screen and (max-width: 768px) {
+    margin-top: 10px;
+  }
 }
 
-.footer_link{
-    text-decoration: underline;
-    color: getColor('btn-color');
+.footer_link {
+  text-decoration: underline;
+  color: getColor('btn-color');
 }
-
