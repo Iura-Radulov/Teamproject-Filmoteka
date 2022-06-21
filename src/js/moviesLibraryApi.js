@@ -56,7 +56,10 @@ function onLibraryBtnClick() {
   openLoading();
 
   const userId = getUserId();
-  checkIfLoggedIn(userId);
+  if (!userId) {
+    notifyIfNotLoggedIn();
+    return;
+  }
   showWatchedPagination();
   switchToLibraryHeader();
   handleFetchAndRender(WATCHED_MOVIES);
@@ -72,7 +75,10 @@ function onAddButtonClick(event) {
   openLoading();
 
   const userId = getUserId();
-  checkIfLoggedIn(userId);
+  if (!userId) {
+    notifyIfNotLoggedIn();
+    return;
+  }
 
   const movieJson = event.target.dataset.movie;
   const id = Number(event.target.dataset.id);
@@ -123,25 +129,23 @@ function onAddButtonClick(event) {
 function getUserId() {
   return auth.currentUser?.uid;
 }
-function checkIfLoggedIn(userId) {
-  if (!userId) {
-    if (hash === 'ua') {
-      return Notify.warning('Увійдіть у свій акаунт, будь-ласка', {
-        timeout: 3000,
-        opacity: 0.9,
-        width: '150px',
-        clickToClose: true,
-        pauseOnHover: false,
-      });
-    } else {
-      return Notify.warning('You should sign in first!', {
-        timeout: 3000,
-        opacity: 0.9,
-        width: '150px',
-        clickToClose: true,
-        pauseOnHover: false,
-      });
-    }
+function notifyIfNotLoggedIn() {
+  if (hash === 'ua') {
+    return Notify.warning('Увійдіть у свій акаунт, будь-ласка', {
+      timeout: 3000,
+      opacity: 0.9,
+      width: '150px',
+      clickToClose: true,
+      pauseOnHover: false,
+    });
+  } else {
+    return Notify.warning('You should sign in first!', {
+      timeout: 3000,
+      opacity: 0.9,
+      width: '150px',
+      clickToClose: true,
+      pauseOnHover: false,
+    });
   }
 }
 function databaseContainsMovie(category, movieId, userId) {
