@@ -45,12 +45,11 @@ export async function startPopularFilms() {
   showLibraryBtn.classList.remove('current-link');
   formEl.classList.remove('is-hidden');
   libraryButtons.classList.add('is-hidden');
-  const currentLanguage = chooseLanguageApi();
   openLoading();
   try {
-    const dates = await newApiPopularFilms.fetchFilmsCards(currentLanguage);
+    const dates = await newApiPopularFilms.fetchFilmsCards();
     popularSearch = 'popular';
-    renderPagination(dates[0].total_pages);
+    renderPagination(dates.total_pages);
     const markup = createFilmsList(dates);
     filmsContainer.insertAdjacentHTML('afterbegin', markup);
   } catch (error) {
@@ -142,11 +141,9 @@ function onSearchFilm(event) {
   newApiSearchFilm
     .searchFilm(currentLanguage)
     .then(dates => {
-      const filmArray = dates[0].results;
-      const genreArray = dates[1].genres;
-
+      const filmArray = dates.results;
       popularSearch = 'search';
-      renderPagination(dates[0].total_pages);
+      renderPagination(dates.total_pages);
 
       if (filmArray.length === 0) {
         if (hash === 'ua') {

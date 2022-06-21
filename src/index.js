@@ -7,3 +7,4 @@ import './js/footerTeam';
 import './js/loader';
 import './js/changeTheme';
 import './js/scrollToTop';
+import './js/genreLocal';
