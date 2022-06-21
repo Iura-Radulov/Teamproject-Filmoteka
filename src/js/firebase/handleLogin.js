@@ -14,16 +14,16 @@ export function hideLoginError() {
 }
 
 export function showLoginError(error) {
-  refs.divLoginError.style.display = 'block';
+  refs.divLoginError2.style.display = 'block';
 
   if (error.code == 'auth/wrong-password') {
     hash === 'ua'
-      ? (refs.lblLoginErrorMessage.innerHTML = `Невірний пароль. Спробуйте ще раз.`)
-      : (refs.lblLoginErrorMessage.innerHTML = `Wrong password. Try again.`);
+      ? (refs.lblLoginErrorMessage2.innerHTML = `Невірний пароль. Спробуйте ще раз.`)
+      : (refs.lblLoginErrorMessage2.innerHTML = `Wrong password. Try again.`);
   } else {
     hash === 'ua'
-      ? (refs.lblLoginErrorMessage.innerHTML = `Помилка: ${error.message}`)
-      : (refs.lblLoginErrorMessage.innerHTML = `Error: ${error.message}`);
+      ? (refs.lblLoginErrorMessage2.innerHTML = `Помилка: ${error.message}`)
+      : (refs.lblLoginErrorMessage2.innerHTML = `Error: ${error.message}`);
   }
 }
 

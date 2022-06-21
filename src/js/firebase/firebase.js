@@ -17,6 +17,7 @@ import {
   hideFormLoginRegister,
   resetForm,
   showFormLoginRegister,
+  showRegisterError
 } from './handleRegister';
 import { startPopularFilms } from '../fetchdata';
 const hash = window.location.hash.substring(1);
@@ -51,6 +52,8 @@ export async function createAccount(email, password) {
     hideFormLoginRegister();
   } catch (error) {
     console.log(`There was an error: ${error}`);
+    showRegisterError(error);
+    resetForm();
   }
 }
 
@@ -138,3 +141,4 @@ refs.overlayBtnClose.addEventListener('click', hideOverlay);
 refs.overlayBtn.addEventListener('click', onBtnSignIn);
 
 refs.btnLogout.addEventListener('click', logout);
+

@@ -137,7 +137,7 @@
   }
 
   &__list :not(:first-child) {
-    margin-left: 39px;
+    margin-left: 40px;
   }
 }
 .navigation-link {
@@ -181,11 +181,13 @@
   }
 }
 .search-wrapper {
-  // position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   max-width: 100%;
+  @media screen and (max-width: 767px) {
+    margin-top: 55px;
+  }
 }
 .search-input {
   display: flex;
@@ -271,7 +273,7 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  margin: 0 auto;
+  margin: 6px 0 auto;
   cursor: pointer;
 }
 .button_library {

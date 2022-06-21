@@ -1,27 +1,26 @@
-.scroll-top{
-    display: block;
-    position: fixed;
-    bottom: 20px;
-    right: 30px;
-    width: 40px;
-    z-index: 999;
-    border: none;
-    outline: none;
-    background-color: rgba(255, 106, 0, 0.5);
-    color: getColor('white-color');
-    cursor: pointer;
-    border-radius: 10px;
-    font-size: 30px;
-    text-align: center;
-    transition: 0.5s;
+.scroll-top {
+  display: block;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  width: 40px;
+  z-index: 999;
+  border: none;
+  outline: none;
+  background-color: rgba(255, 106, 0, 0.5);
+  color: getColor('white-color');
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 30px;
+  text-align: center;
+  transition: 0.5s;
 
-    &_show{
-        display: none;
-        transition: 1s;
-    }
+  &_show {
+    display: none;
+    transition: 1s;
+  }
 }
 
-.scroll-top:hover{
-    background-color: getColor('btn-color');
+.scroll-top:hover {
+  background-color: getColor('btn-color');
 }
-

@@ -27,14 +27,15 @@ const refs = {
   txtEmailLogin: document.getElementById('txtEmailLogin'),
   txtPasswordLogin: document.getElementById('txtPasswordLogin'),
 
-  //    txtNameRegister: document.getElementById('txtNameRegister'),
   txtEmailRegister: document.getElementById('txtEmailRegister'),
   txtPasswordRegister: document.getElementById('txtPasswordRegister'),
 
   loginUser: document.getElementById('loginUser'),
 
-  divLoginError: document.getElementById('divLoginError'),
-  lblLoginErrorMessage: document.getElementById('lblLoginErrorMessage'),
+  divLoginError1: document.getElementById('divLoginError1'),
+  lblLoginErrorMessage1: document.getElementById('lblLoginErrorMessage1'),
+  divLoginError2: document.getElementById('divLoginError2'),
+  lblLoginErrorMessage2: document.getElementById('lblLoginErrorMessage2'),
   btnMyLibrary: document.querySelector('#library'),
 
   showWatchedBtn: document.getElementById('watched'),
@@ -49,6 +50,5 @@ const refs = {
   paginationButtons: document.getElementById('pagination_list'),
   paginationContainer: document.querySelector('.pagination'),
 };
-//        footer
 
 export default refs;

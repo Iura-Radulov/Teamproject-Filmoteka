@@ -31,6 +31,12 @@ export function hideFormLogin() {
    }
 
 
+export function showRegisterError(error) {
+  refs.divLoginError1.style.display = 'block';
+   refs.lblLoginErrorMessage1.innerHTML = `Error: ${error.message}`;
+  }
+
+
 function showFormRegister() {
    refs.signUpContainer.style.display = 'flex';  
 }

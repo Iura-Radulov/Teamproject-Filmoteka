@@ -38,8 +38,8 @@ logoBtn.addEventListener('click', startPopularFilms);
 filmsContainer.addEventListener('click', onFilmClick);
 formEl.addEventListener('submit', onSearchFilm);
 
-export async function startPopularFilms(event) {
-  event.preventDefault();
+export async function startPopularFilms() {
+  
   clearFilmsContainer();
   newApiPopularFilms.resetPage();
   showHomeBtn.classList.add('current-link');
