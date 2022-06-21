@@ -9,8 +9,8 @@ import {
 const hash = window.location.hash.substring(1);
 
 export function hideLoginError() {
-  refs.divLoginError.style.display = 'none';
-  refs.lblLoginErrorMessage.innerHTML = '';
+  refs.divLoginError2.style.display = 'none';
+  refs.lblLoginErrorMessage2.innerHTML = '';
 }
 
 export function showLoginError(error) {
