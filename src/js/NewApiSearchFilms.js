@@ -6,18 +6,12 @@ export default class NewApiSearchFilms {
 
   async searchFilm(languageChoose) {
     const KEY_API = '024bf82d4805f650033dc69997860333';
-    const festFetch = `https://api.themoviedb.org/3/search/movie?api_key=${KEY_API}&language=${languageChoose}&page=${this.page}&include_adult=false&query=${this.searchQuery}`;
-    const secondFetch = `https://api.themoviedb.org/3/genre/movie/list?api_key=${KEY_API}&language=${languageChoose}`;
-    const dateIds = [festFetch, secondFetch];
-
-    const arrayOfPromises = dateIds.map(async userId => {
-      const response = await fetch(`${userId}`);
-      return response.json();
-    });
-
-    const dates = await Promise.all(arrayOfPromises);
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=${KEY_API}&language=${languageChoose}&page=${this.page}&include_adult=false&query=${this.searchQuery}`;
+    const response = await fetch(url);
+    const dates = await response.json();
     return dates;
   }
+
   get query() {
     return this.searchQuery;
   }
@@ -28,7 +22,7 @@ export default class NewApiSearchFilms {
   resetPage() {
     this.page = 1;
   }
-setPage(page) {
+  setPage(page) {
     this.page = page;
   }
   incrementPage() {

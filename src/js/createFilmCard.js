@@ -1,4 +1,3 @@
-import genreCard from './genreCard';
 export default function createFilmCard(movie) {
   const {
     vote_average,
@@ -12,7 +11,6 @@ export default function createFilmCard(movie) {
     title,
     id,
   } = movie;
-  // console.log(genres);
 
   return `<div class="about_film-card">
          <img src=${
@@ -39,7 +37,7 @@ export default function createFilmCard(movie) {
           </div>
           <div class="about_film-item">
           <p class="about_film-text lang-genre">Genre</p>
-          <b class="about_film-date">${genreCard(genres)}</b>
+          <b class="about_film-date">${genres.map(genre => genre.name)}</b>
           </div>
           <h2 class="about_film-pretitle lang-about">ABOUT</h2>
           <p class="about_film-overview">${overview}</p>

@@ -1,4 +1,5 @@
 import refs from '../firebase/refs';
+import genreLang from '../genre';
 
 export default function renderList(arrayOfJsons) {
   refs.filmsContainer.innerHTML = '';
@@ -25,14 +26,7 @@ export default function renderList(arrayOfJsons) {
           }
           </p>
           <p class="info-item film__info-desc">
-            <b>${
-              genres.length > 2
-                ? genres
-                    .map(genre => genre.name)
-                    .slice(0, 2)
-                    .concat([' Other'])
-                : genres.map(genre => genre.name)
-            }</b >
+            <b>${genreLang(genres.map(genre => genre.id))}</b >
             <b>|</b>
             <b>${release_date ? release_date.slice(0, 4) : '-'}</b>
             <b class="rating is-hidden">${vote_average}</b>
