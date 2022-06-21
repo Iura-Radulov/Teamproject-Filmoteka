@@ -18,7 +18,7 @@ export default function createFilmsList(dates) {
           poster_path !== null
             ? `https://image.tmdb.org/t/p/w500${poster_path}`
             : `https://mysteriouswritings.com/wp-content/uploads/2017/02/movie.jpg`
-        } class="film-img" alt="card-img" loading="lazy" data-id=${id} />
+        } class="film__img" alt="card-img" loading="lazy" data-id=${id} />
 
         <div class="info">
           <p class="film__info-name">${

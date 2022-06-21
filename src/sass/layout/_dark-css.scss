@@ -21,8 +21,9 @@
 
 .lang {
   margin-left: 15px;
-  color: white;
+  color: getColor('btn-color');
   background: transparent;
+  cursor: pointer;
 }
 
 .theme-sec {

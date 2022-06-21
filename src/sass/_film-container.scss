@@ -13,16 +13,16 @@
   }
 }
 
-.film-img {
+.film__img {
   width: 309px;
   height: 449px;
-  @media screen and (max-width: 1023px) {
+  @media screen and (max-width: 1024px) {
     width: 336px;
     height: 455px;
   }
   @media screen and (max-width: 767px) {
-    width: 280px;
-    height: 398px;
+    width: 336px;
+    height: 455px;
   }
 }
 
