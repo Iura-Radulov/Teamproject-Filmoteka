@@ -27,7 +27,16 @@
   cursor: pointer;
 }
 
-.theme-sec {
+.header__background-library .theme-sec {
+  margin-top: 4px;
+  @media screen and (max-width: 767px) {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.header__background .theme-sec {
   margin-top: 28px;
   @media screen and (max-width: 767px) {
     display: flex;
