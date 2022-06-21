@@ -241,6 +241,11 @@ export const translation = {
     ua: 'Микола Чернецький',
   },
 
+  git: {
+    en: 'Welcome to our GitHub',
+    ua: 'Ласкаво просимо до нашого GitHub',
+  },
+
   tobe: {
     en: 'TO BE CONTINUED...',
     ua: 'ДАЛІ БУДЕ...',
