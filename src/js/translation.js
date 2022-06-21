@@ -85,7 +85,7 @@ export const translation = {
 
   our: {
     en: 'CODE HUNTERS',
-    ua: 'НАША КОМАНДА',
+    ua: 'CODE HUNTERS',
   },
 
   desc: {
