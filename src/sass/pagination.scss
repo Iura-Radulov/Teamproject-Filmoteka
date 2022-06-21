@@ -10,7 +10,10 @@
 
   height: 40px;
 }
-
+body.dark .numbers,
+body.dark .points {
+  color: #F7F7F7;
+}
 .arrow{
     font-weight: 500;
     width: 40px;

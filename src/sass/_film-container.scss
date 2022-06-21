@@ -35,7 +35,9 @@
     color: #ff6b08;
   }
 }
-
+body.dark .film__info-name {
+  color: #f7f7f7;
+}
 .rating {
   color: white;
   background: #ff6b08;
