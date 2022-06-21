@@ -7,10 +7,8 @@
   font-size: 14px;
   line-height: 16px;
   align-items: center;
-
   color: getColor('another-text-color');
   background-color: #f7f7f7;
-
   width: 100%;
   height: 100px;
   padding-top: 28.71px;
@@ -20,6 +18,11 @@
     flex-direction: column;
   }
 }
+
+// .footer-content{
+//     display: table-row;
+//         height: 100%;
+// }
 
 .svg {
   background-image: url(../images/svg/heart.svg);
