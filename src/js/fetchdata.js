@@ -13,7 +13,7 @@ import {
   addBtnDataAttributes,
   addBtnEventListeners,
   createButtonRefs,
-} from './moviesLibraryApi';
+} from './library/moviesLibraryApi';
 import { renderPagination } from './pagination';
 
 export let popularSearch;
@@ -39,7 +39,6 @@ filmsContainer.addEventListener('click', onFilmClick);
 formEl.addEventListener('submit', onSearchFilm);
 
 export async function startPopularFilms() {
-  
   clearFilmsContainer();
   newApiPopularFilms.resetPage();
   showHomeBtn.classList.add('current-link');

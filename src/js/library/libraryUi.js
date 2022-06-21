@@ -1,5 +1,6 @@
-import refs from './firebase/refs';
-import { changeLibraryActivePage } from './pagination';
+import { Notify } from 'notiflix';
+import refs from '../firebase/refs';
+import { changeLibraryActivePage, renderPagination } from '../pagination';
 
 const {
   showWatchedBtn,
@@ -13,6 +14,8 @@ const {
   paginationButtons,
   paginationContainer,
 } = refs;
+
+export const hash = window.location.hash.substring(1);
 
 const IS_HIDDEN = 'is-hidden';
 export const CURRENT_LINK = 'current-link';
@@ -64,4 +67,27 @@ export function showQueuePagination() {
   paginationButtons.id = 'library-pagination-queue';
   const pagination = document.getElementById('library-pagination-queue');
   pagination.addEventListener('click', changeLibraryActivePage);
+}
+export function definePagesQuantity(response) {
+  const totalPages = Math.ceil(Object.values(response).length / 20);
+  renderPagination(totalPages);
+}
+export function notifyIfNotLoggedIn() {
+  if (hash === 'ua') {
+    return Notify.warning('Увійдіть у свій акаунт, будь-ласка', {
+      timeout: 3000,
+      opacity: 0.9,
+      width: '150px',
+      clickToClose: true,
+      pauseOnHover: false,
+    });
+  } else {
+    return Notify.warning('You should sign in first!', {
+      timeout: 3000,
+      opacity: 0.9,
+      width: '150px',
+      clickToClose: true,
+      pauseOnHover: false,
+    });
+  }
 }
