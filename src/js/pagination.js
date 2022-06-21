@@ -1,11 +1,11 @@
 import createFilmsList from './createFilmsList';
 import { openLoading, closeLoading } from './loader';
 import NewApiPopularFilms from './NewApiPopularFilms';
-import {
-  renderList,
+import {  
   WATCHED_MOVIES,
   MOVIES_QUEUE,
 } from './library/moviesLibraryApi';
+import renderList from './library/renderList';
 import { fetchMoviesFromDatabase } from './library/libraryDatabase';
 import { popularSearch, textSearch } from './fetchdata';
 import NewApiSearchFilms from './NewApiSearchFilms';
