@@ -187,7 +187,10 @@ function onSearchFilm(event) {
   closeLoading();
 }
 
-function onBackdropClick() {
+function onBackdropClick(event) {
+  if (event.target !== backdropEl) {
+    return;
+  }
   backdropEl.classList.add('is-hidden');
   document.body.classList.toggle('modal-open');
   backdropEl.removeEventListener('click', onBackdropClick);

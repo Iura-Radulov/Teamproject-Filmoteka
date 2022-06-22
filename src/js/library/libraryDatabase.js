@@ -2,7 +2,7 @@ import { getDatabase, ref, set, child, get, remove } from 'firebase/database';
 import { app } from '../firebase/firebase';
 import { getAuth } from 'firebase/auth';
 import refs from '../firebase/refs';
-import { showEmptyListMessage, CURRENT_LINK } from './libraryUi';
+import { showEmptyListMessage, disableButton, CURRENT_LINK } from './libraryUi';
 import {
   removeBtnDataAttributes,
   handleFetchAndRender,
@@ -31,12 +31,14 @@ export function handleDatabaseInteraction(event, userId) {
       set(ref(database, `users/${userId}/watchedMovies/${id}`), movieJson);
 
       removeBtnDataAttributes(event.target);
+      disableButton(event.target);
       break;
 
     case 'add-to-queue':
       set(ref(database, `users/${userId}/queueOfMovies/${id}`), movieJson);
 
       removeBtnDataAttributes(event.target);
+      disableButton(event.target);
       break;
 
     case 'remove-from-watched':
@@ -49,6 +51,8 @@ export function handleDatabaseInteraction(event, userId) {
       }
 
       handleFetchAndRender(WATCHED_MOVIES);
+
+      disableButton(event.target);
       break;
 
     case 'remove-from-queue':
@@ -61,6 +65,8 @@ export function handleDatabaseInteraction(event, userId) {
       }
 
       handleFetchAndRender(MOVIES_QUEUE);
+
+      disableButton(event.target);
       break;
 
     default:
