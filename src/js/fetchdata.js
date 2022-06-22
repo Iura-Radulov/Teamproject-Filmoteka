@@ -15,6 +15,7 @@ import {
   createButtonRefs,
 } from './library/moviesLibraryApi';
 import { renderPagination } from './pagination';
+import { async } from '@firebase/util';
 
 export let popularSearch;
 export let textSearch;
@@ -34,9 +35,14 @@ const libraryButtons = document.querySelector('.buttons');
 
 document.addEventListener('DOMContentLoaded', startPopularFilms);
 showHomeBtn.addEventListener('click', startPopularFilms);
-logoBtn.addEventListener('click', startPopularFilms);
+logoBtn.addEventListener('click', onLogoClick);
 filmsContainer.addEventListener('click', onFilmClick);
 formEl.addEventListener('submit', onSearchFilm);
+
+function onLogoClick(event) {
+  event.preventDefault();
+  startPopularFilms();
+}
 
 export async function startPopularFilms() {
   clearFilmsContainer();

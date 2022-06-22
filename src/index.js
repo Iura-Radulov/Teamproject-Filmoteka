@@ -1,3 +1,4 @@
+import './js/genreLocal';
 import './js/fetchdata';
 import './js/firebase/firebase';
 import './js/pagination';
@@ -7,4 +8,3 @@ import './js/footerTeam';
 import './js/loader';
 import './js/changeTheme';
 import './js/scrollToTop';
-import './js/genreLocal';
