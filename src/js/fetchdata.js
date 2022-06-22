@@ -6,6 +6,7 @@ import fetchFilmModal from './fetchFilmModal';
 import Notiflix from 'notiflix';
 import './language';
 import { changeLanguage } from './language';
+import { changeUrlLanguage } from './language';
 import { chooseLanguageApi } from './language';
 import { genreLang } from './genre';
 import { openLoading, closeLoading } from './loader';
@@ -32,12 +33,14 @@ const showHomeBtn = document.getElementById('home');
 const showLibraryBtn = document.getElementById('library');
 const logoBtn = document.querySelector('.logo');
 const libraryButtons = document.querySelector('.buttons');
+const closeModalBtn = document.querySelector('[team-data-close]');
 
 document.addEventListener('DOMContentLoaded', startPopularFilms);
 showHomeBtn.addEventListener('click', startPopularFilms);
 logoBtn.addEventListener('click', onLogoClick);
 filmsContainer.addEventListener('click', onFilmClick);
 formEl.addEventListener('submit', onSearchFilm);
+closeModalBtn.addEventListener('click', changeUrlLanguage);
 
 function onLogoClick(event) {
   event.preventDefault();
@@ -148,8 +151,6 @@ function onSearchFilm(event) {
     .searchFilm(currentLanguage)
     .then(dates => {
       const filmArray = dates.results;
-      
-      
 
       if (filmArray.length === 0) {
         if (hash === 'ua') {
@@ -198,6 +199,12 @@ function onEscKeyPress(event) {
     backdropEl.classList.add('is-hidden');
     document.body.classList.toggle('modal-open');
     document.removeEventListener('keydown', onEscKeyPress);
+  }
+}
+
+function onEnterKeyPress(event) {
+  if (event.code === 'Enter') {
+    changeUrlLanguage();
   }
 }
 

@@ -7,7 +7,7 @@ const allLang = ['en', 'ua'];
 
 select.addEventListener('change', changeUrlLanguage);
 
-function changeUrlLanguage() {
+export function changeUrlLanguage() {
   let lang = select.value;
   location.href = window.location.pathname + '#' + lang;
   location.reload();

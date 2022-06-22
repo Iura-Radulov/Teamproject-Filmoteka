@@ -1,4 +1,5 @@
 import './js/genreLocal';
+import './js/language';
 import './js/fetchdata';
 import './js/firebase/firebase';
 import './js/pagination';
