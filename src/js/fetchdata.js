@@ -8,7 +8,6 @@ import './language';
 import { changeLanguage } from './language';
 import { changeUrlLanguage } from './language';
 import { chooseLanguageApi } from './language';
-import { genreLang } from './genre';
 import { openLoading, closeLoading } from './loader';
 import {
   addBtnDataAttributes,
@@ -16,7 +15,6 @@ import {
   createButtonRefs,
 } from './library/moviesLibraryApi';
 import { renderPagination } from './pagination';
-import { async } from '@firebase/util';
 
 export let popularSearch;
 export let textSearch;
@@ -34,6 +32,7 @@ const showLibraryBtn = document.getElementById('library');
 const logoBtn = document.querySelector('.logo');
 const libraryButtons = document.querySelector('.buttons');
 const closeModalBtn = document.querySelector('[team-data-close]');
+console.dir(formEl);
 
 document.addEventListener('DOMContentLoaded', startPopularFilms);
 showHomeBtn.addEventListener('click', startPopularFilms);
@@ -48,6 +47,7 @@ function onLogoClick(event) {
 }
 
 export async function startPopularFilms() {
+  formEl[0].value = '';
   clearFilmsContainer();
   newApiPopularFilms.resetPage();
   showHomeBtn.classList.add('current-link');
