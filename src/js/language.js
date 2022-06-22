@@ -10,7 +10,7 @@ if (!localStorage.getItem('lang')) {
   localStorage.setItem('lang', window.location.hash);
 }
 
-function changeUrlLanguage() {
+export function changeUrlLanguage() {
   let lang = select.value;
   location.href = window.location.pathname + '#' + lang;
   location.reload();
