@@ -6,8 +6,8 @@ import fetchFilmModal from './fetchFilmModal';
 import Notiflix from 'notiflix';
 import './language';
 import { changeLanguage } from './language';
+import { changeUrlLanguage } from './language';
 import { chooseLanguageApi } from './language';
-import { genreLang } from './genre';
 import { openLoading, closeLoading } from './loader';
 import {
   addBtnDataAttributes,
@@ -15,7 +15,6 @@ import {
   createButtonRefs,
 } from './library/moviesLibraryApi';
 import { renderPagination } from './pagination';
-import { async } from '@firebase/util';
 
 export let popularSearch;
 export let textSearch;
@@ -32,12 +31,14 @@ const showHomeBtn = document.getElementById('home');
 const showLibraryBtn = document.getElementById('library');
 const logoBtn = document.querySelector('.logo');
 const libraryButtons = document.querySelector('.buttons');
+const closeModalBtn = document.querySelector('[team-data-close]');
 
 document.addEventListener('DOMContentLoaded', startPopularFilms);
 showHomeBtn.addEventListener('click', startPopularFilms);
 logoBtn.addEventListener('click', onLogoClick);
 filmsContainer.addEventListener('click', onFilmClick);
 formEl.addEventListener('submit', onSearchFilm);
+closeModalBtn.addEventListener('click', changeUrlLanguage);
 
 function onLogoClick(event) {
   event.preventDefault();
@@ -45,6 +46,7 @@ function onLogoClick(event) {
 }
 
 export async function startPopularFilms() {
+  formEl[0].value = '';
   clearFilmsContainer();
   newApiPopularFilms.resetPage();
   showHomeBtn.classList.add('current-link');
@@ -148,8 +150,6 @@ function onSearchFilm(event) {
     .searchFilm(currentLanguage)
     .then(dates => {
       const filmArray = dates.results;
-      
-      
 
       if (filmArray.length === 0) {
         if (hash === 'ua') {
