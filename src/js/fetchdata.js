@@ -32,7 +32,6 @@ const showLibraryBtn = document.getElementById('library');
 const logoBtn = document.querySelector('.logo');
 const libraryButtons = document.querySelector('.buttons');
 const closeModalBtn = document.querySelector('[team-data-close]');
-console.dir(formEl);
 
 document.addEventListener('DOMContentLoaded', startPopularFilms);
 showHomeBtn.addEventListener('click', startPopularFilms);
@@ -199,12 +198,6 @@ function onEscKeyPress(event) {
     backdropEl.classList.add('is-hidden');
     document.body.classList.toggle('modal-open');
     document.removeEventListener('keydown', onEscKeyPress);
-  }
-}
-
-function onEnterKeyPress(event) {
-  if (event.code === 'Enter') {
-    changeUrlLanguage();
   }
 }
 
