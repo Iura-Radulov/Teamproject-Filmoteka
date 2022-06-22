@@ -31,6 +31,9 @@ export function makeQueueBtnActive() {
   showQueueBtn.classList.add(ACTIVE);
   showWatchedBtn.classList.remove(ACTIVE);
 }
+export function disableButton(button) {
+  button.classList.add('disabled');
+}
 export function switchToLibraryHeader() {
   showLibraryBtn.classList.add(CURRENT_LINK);
   showHomeBtn.classList.remove(CURRENT_LINK);
