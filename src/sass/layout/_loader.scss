@@ -18,8 +18,7 @@ body.loader {
   border-radius: 50%;
   perspective: 800px;
   position: fixed;
-  z-index: 101;
-  transition: 2000;
+  z-index: 100;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -66,15 +65,15 @@ body.loader {
   position: fixed;
   top: 0;
   z-index: 99;
-  // transition: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 0.4;
 }
 .hide {
-  opacity: 0;
-  z-index: -10;
+  // opacity: 0;
+  // z-index: -10;
+  display: none;
 }
 
 @keyframes rotate-one {
