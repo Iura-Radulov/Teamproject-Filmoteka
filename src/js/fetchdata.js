@@ -142,8 +142,8 @@ function onSearchFilm(event) {
     .searchFilm(currentLanguage)
     .then(dates => {
       const filmArray = dates.results;
-      popularSearch = 'search';
-      renderPagination(dates.total_pages);
+      
+      
 
       if (filmArray.length === 0) {
         if (hash === 'ua') {
@@ -174,6 +174,8 @@ function onSearchFilm(event) {
         const markup = createFilmsList(dates);
         filmsContainer.insertAdjacentHTML('afterbegin', markup);
       }
+      popularSearch = 'search';
+      renderPagination(dates.total_pages);
     })
     .catch(error => console.log(error));
   closeLoading();
