@@ -1,5 +1,6 @@
 import refs from '../firebase/refs';
 import genreLang from '../genre';
+import date from '../date';
 
 export default function renderList(arrayOfJsons) {
   refs.filmsContainer.innerHTML = '';
@@ -19,7 +20,7 @@ export default function renderList(arrayOfJsons) {
           poster_path !== null
             ? `https://image.tmdb.org/t/p/w500${poster_path}`
             : `https://mysteriouswritings.com/wp-content/uploads/2017/02/movie.jpg`
-        } alt="" loading="lazy" width="310" height="449" data-id=${id} />
+        } alt="film-img" loading="lazy" class="film__img" data-id=${id} />
         <div class="info">
           <p class="film__info-name">${
             original_title ? original_title : original_name
@@ -28,7 +29,7 @@ export default function renderList(arrayOfJsons) {
           <p class="info-item film__info-desc">
             <b>${genreLang(genres.map(genre => genre.id))}</b >
             <b>|</b>
-            <b>${release_date ? release_date.slice(0, 4) : '-'}</b>
+            <b>${date(release_date)}</b>
             <b class="rating is-hidden">${vote_average}</b>
           </p>
         </div>
