@@ -6,9 +6,6 @@ const registerFormSignIn = document.querySelector('.register-form__sign-in');
 const allLang = ['en', 'ua'];
 
 select.addEventListener('change', changeUrlLanguage);
-if (!localStorage.getItem('lang')) {
-  localStorage.setItem('lang', window.location.hash);
-}
 
 export function changeUrlLanguage() {
   let lang = select.value;
@@ -17,8 +14,7 @@ export function changeUrlLanguage() {
 }
 
 function changeLanguagePlaceholder() {
-  // let hash = window.location.hash;
-  let hash = localStorage.getItem('lang');
+  let hash = window.location.hash;
   hash = hash.substring(1);
   if (hash === 'ua') {
     formEl[0].placeholder = 'Пошук фільмів...';
@@ -36,8 +32,7 @@ function changeLanguagePlaceholder() {
 }
 
 export function changeLanguage() {
-  // let hash = window.location.hash;
-  let hash = localStorage.getItem('lang');
+  let hash = window.location.hash;
   hash = hash.substring(1);
   if (!allLang.includes(hash)) {
     location.href = window.location.pathname + '#en';
@@ -59,8 +54,7 @@ changeLanguage();
 changeLanguagePlaceholder();
 
 export function chooseLanguageApi() {
-  // let hash = window.location.hash;
-  let hash = localStorage.getItem('lang');
+  let hash = window.location.hash;
   hash = hash.substring(1);
   if (hash === 'ua') {
     return 'uk';
