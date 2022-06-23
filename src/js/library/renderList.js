@@ -30,7 +30,7 @@ export default function renderList(arrayOfJsons) {
             <b>${genreLang(genres.map(genre => genre.id))}</b >
             <b>|</b>
             <b>${date(release_date)}</b>
-            <b class="rating is-hidden">${vote_average}</b>
+            <b class="rating">${vote_average}</b>
           </p>
         </div>
       </div>`
