@@ -1,4 +1,5 @@
 import genreLang from './genre';
+import date from './date';
 export default function createFilmsList(dates) {
   const filmArray = dates.results;
   return filmArray
@@ -29,7 +30,7 @@ export default function createFilmsList(dates) {
             <b>${genreLang(genre_ids)} </b >
 
             <b>|</b>
-            <b>${release_date ? release_date.slice(0, 4) : '-'}</b>
+            <b>${date(release_date)}</b>
             <b class="rating is-hidden">${vote_average}</b>
           </p>
         </div>

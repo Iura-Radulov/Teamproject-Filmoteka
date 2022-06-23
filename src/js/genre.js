@@ -13,7 +13,7 @@ export default function genreLang(genre_ids) {
     if (genreA.length > 2) {
       return genreA.slice(0, 2).concat([' Other']);
     } else if (genreA.length === 0) {
-      return ' - ';
+      return 'No information';
     } else {
       return genreA;
     }
@@ -27,7 +27,7 @@ export default function genreLang(genre_ids) {
     if (genreB.length > 2) {
       return genreB.slice(0, 2).concat([' Інші']);
     } else if (genreB.length === 0) {
-      return ' - ';
+      return 'Дані відсутні';
     } else {
       return genreB;
     }
