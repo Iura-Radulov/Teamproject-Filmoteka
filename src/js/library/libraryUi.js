@@ -1,6 +1,7 @@
 import { Notify } from 'notiflix';
 import refs from '../firebase/refs';
 import { changeLibraryActivePage, renderPagination } from '../pagination';
+import hashValue from '../language';
 
 const {
   showWatchedBtn,
@@ -15,7 +16,7 @@ const {
   paginationContainer,
 } = refs;
 
-export const hash = window.location.hash.substring(1);
+export const hash = hashValue();
 
 const IS_HIDDEN = 'is-hidden';
 export const CURRENT_LINK = 'current-link';

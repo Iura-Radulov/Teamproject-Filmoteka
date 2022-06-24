@@ -5,8 +5,8 @@ import createFilmCard from './createFilmCard';
 import fetchFilmModal from './fetchFilmModal';
 import Notiflix from 'notiflix';
 import './language';
+import hashValue from './language';
 import { changeLanguage } from './language';
-import { changeUrlLanguage } from './language';
 import { chooseLanguageApi } from './language';
 import { openLoading, closeLoading } from './loader';
 import {
@@ -20,7 +20,7 @@ export let popularSearch;
 export let textSearch;
 const newApiSearchFilm = new NewApiSearchFilms();
 const newApiPopularFilms = new NewApiPopularFilms();
-const hash = window.location.hash.substring(1);
+let hash = hashValue();
 
 const filmsContainer = document.querySelector('.films__container');
 const backdropEl = document.querySelector('.backdrop');
@@ -32,13 +32,14 @@ const showLibraryBtn = document.getElementById('library');
 const logoBtn = document.querySelector('.logo');
 const libraryButtons = document.querySelector('.buttons');
 const closeModalBtn = document.querySelector('[team-data-close]');
+const select = document.querySelector('.lang');
+const LOCALSTORAGE_KEY3 = 'select_lang';
 
 document.addEventListener('DOMContentLoaded', startPopularFilms);
 showHomeBtn.addEventListener('click', startPopularFilms);
 logoBtn.addEventListener('click', onLogoClick);
 filmsContainer.addEventListener('click', onFilmClick);
 formEl.addEventListener('submit', onSearchFilm);
-closeModalBtn.addEventListener('click', changeUrlLanguage);
 
 function onLogoClick(event) {
   event.preventDefault();
@@ -48,6 +49,7 @@ function onLogoClick(event) {
 export async function startPopularFilms() {
   formEl[0].value = '';
   clearFilmsContainer();
+  const currentLanguage = chooseLanguageApi();
   newApiPopularFilms.resetPage();
   showHomeBtn.classList.add('current-link');
   showLibraryBtn.classList.remove('current-link');
@@ -55,7 +57,7 @@ export async function startPopularFilms() {
   libraryButtons.classList.add('is-hidden');
   openLoading();
   try {
-    const dates = await newApiPopularFilms.fetchFilmsCards();
+    const dates = await newApiPopularFilms.fetchFilmsCards(currentLanguage);
     popularSearch = 'popular';
     renderPagination(dates.total_pages);
     const markup = createFilmsList(dates);

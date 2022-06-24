@@ -12,7 +12,6 @@ import {
   showQueuePagination,
   definePagesQuantity,
   notifyIfNotLoggedIn,
-  hash,
 } from './libraryUi';
 import {
   getUserId,
@@ -21,6 +20,8 @@ import {
   fetchMoviesFromDatabase,
 } from './libraryDatabase';
 import renderList from './renderList';
+import hashValue from '../language';
+const hash = hashValue();
 
 export const WATCHED_MOVIES = 'watchedMovies/';
 export const MOVIES_QUEUE = 'queueOfMovies/';
