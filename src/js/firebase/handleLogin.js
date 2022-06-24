@@ -6,7 +6,8 @@ import {
   showFormLoginRegister,
   hideFormLogin,
 } from './handleRegister';
-const hash = window.location.hash.substring(1);
+import hashValue from '../language';
+const hash = hashValue();
 
 export function hideLoginError() {
   refs.divLoginError2.style.display = 'none';

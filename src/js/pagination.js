@@ -8,10 +8,11 @@ import { popularSearch, textSearch } from './fetchdata';
 import NewApiSearchFilms from './NewApiSearchFilms';
 import { chooseLanguageApi } from './language';
 import Notiflix from 'notiflix';
+import hashValue from './language';
 
 const newApiPopularFilms = new NewApiPopularFilms();
 const newApiSearchFilm = new NewApiSearchFilms();
-const hash = window.location.hash.substring(1);
+const hash = hashValue();
 
 const refs = {
   ul: document.getElementById('pagination_list'),
@@ -166,7 +167,8 @@ async function changePage(page) {
   } else {
     newApiPopularFilms.setPage(page);
     try {
-      const dates = await newApiPopularFilms.fetchFilmsCards();
+      const currentLanguage = chooseLanguageApi();
+      const dates = await newApiPopularFilms.fetchFilmsCards(currentLanguage);
       const totalPage = dates.total_pages;
 
       renderPagination(totalPage, page);

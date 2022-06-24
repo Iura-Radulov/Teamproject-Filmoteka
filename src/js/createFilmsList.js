@@ -5,7 +5,7 @@ export default function createFilmsList(dates) {
   return filmArray
     .map(
       ({
-        original_title,
+        title,
         poster_path,
         original_name,
         genre_ids,
@@ -21,9 +21,7 @@ export default function createFilmsList(dates) {
         } alt="film-img" loading="lazy" class="film__img" data-id=${id} />
 
         <div class="info">
-          <p class="film__info-name">${
-            original_title ? original_title : original_name
-          }
+          <p class="film__info-name">${title ? title : original_name}
           </p>
 
           <p class="film__info-desc">

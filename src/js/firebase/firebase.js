@@ -17,10 +17,11 @@ import {
   hideFormLoginRegister,
   resetForm,
   showFormLoginRegister,
-  showRegisterError
+  showRegisterError,
 } from './handleRegister';
 import { startPopularFilms } from '../fetchdata';
-const hash = window.location.hash.substring(1);
+import hashValue from '../language';
+const hash = hashValue();
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -141,4 +142,3 @@ refs.overlayBtnClose.addEventListener('click', hideOverlay);
 refs.overlayBtn.addEventListener('click', onBtnSignIn);
 
 refs.btnLogout.addEventListener('click', logout);
-

@@ -1,8 +1,8 @@
+import hashValue from './language';
 export default function genreLang(genre_ids) {
   const genreUkr = JSON.parse(localStorage.getItem('genre_uk'));
   const genreEn = JSON.parse(localStorage.getItem('genre_en'));
-  let hash = window.location.hash;
-  hash = hash.substring(1);
+  let hash = hashValue();
   if (hash === 'en') {
     const genreA = genreEn.reduce((listGenre, genre) => {
       if (genre_ids.includes(genre.id)) {

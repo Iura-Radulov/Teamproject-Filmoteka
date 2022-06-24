@@ -1,6 +1,6 @@
+import hashValue from './language';
 export default function date(release_date) {
-  let hash = window.location.hash;
-  hash = hash.substring(1);
+  let hash = hashValue();
   if (hash === 'en') {
     return release_date ? release_date.slice(0, 4) : 'No information';
   } else if (hash === 'ua') {

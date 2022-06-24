@@ -1,6 +1,6 @@
+import hashValue from './language';
 export default function genreCard(genres) {
-  let hash = window.location.hash;
-  hash = hash.substring(1);
+  let hash = hashValue();
   const genreArray = genres.map(genre => genre.name);
   if (hash === 'en') {
     if (genreArray.length !== 0) {
